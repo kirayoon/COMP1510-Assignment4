@@ -47,10 +47,14 @@ def get_user_choice() -> str:
     return get_user_choice()
 
 
-def validate_move(direction: str, player_location: tuple, board: list[list]) -> tuple:
+def validate_move(direction: str, player_location: tuple, board: list[list]) -> tuple or bool:
     move_dictionary = {'Up': (-1, 0), 'Down': (1, 0), 'Left': (0, -1), 'Right': (0, 1)}
     new_location = tuple(map(sum, zip(player_location, move_dictionary[direction])))
-    return new_location, new_location[0] in range(len(board)) and new_location[1] in range(len(board))
+
+    if new_location[0] in range(len(board)) and new_location[1] in range(len(board)):
+        return new_location
+
+    return None
 
 
 def game():
@@ -62,6 +66,7 @@ def game():
     while not game_is_won:
         # Print the grid
         print_grid(board)
+
         # Need function to describe board
 
         # Get the user's move
@@ -87,9 +92,8 @@ def game():
         # Validate movement
         valid_move = validate_move(direction, user_location, board)
         print(valid_move)
-        if valid_move[1]:
-
-            user_location = valid_move[0]
+        if valid_move:
+            user_location = valid_move
             print(f'Walking {direction.lower()}...')
 
         else:
