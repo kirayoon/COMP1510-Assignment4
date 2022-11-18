@@ -13,8 +13,8 @@ def print_grid(board: list[list]) -> None:
     print(" +---+---+---+---+---+---+---+---+---+---+")
 
 
-def create_board() -> list[list]:
-    return [[u"\u25A1" for _ in range(10)] for _ in range(10)]
+def make_board(row: int, col: int) -> list[list]:
+    return [[u"\u25A1" for _ in range(row)] for _ in range(col)]
 
 
 # The next thing we do in the loop is ask the user where they wish to go. Create a function called
@@ -28,28 +28,23 @@ def create_board() -> list[list]:
 
 # user_location is a tuple with i and j coordinates (row, col)
 def get_user_choice() -> str:
-    directions = enumerate(["Up", "Down", "Left", "Right"])
-    print('', 'Type "quit" to quit the game, or "help" for help.', '', 'Directions:', sep='\n')
-    for number, move in directions:
-        print(f"{number + 1}: {move}")
+    valid_directions = ['Up', 'Down', 'Left', 'Right', 'Help', 'Quit']
+    print('', 'OPTIONS', sep='\n')
+    for number, move in enumerate(valid_directions, start=1):
+        print(f"{number}: {move}")
 
-    user_choice = input('Enter the number of the direction you wish to go: ')
+    print('')
+    user_choice = input('Enter the number or first letter of an action: ')
 
-    return user_choice
+    if user_choice.isdigit() and 1 <= int(user_choice) <= 6:
+        return valid_directions[int(user_choice) - 1]
 
+    valid_choice = list(filter(lambda x: x.startswith(user_choice.upper()), valid_directions))
+    if len(valid_choice) == 1:
+        return valid_choice[0]
 
-def check_user_choice(user_choice: str or int) -> str:
-    valid_choices = ['up', 'down', 'left', 'right', 'quit', 'help']
-    valid_numbers = ['1', '2', '3', '4']
-    if user_choice in valid_numbers:
-        return valid_choices[int(user_choice) - 1]
-
-    elif user_choice in valid_choices:
-        return user_choice
-
-    else:
-        print('', 'Invalid choice. Please try again.', sep='\n')
-        return check_user_choice(get_user_choice())
+    print('', 'Invalid choice. Please try again.', sep='\n')
+    return get_user_choice()
 
 
 # def move_player(user_choice: str, player_location: tuple, board: list[list]) -> tuple:
