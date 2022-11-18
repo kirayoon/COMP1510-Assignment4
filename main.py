@@ -47,37 +47,36 @@ def get_user_choice() -> str:
     return get_user_choice()
 
 
-# def move_player(user_choice: str, player_location: tuple, board: list[list]) -> tuple:
-#     move_dictionary = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
-#     player_location = tuple(map(sum, zip(player_location, move_dictionary[user_choice])))
-#     if player_location in board:
-#         print(f'Moving {user_choice}...')
-#         time.sleep(1)
-#         return player_location
-#     else:
+def validate_move(direction: str, player_location: tuple, board: list[list]) -> tuple:
+    move_dictionary = {'Up': (-1, 0), 'Down': (1, 0), 'Left': (0, -1), 'Right': (0, 1)}
+    new_location = tuple(map(sum, zip(player_location, move_dictionary[direction])))
+    return new_location, new_location[0] in range(len(board)) and new_location[1] in range(len(board))
 
 
-def main():
-    board = create_board()
-    user_location = (0, 0)
+def game():
+    board = make_board(row=10, col=10)
+    # Put user location inside make user function
+    user_location = (0, 9)
 
     game_is_won = False
     while not game_is_won:
         # Print the grid
         print_grid(board)
+        # Need function to describe board
 
         # Get the user's move
-        user_input = get_user_choice()
-        valid_user_input = check_user_choice(user_input)
+        direction = get_user_choice()
 
         # Quit the game if the user enters "quit"
-        if valid_user_input == 'quit':
+        if direction == 'Quit':
+            print()
             if input("Are you sure you want to quit? (y/n): ").lower() == 'y':
+                print('Cya Chris!')
                 break
             continue
 
         # Print help if the user enters "help"
-        if valid_user_input == 'help':
+        if direction == 'Help':
             print('''
             help documentation
             Type "quit" to quit the game, or "help" for help.
@@ -85,11 +84,28 @@ def main():
             input('Press enter to continue...')
             continue
 
-        # Move the player
-        # move_player(valid_input, user_location, board)
+        # Validate movement
+        valid_move = validate_move(direction, user_location, board)
+        print(valid_move)
+        if valid_move[1]:
 
-        print(valid_user_input)
-        input('reached the end')
+            user_location = valid_move[0]
+            print(f'Walking {direction.lower()}...')
+
+        else:
+            print(f'Walking {direction.lower()}...')
+            time.sleep(1)
+            print('', 'Bam! You smacked your nose on a wall. Please try again.', '', sep='\n')
+            input('Press enter to continue...')
+            continue
+
+        time.sleep(1)
+
+        input('the end....')
+
+
+def main():
+    game()
 
 
 if __name__ == '__main__':
