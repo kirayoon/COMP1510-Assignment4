@@ -1,6 +1,7 @@
 import os
 import random
 import time
+# TODO: use itertools
 
 
 def print_grid(board: list[list]) -> None:
@@ -39,6 +40,7 @@ def get_user_choice() -> str:
     if user_choice.isdigit() and 1 <= int(user_choice) <= 6:
         return valid_directions[int(user_choice) - 1]
 
+    # TODO: see if this can be reformatted
     valid_choice = list(filter(lambda x: x.startswith(user_choice.upper()), valid_directions))
     if len(valid_choice) == 1:
         return valid_choice[0]
@@ -58,8 +60,16 @@ def validate_move(direction: str, player_location: tuple, board: list[list]) -> 
 
 
 def game():
+    # TODO: store ascii art in a file
+    print('+~~~~~~~~~~~~~~~~~~~~~~~~+',
+          '| Assignment 4: The Game |',
+          '| Joseph Chun, Kira Yoon |',
+          '+~~~~~~~~~~~~~~~~~~~~~~~~+', sep='\n')
+    time.sleep(5)
+
     board = make_board(row=10, col=10)
     # Put user location inside make user function
+    # TODO: store user location in dictionary as x and y not tuple?
     user_location = (0, 9)
 
     game_is_won = False
@@ -76,12 +86,23 @@ def game():
         if direction == 'Quit':
             print()
             if input("Are you sure you want to quit? (y/n): ").lower() == 'y':
-                print('Cya Chris!')
+                # TODO: store ascii art in a file
+                print('',
+                      '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+',
+                      '|   ____               ____ _          _     _  |',
+                      '|  / ___|   _  __ _   / ___| |__  _ __(_)___| | |',
+                      '| | |  | | | |/ _` | | |   | \'_ \| \'__| / __| | |',
+                      '| | |__| |_| | (_| | | |___| | | | |  | \__ \_| |',
+                      '|  \____\__, |\__,_|  \____|_| |_|_|  |_|___(_) |',
+                      '|       |___/                                   |',
+                      '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+', sep='\n')
+
                 break
             continue
 
         # Print help if the user enters "help"
         if direction == 'Help':
+            # TODO: create help documentation
             print('''
             help documentation
             Type "quit" to quit the game, or "help" for help.
@@ -104,6 +125,7 @@ def game():
             continue
 
         time.sleep(1)
+        # TODO: add random events and main game loop
 
         input('the end....')
 
