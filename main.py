@@ -26,27 +26,39 @@ def make_board(row: int, col: int) -> list[list]:
 # user input that is not correct. Tell me to try again. And again. And again. Keep looping while my
 # input is not correct. Also I hate typing, so make my choices single letter choices
 
+def print_choices_menu() -> None:
+    choices = ['Up', 'Down', 'Left', 'Right', 'Sleep', 'Player', 'Inventory', 'Help', 'Quit']
+    menu = list(enumerate(choices, 1))
+    headings = ["\033[4mMovement\033[0m", "\033[4mCommands\033[0m"]
+
+    print(f'\n{headings[0]:>23}{headings[1]:>27}')
+
+    move, info = 0, 5
+    while info < len(menu):
+        print(f"{menu[move][0]:8}: {menu[move][1]: <15} {menu[info][0]}: {menu[info][1]}")
+        move += 1
+        info += 1
+
+    print(f"{menu[4][0]:8}: {menu[4][1]: <15}\n")
+
 
 # user_location is a tuple with i and j coordinates (row, col)
 def get_user_choice() -> str:
-    valid_directions = ['Up', 'Down', 'Left', 'Right', 'Help', 'Quit']
-    print('', 'OPTIONS', sep='\n')
-    for number, move in enumerate(valid_directions, start=1):
-        print(f"{number}: {move}")
+    choices = ['Up', 'Down', 'Left', 'Right', 'Sleep', 'Player', 'Inventory', 'Help', 'Quit']
 
-    print('')
     user_choice = input('Enter the number or first letter of an action: ')
 
-    if user_choice.isdigit() and 1 <= int(user_choice) <= 6:
-        return valid_directions[int(user_choice) - 1]
+    if user_choice.isdigit() and 1 <= int(user_choice) <= 9:
+        return choices[int(user_choice) - 1]
 
     # TODO: see if this can be reformatted
-    valid_choice = list(filter(lambda x: x.startswith(user_choice.upper()), valid_directions))
-    if len(valid_choice) == 1:
-        return valid_choice[0]
+    valid_choice = list(filter(lambda x: x.startswith(user_choice.upper()), choices))
 
-    print('', 'Invalid choice. Please try again.', sep='\n')
-    return get_user_choice()
+    if len(valid_choice) != 1:
+        print('', 'Invalid choice. Please try again.', sep='\n')
+        return get_user_choice()
+
+    return valid_choice[0]
 
 
 def validate_move(direction: str, player_location: tuple, board: list[list]) -> tuple or bool:
@@ -77,10 +89,12 @@ def game():
         # Print the grid
         print_grid(board)
 
-        # Need function to describe board
+        # Need function to describe room
 
-        # Get the user's move
+        # Print player choices menu and get user's choice
+        print_choices_menu()
         direction = get_user_choice()
+        input(f'You chose {direction}. Press enter to continue.')
 
         # Quit the game if the user enters "quit"
         if direction == 'Quit':
