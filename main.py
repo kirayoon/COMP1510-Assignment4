@@ -170,8 +170,8 @@ def game():
                    'sleep': player_sleep,
                    'player': player_information,
                    'inventory': show_inventory,
-                   'help': 'help',
-                   'quit': 'quit'}
+                   'help': '',
+                   'quit': ''}
 
     game_is_won = False
     while not game_is_won:
@@ -187,12 +187,8 @@ def game():
         # just for test
         input(f'You chose {player_choice}. Press enter to continue.')
 
-        # Validate player movement
-        valid_move = validate_move(player_choice, player['location'], board)
-        command = command_map[player_choice]
-
         # Print help if the player enters "help"
-        if command == 'help':
+        if player_choice == 'help':
             # TODO: create help documentation
             print('''
             help documentation
@@ -201,7 +197,7 @@ def game():
             input('Press enter to continue...')
             continue
         # Quit the game if the player enters "quit"
-        elif command == 'quit':
+        elif player_choice == 'quit':
             print()
             if input("Are you sure you want to quit? (y/n): ").lower() == 'y':
                 os.system('cls' if os.name == 'nt' else 'clear')
@@ -216,6 +212,10 @@ def game():
                       '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+', sep='\n')
                 quit()
             continue
+
+        # Validate player movement
+        valid_move = validate_move(player_choice, player['location'], board)
+        command = command_map[player_choice]
 
         print(valid_move)
         if valid_move:
