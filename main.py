@@ -70,32 +70,34 @@ def print_choices_menu(command_map: dict) -> None:
     print(f"{menu[4][0]:8}: {menu[4][1]: <15}\n")
 
 
-# user_location is a tuple with i and j coordinates (row, col)
-def get_user_choice(command_map: dict) -> str:
+# player_location is a tuple with i and j coordinates (row, col)
+def get_player_choice(command_map: dict) -> str:
     choices = list(command_map.keys())
-    user_choice = input('Enter the number or first letter of an option: ')
+    player_choice = input('Enter the number or first letter of an option: ')
 
-    if user_choice.isdigit() and 1 <= int(user_choice) <= 9:
-        return choices[int(user_choice) - 1]
+    if player_choice.isdigit() and 1 <= int(player_choice) <= 9:
+        return choices[int(player_choice) - 1]
 
     # TODO: see if this can be reformatted
-    valid_choice = list(filter(lambda choice: choice.startswith(user_choice.lower()), choices))
+    valid_choice = list(filter(lambda choice: choice.startswith(player_choice.lower()), choices))
 
     if len(valid_choice) != 1:
         print('', 'Invalid choice. Please try again.', sep='\n')
-        return get_user_choice(command_map)
+        return get_player_choice(command_map)
 
     return valid_choice[0]
 
 
 def validate_move(direction: str, player_location: tuple, board: list[list]) -> tuple or None:
-    move_dictionary = {'Up': (-1, 0), 'Down': (1, 0), 'Left': (0, -1), 'Right': (0, 1)}
+    move_dictionary = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
+    if direction == 'quit' or direction == 'help':
+        return
     new_location = tuple(map(sum, zip(player_location, move_dictionary[direction])))
 
     if new_location[0] in range(len(board)) and new_location[1] in range(len(board)):
         return new_location
 
-    return None
+    return
 
 
 # Functions for each basic command
@@ -135,7 +137,8 @@ def game():
           '| Assignment 4: The Game |',
           '| Joseph Chun, Kira Yoon |',
           '+~~~~~~~~~~~~~~~~~~~~~~~~+', '\n', sep='\n')
-    input('Press enter to start...')
+    char_name = input('Please input your character\'s name:')
+    print(f'\nHello {char_name}! Welcome to the game!')
 
     # Initialize player board
     board = make_board(row=10, col=10)
@@ -145,9 +148,21 @@ def game():
     print_from_text_file('ascii_bear.txt')
     print_from_text_file('level_1.txt')
 
-    # Put user location inside make user function
-    # TODO: store user location in dictionary as x and y not tuple?
-    user_location = (0, 9)
+    # Initialize player information
+    player = {'name': char_name,
+              'location': (0, 0),
+              'inventory': [],
+              'hp': 25,
+              'max_hp': 25,
+              'attack': 5,
+              'defense': 5,
+              'level': 1,
+              'exp': 0,
+              'max_exp': 1000}
+
+    # Put player location inside make player function
+    # TODO: store player location in dictionary as x and y not tuple?
+    player_location = (0, 9)
     command_map = {'up': up,
                    'down': down,
                    'left': left,
@@ -165,16 +180,18 @@ def game():
 
         # Need function to describe room
 
-        # Print player choices menu and get user's choice
+        # Print player choices menu and get player's choice
         print_choices_menu(command_map)
-        user_choice = get_user_choice(command_map)
+        player_choice = get_player_choice(command_map)
 
         # just for test
-        input(f'You chose {user_choice}. Press enter to continue.')
+        input(f'You chose {player_choice}. Press enter to continue.')
 
-        command = command_map[user_choice]
+        # Validate player movement
+        valid_move = validate_move(player_choice, player['location'], board)
+        command = command_map[player_choice]
 
-        # Print help if the user enters "help"
+        # Print help if the player enters "help"
         if command == 'help':
             # TODO: create help documentation
             print('''
@@ -183,7 +200,7 @@ def game():
             ''')
             input('Press enter to continue...')
             continue
-
+        # Quit the game if the player enters "quit"
         elif command == 'quit':
             print()
             if input("Are you sure you want to quit? (y/n): ").lower() == 'y':
@@ -200,15 +217,13 @@ def game():
                 quit()
             continue
 
-        # Validate movement
-        valid_move = validate_move(user_choice, user_location, board)
         print(valid_move)
         if valid_move:
-            user_location = valid_move
-            print(f'Walking {user_choice.lower()}...')
+            player_location = valid_move
+            print(f'Walking {player_choice.lower()}...')
 
         else:
-            print(f'Walking {user_choice.lower()}...')
+            print(f'Walking {player_choice.lower()}...')
             time.sleep(1)
             print('', 'Bam! You smacked your nose on a wall. Please try again.', '', sep='\n')
             input('Press enter to continue...')
