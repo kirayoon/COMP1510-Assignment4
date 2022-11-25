@@ -102,20 +102,28 @@ def validate_move(player_input: str, i_coord: int, j_coord: int, board_height: i
 
 
 # Functions for each basic command
-def up():
-    pass
+def up(player_dict):
+    print('Walking up...')
+    time.sleep(1)
+    player_dict['i-coord'] -= 1
 
 
-def down():
-    pass
+def down(player_dict):
+    print('Walking down...')
+    time.sleep(1)
+    player_dict['i-coord'] += 1
 
 
-def left():
-    pass
+def left(player_dict):
+    print('Walking left...')
+    time.sleep(1)
+    player_dict['j-coord'] -= 1
 
 
-def right():
-    pass
+def right(player_dict):
+    print('Walking right...')
+    time.sleep(1)
+    player_dict['j-coord'] += 1
 
 
 def player_sleep():
