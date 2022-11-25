@@ -83,7 +83,7 @@ def get_user_choice(command_map: dict) -> str:
 
     if len(valid_choice) != 1:
         print('', 'Invalid choice. Please try again.', sep='\n')
-        return get_user_choice()
+        return get_user_choice(command_map)
 
     return valid_choice[0]
 
@@ -127,28 +127,10 @@ def show_inventory():
     pass
 
 
-def show_help():
-    pass
-
-
-def quit_session():
-    print()
-    if input("Are you sure you want to quit? (y/n): ").lower() == 'y':
-        print('',
-              '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+',
-              '|   ____               ____ _          _     _  |',
-              '|  / ___|   _  __ _   / ___| |__  _ __(_)___| | |',
-              '| | |  | | | |/ _` | | |   | \'_ \\| \'__| / __| | |',
-              '| | |__| |_| | (_| | | |___| | | | |  | \\__ \\_| |',
-              '|  \\____\\__, |\\__,_|  \\____|_| |_|_|  |_|___(_) |',
-              '|       |___/                                   |',
-              '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+', sep='\n')
-        quit()
-
-
 def game():
     # TODO: store ascii art in a file
     # Print the title screen
+    os.system('cls' if os.name == 'nt' else 'clear')
     print('+~~~~~~~~~~~~~~~~~~~~~~~~+',
           '| Assignment 4: The Game |',
           '| Joseph Chun, Kira Yoon |',
@@ -173,8 +155,8 @@ def game():
                    'sleep': player_sleep,
                    'player': player_information,
                    'inventory': show_inventory,
-                   'help': show_help,
-                   'quit': quit_session}
+                   'help': 'help',
+                   'quit': 'quit'}
 
     game_is_won = False
     while not game_is_won:
@@ -190,16 +172,32 @@ def game():
         # just for test
         input(f'You chose {user_choice}. Press enter to continue.')
 
-        command_map[user_choice]()
+        command = command_map[user_choice]
 
         # Print help if the user enters "help"
-        if user_choice == 'Help':
+        if command == 'help':
             # TODO: create help documentation
             print('''
             help documentation
             Type "quit" to quit the game, or "help" for help.
             ''')
             input('Press enter to continue...')
+            continue
+
+        elif command == 'quit':
+            print()
+            if input("Are you sure you want to quit? (y/n): ").lower() == 'y':
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print('',
+                      '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+',
+                      '|   ____               ____ _          _     _  |',
+                      '|  / ___|   _  __ _   / ___| |__  _ __(_)___| | |',
+                      '| | |  | | | |/ _` | | |   | \'_ \\| \'__| / __| | |',
+                      '| | |__| |_| | (_| | | |___| | | | |  | \\__ \\_| |',
+                      '|  \\____\\__, |\\__,_|  \\____|_| |_|_|  |_|___(_) |',
+                      '|       |___/                                   |',
+                      '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+', sep='\n')
+                quit()
             continue
 
         # Validate movement
