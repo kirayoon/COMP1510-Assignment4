@@ -126,8 +126,15 @@ def right(player_dict):
     player_dict['j-coord'] += 1
 
 
-def player_sleep():
-    pass
+def player_sleep(player_dict):
+    player_dict['hp'] = player_dict['max_hp']
+    print(f'''
+    You sleep under the stars and dreamt of being full. 
+    What a good night.
+    
+    Your health has recovered to {player_dict["max_hp"]}.
+    ''')
+    input('Press enter to continue...')
 
 
 def player_information():
