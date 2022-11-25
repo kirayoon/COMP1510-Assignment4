@@ -2,7 +2,7 @@ import os
 import random
 import time
 from pathlib import Path
-from levels import level_1, level_2, level_3, level_final
+# from levels import level_1, level_2, level_3, level_final
 
 
 # TODO: use itertools
@@ -63,7 +63,7 @@ def print_choices_menu(command_map: dict) -> None:
 
     move, info = 0, 5
     while info < len(menu):
-        print(f"{menu[move][0]:8}: {menu[move][1]: <15} {menu[info][0]}: {menu[info][1]}")
+        print(f"{menu[move][0]:8}: {menu[move][1].title(): <15} {menu[info][0]}: {menu[info][1].title()}")
         move += 1
         info += 1
 
@@ -88,16 +88,17 @@ def get_player_choice(command_map: dict) -> str:
     return valid_choice[0]
 
 
-def validate_move(direction: str, player_location: tuple, board: list[list]) -> tuple or None:
+def validate_move(player_input: str, i_coord: int, j_coord: int, board_height: int) -> bool:
     move_dictionary = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
-    if direction == 'quit' or direction == 'help':
-        return
-    new_location = tuple(map(sum, zip(player_location, move_dictionary[direction])))
-
-    if new_location[0] in range(len(board)) and new_location[1] in range(len(board)):
-        return new_location
-
-    return
+    board_width = board_height
+    if player_input in move_dictionary:
+        direction = move_dictionary[player_input]
+    else:
+        return False
+    new_loc = (i_coord + direction[0], j_coord + direction[1])
+    if 0 <= new_loc[0] < board_height and 0 <= new_loc[1] < board_width:
+        return True
+    return False
 
 
 # Functions for each basic command
@@ -132,13 +133,10 @@ def show_inventory():
 def game():
     # TODO: store ascii art in a file
     # Print the title screen
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print('+~~~~~~~~~~~~~~~~~~~~~~~~+',
-          '| Assignment 4: The Game |',
-          '| Joseph Chun, Kira Yoon |',
-          '+~~~~~~~~~~~~~~~~~~~~~~~~+', '\n', sep='\n')
+    print_from_text_file('title_screen.txt')
     char_name = input('Please input your character\'s name:')
     print(f'\nHello {char_name}! Welcome to the game!')
+    time.sleep(3)
 
     # Initialize player board
     board = make_board(row=10, col=10)
@@ -150,7 +148,9 @@ def game():
 
     # Initialize player information
     player = {'name': char_name,
-              'location': (0, 0),
+              'location': 0,
+              'i-coord': 0,
+              'j-coord': 0,
               'inventory': [],
               'hp': 25,
               'max_hp': 25,
@@ -160,9 +160,6 @@ def game():
               'exp': 0,
               'max_exp': 1000}
 
-    # Put player location inside make player function
-    # TODO: store player location in dictionary as x and y not tuple?
-    player_location = (0, 9)
     command_map = {'up': up,
                    'down': down,
                    'left': left,
@@ -214,20 +211,13 @@ def game():
             continue
 
         # Validate player movement
-        valid_move = validate_move(player_choice, player['location'], board)
-        command = command_map[player_choice]
-
-        print(valid_move)
+        valid_move = validate_move(player_choice, player['i-coord'], player['j-coord'], len(board))
         if valid_move:
-            player_location = valid_move
-            print(f'Walking {player_choice.lower()}...')
+            command = command_map[player_choice]
+            command(valid_move)
 
-        else:
-            print(f'Walking {player_choice.lower()}...')
-            time.sleep(1)
-            print('', 'Bam! You smacked your nose on a wall. Please try again.', '', sep='\n')
-            input('Press enter to continue...')
-            continue
+
+
 
         time.sleep(1)
         # TODO: add random events and main game loop
