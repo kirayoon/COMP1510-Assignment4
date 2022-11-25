@@ -2,6 +2,7 @@ import os
 import random
 import time
 from pathlib import Path
+from levels import level_1, level_2, level_3, level_final
 
 
 # TODO: use itertools
@@ -54,18 +55,8 @@ def print_from_text_file(text_file: str) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-# The next thing we do in the loop is ask the user where they wish to go. Create a function called
-# get_user_choice. This function must print an enumerated list of directions and ask the user to enter
-# the letter ot number corresponding to the direction they wish to travel, and return the direction.
-# Choose a system and stick to it, i.e., North-East-South-West, or Up-Down-Left-Right. Don’t let me
-# enter junk. If I enter something that is not a number from the list, make me choose again. Reject all
-# user input that is not correct. Tell me to try again. And again. And again. Keep looping while my
-# input is not correct. Also I hate typing, so make my choices single letter choices
-
-
-def print_choices_menu() -> None:
-    choices = ['Up', 'Down', 'Left', 'Right', 'Sleep', 'Player', 'Inventory', 'Help', 'Quit']
-    menu = list(enumerate(choices, 1))
+def print_choices_menu(command_map: dict) -> None:
+    menu = list(enumerate(command_map.keys(), 1))
     headings = ["\033[4mMovement\033[0m", "\033[4mCommands\033[0m"]
 
     print(f'\n{headings[0]:>23}{headings[1]:>27}')
@@ -80,10 +71,8 @@ def print_choices_menu() -> None:
 
 
 # user_location is a tuple with i and j coordinates (row, col)
-def get_user_choice() -> str:
-    # TODO: turn each choice into a function -> use eval(choice)() to call function
-    choices = ['up', 'down', 'left', 'right', 'sleep', 'player', 'inventory', 'help', 'quit']
-
+def get_user_choice(command_map: dict) -> str:
+    choices = list(command_map.keys())
     user_choice = input('Enter the number or first letter of an option: ')
 
     if user_choice.isdigit() and 1 <= int(user_choice) <= 9:
@@ -109,22 +98,83 @@ def validate_move(direction: str, player_location: tuple, board: list[list]) -> 
     return None
 
 
+# Functions for each basic command
+def up():
+    pass
+
+
+def down():
+    pass
+
+
+def left():
+    pass
+
+
+def right():
+    pass
+
+
+def player_sleep():
+    pass
+
+
+def player_information():
+    pass
+
+
+def show_inventory():
+    pass
+
+
+def show_help():
+    pass
+
+
+def quit_session():
+    print()
+    if input("Are you sure you want to quit? (y/n): ").lower() == 'y':
+        print('',
+              '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+',
+              '|   ____               ____ _          _     _  |',
+              '|  / ___|   _  __ _   / ___| |__  _ __(_)___| | |',
+              '| | |  | | | |/ _` | | |   | \'_ \\| \'__| / __| | |',
+              '| | |__| |_| | (_| | | |___| | | | |  | \\__ \\_| |',
+              '|  \\____\\__, |\\__,_|  \\____|_| |_|_|  |_|___(_) |',
+              '|       |___/                                   |',
+              '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+', sep='\n')
+        quit()
+
+
 def game():
     # TODO: store ascii art in a file
+    # Print the title screen
     print('+~~~~~~~~~~~~~~~~~~~~~~~~+',
           '| Assignment 4: The Game |',
           '| Joseph Chun, Kira Yoon |',
           '+~~~~~~~~~~~~~~~~~~~~~~~~+', '\n', sep='\n')
-    time.sleep(1)
+    input('Press enter to start...')
 
+    # Initialize player board
+    board = make_board(row=10, col=10)
+
+    # Play intro text leading to level_1 text
     print_scrolling_text('intro.txt')
     print_from_text_file('ascii_bear.txt')
     print_from_text_file('level_1.txt')
 
-    board = make_board(row=10, col=10)
     # Put user location inside make user function
     # TODO: store user location in dictionary as x and y not tuple?
     user_location = (0, 9)
+    command_map = {'up': up,
+                   'down': down,
+                   'left': left,
+                   'right': right,
+                   'sleep': player_sleep,
+                   'player': player_information,
+                   'inventory': show_inventory,
+                   'help': show_help,
+                   'quit': quit_session}
 
     game_is_won = False
     while not game_is_won:
@@ -134,29 +184,13 @@ def game():
         # Need function to describe room
 
         # Print player choices menu and get user's choice
-        print_choices_menu()
-        user_choice = get_user_choice()
+        print_choices_menu(command_map)
+        user_choice = get_user_choice(command_map)
 
         # just for test
         input(f'You chose {user_choice}. Press enter to continue.')
 
-        # Quit the game if the user enters "quit"
-        if user_choice == 'Quit':
-            print()
-            if input("Are you sure you want to quit? (y/n): ").lower() == 'y':
-                # TODO: store ascii art in a file
-                print('',
-                      '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+',
-                      '|   ____               ____ _          _     _  |',
-                      '|  / ___|   _  __ _   / ___| |__  _ __(_)___| | |',
-                      '| | |  | | | |/ _` | | |   | \'_ \\| \'__| / __| | |',
-                      '| | |__| |_| | (_| | | |___| | | | |  | \\__ \\_| |',
-                      '|  \\____\\__, |\\__,_|  \\____|_| |_|_|  |_|___(_) |',
-                      '|       |___/                                   |',
-                      '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+', sep='\n')
-
-                break
-            continue
+        command_map[user_choice]()
 
         # Print help if the user enters "help"
         if user_choice == 'Help':
