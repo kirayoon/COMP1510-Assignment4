@@ -30,8 +30,7 @@ def make_board(num_row: int, num_col: int) -> dict:
 
 
 def print_scrolling_text(text_file: str) -> None:
-    folder = Path("text/")
-    text_file = folder / text_file
+    text_file = Path('text/') / text_file
     with open(text_file, 'r') as file:
         script = [line.rstrip('\n') for line in file]
 
@@ -71,7 +70,8 @@ def print_choices_menu(command_map: dict) -> None:
     move_idx, command_idx = 0, 5
     while command_idx < len(menu):
         print(
-            f"{menu[move_idx][0]:8}: {menu[move_idx][1].title(): <15} {menu[command_idx][0]}: {menu[command_idx][1].title()}")
+            f"{menu[move_idx][0]:8}: {menu[move_idx][1].title(): <15} "
+            f"{menu[command_idx][0]}: {menu[command_idx][1].title()}")
         move_idx += 1
         command_idx += 1
 
@@ -179,7 +179,7 @@ def game():
               'location': (0, 0),
               'i-coord': 0,
               'j-coord': 0,
-              'inventory': [],
+              'inventory': {},
               'hp': 25,
               'max_hp': 25,
               'attack': 5,
