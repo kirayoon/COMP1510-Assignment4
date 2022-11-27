@@ -97,23 +97,22 @@ def get_player_choice(command_map: dict) -> str:
     return valid_choice[0]
 
 
-def validate_move(player_input: str, i_coord: int, j_coord: int, board_height: int) -> bool:
+def validate_move(player_input: str, player_coordinate: tuple, board: dict[tuple, int]) -> bool:
     move_dictionary = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
-    board_width = board_height
     direction = move_dictionary[player_input]
+    new_loc = tuple(map(sum, zip(direction, player_coordinate)))
 
-    new_loc = (i_coord + direction[0], j_coord + direction[1])
-    if 0 <= new_loc[0] < board_height and 0 <= new_loc[1] < board_width:
+    if new_loc in board:
         return True
 
     return False
 
 
 # Functions for each basic command
-def up(player_dict: dict):
+def up(player_location: tuple):
     print('Walking up...')
     time.sleep(1)
-    player_dict['i-coord'] -= 1
+    return player_location[0] - 1, player_location[1]
 
 
 def down(player_dict: dict):
@@ -163,7 +162,7 @@ def game():
     # time.sleep(3)
     #
     # Initialize player board
-    board = make_board(row=10, col=10)
+    board = make_board(num_row=5, num_col=5)
     #
     # # Play intro text leading to level_1 text
     # print_scrolling_text('intro.txt')
@@ -172,7 +171,7 @@ def game():
 
     # Initialize player information
     player = {'name': char_name,
-              'location': 0,
+              'location': (0, 0),
               'i-coord': 0,
               'j-coord': 0,
               'inventory': [],
@@ -228,7 +227,7 @@ def game():
         # Check if player choice is a movement command
         if player_choice in list(command_map.keys())[:4]:
             # Validate player movement
-            valid_move = validate_move(player_choice, player['i-coord'], player['j-coord'], len(board))
+            valid_move = validate_move(player_choice, player['location'], board)
             if valid_move:
                 command = command_map[player_choice]
                 command(player)
