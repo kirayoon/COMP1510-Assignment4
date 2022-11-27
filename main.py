@@ -36,17 +36,17 @@ def print_scrolling_text(text_file: str) -> None:
         script = [line.rstrip('\n') for line in file]
 
     height = len(script)
-    num = 0
+    num_lines = 0
     while height:
         os.system('cls' if os.name == 'nt' else 'clear')
         print('\n' * height)
-        for line in script[:num + 1]:
+        for line in script[:num_lines + 1]:
             print(line)
         # TODO: change this for final
         time.sleep(.5)
 
         height -= 1
-        num += 1
+        num_lines += 1
     input('\nPress enter to continue...')
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -91,7 +91,6 @@ def get_player_choice(command_map: dict) -> str:
 
     if len(valid_choice) != 1:
         print_out = '*** Invalid choice. Please try again. ***'
-        print_out_length = len(print_out)
         print(f'\n{print_out:^47}\n')
         return get_player_choice(command_map)
 
