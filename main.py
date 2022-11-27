@@ -20,7 +20,7 @@ def print_grid(board: list[list]) -> None:
     print(" +---+---+---+---+---+---+---+---+---+---+")
 
 
-def make_board(num_row: int, num_col: int) -> dict[tuple, int]:
+def make_board(num_row: int, num_col: int) -> dict:
     board_key = [(row, col) for row in range(num_row) for col in range(num_col)]
     board_values = [num for num in range(25)]
     random.shuffle(board_values)
@@ -97,7 +97,7 @@ def get_player_choice(command_map: dict) -> str:
     return valid_choice[0]
 
 
-def validate_move(player_input: str, player_coordinate: tuple, board: dict[tuple, int]) -> bool:
+def validate_move(player_input: str, player_coordinate: tuple, board: dict) -> bool:
     move_dictionary = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
     direction = move_dictionary[player_input]
     new_loc = tuple(map(sum, zip(direction, player_coordinate)))
