@@ -145,11 +145,16 @@ def player_sleep(player_dict: dict):
     input('Press enter to continue...')
 
 
-def player_information():
-    pass
+def player_information(player_dict: dict):
+    stats = ['name', 'hp', 'max_hp', 'level', 'attack', 'xp', 'max_xp']
+    print(f'\n{" "*7}{player_dict[stats[0]].title()} the Scary Bear',
+          f'{stats[3].title():>12}: {player_dict[stats[3]]:>2} '
+          f'{stats[5].upper():>7}: {player_dict[stats[5]]}/{player_dict[stats[6]]}',
+          f'{stats[4].title():>13}: {player_dict[stats[4]]} '
+          f'{stats[1].upper():>7}: {player_dict[stats[1]]}/{player_dict[stats[2]]}', sep='\n')
 
 
-def show_inventory():
+def show_inventory(player_dict: dict):
     pass
 
 
@@ -179,10 +184,9 @@ def game():
               'hp': 25,
               'max_hp': 25,
               'attack': 5,
-              'defense': 5,
               'level': 1,
-              'exp': 0,
-              'max_exp': 1000}
+              'xp': 1000,
+              'max_xp': 1000}
 
     command_map = {'up': up,
                    'down': down,
@@ -226,15 +230,19 @@ def game():
                 quit()
             continue
 
-        # Check if player choice is a movement command
-        if player_choice in list(command_map.keys())[:4]:
-            # Validate player movement
-            valid_move = validate_move(player_choice, player['location'], board)
-            if valid_move:
-                direction = command_map[player_choice]
-                # Change player location key to new location value
-                player['location'] = direction(player)
-                continue
+        command = command_map[player_choice]
+        # If player choice is not a movement command, execute the command
+        if player_choice not in list(command_map.keys())[:4]:
+            command(player)
+            input('Press enter to continue...')
+            continue
+
+        # Check if player can move in the direction they chose
+        valid_move = validate_move(player_choice, player['location'], board)
+        if valid_move:
+            # Change player location key to new location value
+            player['location'] = command(player)
+            continue
 
         time.sleep(1)
         # TODO: add random events and main game loop
