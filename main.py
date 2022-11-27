@@ -127,10 +127,10 @@ def left(player_location: tuple):
     return player_location[0], player_location[1] - 1
 
 
-def right(player_dict: dict):
+def right(player_location: tuple):
     print('Walking right...')
     time.sleep(1)
-    player_dict['j-coord'] += 1
+    return player_location[0], player_location[1] + 1
 
 
 def player_sleep(player_dict: dict):
