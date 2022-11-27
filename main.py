@@ -151,7 +151,7 @@ def player_information(player_dict: dict):
           f'{stats[3].title():>12}: {player_dict[stats[3]]:>2} '
           f'{stats[5].upper():>7}: {player_dict[stats[5]]}/{player_dict[stats[6]]}',
           f'{stats[4].title():>13}: {player_dict[stats[4]]} '
-          f'{stats[1].upper():>7}: {player_dict[stats[1]]}/{player_dict[stats[2]]}', sep='\n')
+          f'{stats[1].upper():>7}: {player_dict[stats[1]]}/{player_dict[stats[2]]}\n', sep='\n')
 
 
 def show_inventory(player_dict: dict):
@@ -185,7 +185,7 @@ def game():
               'max_hp': 25,
               'attack': 5,
               'level': 1,
-              'xp': 1000,
+              'xp': 0,
               'max_xp': 1000}
 
     command_map = {'up': up,
