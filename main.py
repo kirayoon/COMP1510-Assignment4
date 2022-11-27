@@ -115,10 +115,10 @@ def up(player_location: tuple):
     return player_location[0] - 1, player_location[1]
 
 
-def down(player_dict: dict):
+def down(player_location: tuple):
     print('Walking down...')
     time.sleep(1)
-    player_dict['i-coord'] += 1
+    return player_location[0] + 1, player_location[1]
 
 
 def left(player_dict: dict):
