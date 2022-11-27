@@ -2,6 +2,8 @@ import os
 import random
 import time
 from pathlib import Path
+
+
 # from levels import level_1, level_2, level_3, level_final
 
 
@@ -19,7 +21,7 @@ def print_grid(board: list[list]) -> None:
 
 
 def make_board(row: int, col: int) -> list[list]:
-    return [[u"\u25A1" for _ in range(row)] for _ in range(col)]
+    return [["" for _ in range(row)] for _ in range(col)]
 
 
 def print_scrolling_text(text_file: str) -> None:
@@ -61,13 +63,14 @@ def print_choices_menu(command_map: dict) -> None:
 
     print(f'\n{headings[0]:>23}{headings[1]:>27}')
 
-    move, info = 0, 5
-    while info < len(menu):
-        print(f"{menu[move][0]:8}: {menu[move][1].title(): <15} {menu[info][0]}: {menu[info][1].title()}")
-        move += 1
-        info += 1
+    move_idx, command_idx = 0, 5
+    while command_idx < len(menu):
+        print(
+            f"{menu[move_idx][0]:8}: {menu[move_idx][1].title(): <15} {menu[command_idx][0]}: {menu[command_idx][1].title()}")
+        move_idx += 1
+        command_idx += 1
 
-    print(f"{menu[4][0]:8}: {menu[4][1]: <15}\n")
+    print(f"{menu[4][0]:8}: {menu[4][1].title(): <15}\n")
 
 
 # player_location is a tuple with i and j coordinates (row, col)
@@ -82,7 +85,9 @@ def get_player_choice(command_map: dict) -> str:
     valid_choice = list(filter(lambda choice: choice.startswith(player_choice.lower()), choices))
 
     if len(valid_choice) != 1:
-        print('', 'Invalid choice. Please try again.', sep='\n')
+        print('''
+        *** Invalid choice. Please try again. ***
+        ''')
         return get_player_choice(command_map)
 
     return valid_choice[0]
@@ -91,42 +96,41 @@ def get_player_choice(command_map: dict) -> str:
 def validate_move(player_input: str, i_coord: int, j_coord: int, board_height: int) -> bool:
     move_dictionary = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
     board_width = board_height
-    if player_input in move_dictionary:
-        direction = move_dictionary[player_input]
-    else:
-        return False
+    direction = move_dictionary[player_input]
+
     new_loc = (i_coord + direction[0], j_coord + direction[1])
     if 0 <= new_loc[0] < board_height and 0 <= new_loc[1] < board_width:
         return True
+
     return False
 
 
 # Functions for each basic command
-def up(player_dict):
+def up(player_dict: dict):
     print('Walking up...')
     time.sleep(1)
     player_dict['i-coord'] -= 1
 
 
-def down(player_dict):
+def down(player_dict: dict):
     print('Walking down...')
     time.sleep(1)
     player_dict['i-coord'] += 1
 
 
-def left(player_dict):
+def left(player_dict: dict):
     print('Walking left...')
     time.sleep(1)
     player_dict['j-coord'] -= 1
 
 
-def right(player_dict):
+def right(player_dict: dict):
     print('Walking right...')
     time.sleep(1)
     player_dict['j-coord'] += 1
 
 
-def player_sleep(player_dict):
+def player_sleep(player_dict: dict):
     player_dict['hp'] = player_dict['max_hp']
     print(f'''
     You sleep under the stars and dreamt of being full. 
@@ -146,20 +150,21 @@ def show_inventory():
 
 
 def game():
-    # TODO: store ascii art in a file
-    # Print the title screen
-    print_from_text_file('title_screen.txt')
-    char_name = input('Please input your character\'s name:')
-    print(f'\nHello {char_name}! Welcome to the game!')
-    time.sleep(3)
-
+    # # TODO: store ascii art in a file
+    # TODO: remove comment for production
+    # # Print the title screen
+    # print_from_text_file('title_screen.txt')
+    char_name = input('Please input your character\'s name: ')
+    # print(f'\nHello {char_name}! Welcome to the game!')
+    # time.sleep(3)
+    #
     # Initialize player board
     board = make_board(row=10, col=10)
-
-    # Play intro text leading to level_1 text
-    print_scrolling_text('intro.txt')
-    print_from_text_file('ascii_bear.txt')
-    print_from_text_file('level_1.txt')
+    #
+    # # Play intro text leading to level_1 text
+    # print_scrolling_text('intro.txt')
+    # print_from_text_file('ascii_bear.txt')
+    # print_from_text_file('level_1.txt')
 
     # Initialize player information
     player = {'name': char_name,
@@ -216,14 +221,14 @@ def game():
                 quit()
             continue
 
-        # Validate player movement
-        valid_move = validate_move(player_choice, player['i-coord'], player['j-coord'], len(board))
-        if valid_move:
-            command = command_map[player_choice]
-            command(valid_move)
-
-
-
+        # Check if player choice is a movement command
+        if player_choice in list(command_map.keys())[:4]:
+            # Validate player movement
+            valid_move = validate_move(player_choice, player['i-coord'], player['j-coord'], len(board))
+            if valid_move:
+                command = command_map[player_choice]
+                command(player)
+                continue
 
         time.sleep(1)
         # TODO: add random events and main game loop
