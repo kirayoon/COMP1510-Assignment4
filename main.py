@@ -20,8 +20,12 @@ def print_grid(board: list[list]) -> None:
     print(" +---+---+---+---+---+---+---+---+---+---+")
 
 
-def make_board(row: int, col: int) -> list[list]:
-    return [["" for _ in range(row)] for _ in range(col)]
+def make_board(num_row: int, num_col: int) -> dict[tuple, int]:
+    board_key = [(row, col) for row in range(num_row) for col in range(num_col)]
+    board_values = [num for num in range(25)]
+    random.shuffle(board_values)
+
+    return dict(zip(board_key, board_values))
 
 
 def print_scrolling_text(text_file: str) -> None:
