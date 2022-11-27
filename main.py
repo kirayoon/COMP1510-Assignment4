@@ -10,14 +10,15 @@ from pathlib import Path
 # TODO: use itertools
 
 
-def print_grid(board: list[list]) -> None:
+def print_grid(board: dict, value_of_events: int, board_height: int) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
-    for row in range(10):
-        print(" +---+---+---+---+---+---+---+---+---+---+")
-        for col in range(10):
-            print(" |", board[row][col], end="")
-        print(' |', end="\n")
-    print(" +---+---+---+---+---+---+---+---+---+---+")
+    board_width = board_height
+    for row in range(board_height):
+        print("   +-------+-------+-------+-------+-------+")
+        for col in range(board_width):
+            print("   |  ", board[(row, col)] if board[(row, col)] <= value_of_events else "", end="")
+        print('   |', end="\n")
+    print("   +-------+-------+-------+-------+-------+")
 
 
 def make_board(num_row: int, num_col: int) -> dict:
