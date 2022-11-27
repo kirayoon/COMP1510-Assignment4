@@ -10,7 +10,7 @@ from pathlib import Path
 # TODO: use itertools
 
 
-def print_grid(board: dict, value_of_events: int, board_height: int) -> None:
+def print_map(board: dict, value_of_events: int, board_height: int) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
     board_width = board_height
     for row in range(board_height):
@@ -230,9 +230,9 @@ def game():
             # Validate player movement
             valid_move = validate_move(player_choice, player['location'], board)
             if valid_move:
-                command = command_map[player_choice]
+                direction = command_map[player_choice]
                 # Change player location key to new location value
-                player['location'] = command(player)
+                player['location'] = direction(player)
                 continue
 
         time.sleep(1)
