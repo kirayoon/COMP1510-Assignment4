@@ -14,11 +14,11 @@ def print_map(board: dict, value_of_events: int, board_height: int) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
     board_width = board_height
     for row in range(board_height):
-        print("   +-------+-------+-------+-------+-------+")
+        print("  +-------+-------+-------+-------+-------+")
         for col in range(board_width):
-            print("   |  ", board[(row, col)] if board[(row, col)] <= value_of_events else "", end="")
-        print('   |', end="\n")
-    print("   +-------+-------+-------+-------+-------+")
+            print("  | ", '(!)' if board[(row, col)] <= value_of_events else "   ", end="")
+        print('  |', end="\n")
+    print("  +-------+-------+-------+-------+-------+")
 
 
 def make_board(num_row: int, num_col: int) -> dict:
@@ -90,9 +90,9 @@ def get_player_choice(command_map: dict) -> str:
     valid_choice = list(filter(lambda choice: choice.startswith(player_choice.lower()), choices))
 
     if len(valid_choice) != 1:
-        print('''
-        *** Invalid choice. Please try again. ***
-        ''')
+        print_out = '*** Invalid choice. Please try again. ***'
+        print_out_length = len(print_out)
+        print(f'\n{print_out:^47}\n')
         return get_player_choice(command_map)
 
     return valid_choice[0]
