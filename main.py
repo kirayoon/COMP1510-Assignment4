@@ -230,7 +230,8 @@ def game():
             valid_move = validate_move(player_choice, player['location'], board)
             if valid_move:
                 command = command_map[player_choice]
-                command(player)
+                # Change player location key to new location value
+                player['location'] = command(player)
                 continue
 
         time.sleep(1)
