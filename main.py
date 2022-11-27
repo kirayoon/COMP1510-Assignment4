@@ -197,7 +197,8 @@ def game():
     game_is_won = False
     while not game_is_won:
         # Print the grid
-        print_grid(board)
+        # TODO: update second param for final
+        print_map(board, 5, 5)
 
         # Need function to describe room
 
