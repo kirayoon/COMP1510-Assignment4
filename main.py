@@ -16,21 +16,24 @@ def print_map(board: dict, value_of_events: int, board_height: int) -> None:
     for row in range(board_height):
         print("  +-------+-------+-------+-------+-------+")
         for col in range(board_width):
-            print("  | ", '(!)' if board[(row, col)] <= value_of_events else "   ", end="")
+            print("  | ", '(!)' if board[(row, col)].startswith('event1') else "   ", end="")
         print('  |', end="\n")
     print("  +-------+-------+-------+-------+-------+")
 
 
-def make_board(num_row: int, num_col: int, player_level: int) -> dict:
+def make_board(num_row: int, num_col: int, current_level: int) -> dict:
     board_key = [(row, col) for row in range(num_row) for col in range(num_col)]
     board_values = []
     # TODO: Change for live
-    level_events = {1: {'event1': 3, 'event2': 4, 'event3': 18},
-                    2: {'event1': 3, 'event2': 1, 'event3': 1, 'event4': 20},
-                    3: {'event1': 3, 'event2': 1, 'event3': 1, 'event4': 20}}
-    for event, occurrence in level_events[player_level]:
+    level_events = {1: {'start': 1, 'event1': 4, 'event2': 3, 'event3': 17},
+                    2: {'start': 1, 'event1': 4, 'event2': 3, 'event3': 1, 'event4': 16},
+                    3: {'start': 1, 'event1': 4, 'event2': 3, 'event3': 1, 'event4': 16},
+                    4: {'empty': 25}}
+    for event, occurrence in level_events[current_level].items():
         board_values.extend([event] * occurrence)
-    random.shuffle(board_values)
+    copy = board_values[2:]
+    random.shuffle(copy)
+    board_values[2:] = copy
 
     return dict(zip(board_key, board_values))
 
@@ -172,7 +175,7 @@ def game():
     # Initialize player board
     board_height = 5
     board_width = 5
-    board = make_board(board_height, board_width, player_level=1)
+    board = dict()
 
     # # Play intro text leading to level_1 text
     # print_scrolling_text('intro.txt')
@@ -190,7 +193,7 @@ def game():
               'attack': 5,
               'level': 1,
               'xp': 0,
-              'max_xp': 1000
+              'max_xp': 1000,
               'turn': 1}
 
     command_map = {'up': up,
@@ -207,6 +210,7 @@ def game():
     while not game_is_won:
         if player['turn'] == 1:
             board = make_board(board_height, board_width, player['level'])
+
 
         # Print the grid
         # TODO: update second param for final
