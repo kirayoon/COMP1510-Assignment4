@@ -160,6 +160,10 @@ def player_information(player_dict: dict):
 
 
 def show_inventory(player_dict: dict):
+    heading = "\033[4mInventory\033[0m"
+    print(f'{heading:>25}')
+    for item, amount in player_dict['inventory']:
+        print(f'\t\t{item}: {amount}')
     pass
 
 
