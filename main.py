@@ -97,15 +97,12 @@ def get_player_choice(command_map: dict) -> str:
     return valid_choice[0]
 
 
-def validate_move(player_input: str, player_coordinate: tuple, board: dict) -> bool:
-    move_dictionary = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
-    direction = move_dictionary[player_input]
-    new_loc = tuple(map(sum, zip(direction, player_coordinate)))
-
-    if new_loc in board:
-        return True
-
-    return False
+def validate_move(player_input: str, player_coordinate: tuple, board_width: int, board_height: int) -> bool:
+    move_dictionary = {'up': player_coordinate[0] > 0,
+                       'down': player_coordinate[0] < board_height - 1,
+                       'left': player_coordinate[1] > 0,
+                       'right': player_coordinate[1] < board_width - 1}
+    return move_dictionary[player_input]
 
 
 # Functions for each basic command
@@ -167,7 +164,9 @@ def game():
     # time.sleep(3)
     #
     # Initialize player board
-    board = make_board(num_row=5, num_col=5)
+    board_height = 5
+    board_width = 5
+    board = make_board(5, 5)
     #
     # # Play intro text leading to level_1 text
     # print_scrolling_text('intro.txt')
@@ -201,7 +200,8 @@ def game():
     while not game_is_won:
         # Print the grid
         # TODO: update second param for final
-        print_map(board, 5, 5)
+        print(player['location'])
+        print_map(board, board_height, board_width)
 
         # Need function to describe room
 
@@ -237,12 +237,16 @@ def game():
             continue
 
         # Check if player can move in the direction they chose
-        valid_move = validate_move(player_choice, player['location'], board)
+        valid_move = validate_move(player_choice, player['location'], board_height, board_width)
+        print(f'Walking {player_choice}...')
+        time.sleep(1)
         if valid_move:
             # Change player location key to new location value
             player['location'] = command(player)
+        else:
+            print(f'*** You cannot move {player_choice}. Please try again. ***')
+            input('Press enter to continue...')
             continue
-
         time.sleep(1)
         # TODO: add random events and main game loop
 
