@@ -34,4 +34,31 @@ def default(player_dict: dict):
         player_dict['inventory']['water'] = 1
 
 
+def slippery_rock(player_dict: dict):
+    print('''
+    You're on a slippery rock.
+    ''')
 
+
+def heavy_current(player_dict: dict):
+    print('''
+    You're in a heavy current.
+    ''')
+
+
+def fish(player_dict: dict):
+    print('''
+    Splish splash a salmon jumps out and slaps you in the face.
+    You better show it who's boss.
+    ''')
+    fight('fish')
+
+
+def fight(enemy: str, player_dict: dict):
+    # fight code here
+    # code to read json file
+    with open('enemy.json') as f:
+        enemy_dict = json.load(f)
+        print(enemy_dict)
+
+    return True
