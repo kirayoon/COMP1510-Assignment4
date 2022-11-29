@@ -349,7 +349,7 @@ def game():
                           'event2': level_1.fish,
                           'event3': level_1.slippery_rock,
                           'event4': level_1.heavy_current,
-                          'event5': egg}
+                          'egg': egg}
         elif player['level'] == 2:
             event_dict = {'event1': level_2.default,
                           'event2': level_2.soup,
