@@ -8,5 +8,10 @@
     "name": "Fido",
     "age": 4,
     "weight": 25
+  },
+  "papa": {
+    "name": "Mr. Lobs",
+    "age": 45,
+    "weight": 180
   }
 }
