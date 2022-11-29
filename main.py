@@ -10,7 +10,7 @@ from pathlib import Path
 # TODO: use itertools
 
 
-def print_map(board: dict, value_of_events: int, board_height: int) -> None:
+def print_map(board: dict, board_height: int) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
     board_width = board_height
     for row in range(board_height):
@@ -152,7 +152,7 @@ def player_sleep(player_dict: dict):
 
 def player_information(player_dict: dict):
     stats = ['name', 'hp', 'max_hp', 'level', 'attack', 'xp', 'max_xp']
-    print(f'\n{" "*7}{player_dict[stats[0]].title()} the Scary Bear',
+    print(f'\n{" " * 7}{player_dict[stats[0]].title()} the Scary Bear',
           f'{stats[3].title():>12}: {player_dict[stats[3]]:>2} '
           f'{stats[5].upper():>7}: {player_dict[stats[5]]}/{player_dict[stats[6]]}',
           f'{stats[4].title():>13}: {player_dict[stats[4]]} '
@@ -186,6 +186,20 @@ def use_item(player_dict: dict, choice: str):
     pass
 
 
+def level_up(player_dict: dict):
+    answer = input('\nWould you like to move to the next level (y/n)?: ').lower()
+    if answer == 'y':
+        player_dict['level'] += 1
+        player_dict['max_xp'] += 10
+        player_dict['xp'] = 0
+        player_dict['max_hp'] += 25
+        player_dict['hp'] = player_dict['max_hp']
+        player_dict['attack'] += 10
+        print('\nYou have leveled up!')
+        print(f'You are now level {player_dict["level"]}')
+        input('Press enter to continue...')
+
+
 def game():
     # # TODO: store ascii art in a file
     # TODO: remove comment for production
@@ -213,7 +227,7 @@ def game():
               'inventory': {'rabbit': 3, 'deer': 1},
               'hp': 25,
               'max_hp': 25,
-              'attack': 5,
+              'attack': 10,
               'level': 1,
               'xp': 0,
               'max_xp': 1000,
@@ -233,7 +247,6 @@ def game():
     while not game_is_won:
         if player['turn'] == 1:
             board = make_board(board_height, board_width, player['level'])
-
 
         # Print the grid
         # TODO: update second param for final
@@ -288,9 +301,14 @@ def game():
         # TODO: add random events and main game loop
 
         input('the end....')
+        level_up(player) if player['xp'] >= player['max_xp'] else None
+        player['turn'] += 1
 
 
 def main():
+    """
+    Drive the program.
+    """
     game()
 
 
