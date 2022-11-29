@@ -6,12 +6,6 @@ from typing import Callable
 # 10, 5, 3, 2,
 
 
-def check_event(board: dict, player_dict: dict):
-    location = player_dict['location']
-    event_dict = {'event1': default, 'event2': fish, 'event3': slippery_rock, 'event4': heavy_current}
-    current_event = board[location]
-    event_func = event_dict[current_event]
-    event_func(player_dict)
 
 
 def default(player_dict: dict):
@@ -28,6 +22,7 @@ def default(player_dict: dict):
         You see fish jumping in the distance.
         Your tummy rumbles.
         ''')
+    print('1 water has been added to your inventory')
     if 'water' in player_dict['inventory']:
         player_dict['inventory']['water'] += 1
     else:
@@ -36,8 +31,13 @@ def default(player_dict: dict):
 
 def slippery_rock(player_dict: dict):
     print('''
-    You're on a slippery rock.
+    WoooaaaaAAAAHHH!
+    You slipped on a rock and fell. 
+    You bruised your arm. How unfortunate :(
+    
+    You lost 1 hp
     ''')
+    player_dict['hp'] -= 1
 
 
 def heavy_current(player_dict: dict):

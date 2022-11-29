@@ -25,7 +25,7 @@ def make_board(num_row: int, num_col: int, current_level: int) -> dict:
     board_key = [(row, col) for row in range(num_row) for col in range(num_col)]
     board_values = []
     # TODO: Change for live
-    level_events = {1: {'start': 1, 'event1': 4, 'event2': 3, 'event3': 17},
+    level_events = {1: {'start': 1, 'event1': 10, 'event2': 5, 'event3': 3, 'event4': 3, 'egg': 3},
                     2: {'start': 1, 'event1': 4, 'event2': 3, 'event3': 1, 'event4': 16},
                     3: {'start': 1, 'event1': 4, 'event2': 3, 'event3': 1, 'event4': 16},
                     4: {'empty': 25}}
@@ -218,9 +218,28 @@ def level_up(player_dict: dict):
         player_dict['max_hp'] += 25
         player_dict['hp'] = player_dict['max_hp']
         player_dict['attack'] += 10
-        print('\nYou have leveled up!')
+        player_dict['turn'] = 1
+        player_dict['location'] = (0, 0)
+        print('\nYou have leveled up, and moved onto the next zone')
         print(f'You are now level {player_dict["level"]}')
         input('Press enter to continue...')
+
+
+def check_event(board: dict, player_dict: dict, level_events: dict) -> None:
+    location = player_dict['location']
+    current_event = board[location]
+    if current_event == 'clear':
+        print('You have already been here. Try a different spot.')
+        input('Press enter to continue... ')
+    else:
+        # Clear the event from the board
+        board[location] = 'clear'
+        event_func = level_events[current_event]
+        event_func(player_dict)
+
+
+def egg():
+    pass
 
 
 def game():
@@ -265,6 +284,7 @@ def game():
                    'inventory': show_inventory,
                    'help': '',
                    'quit': ''}
+    event_dict = {}
 
     game_is_won = False
     while not game_is_won:
@@ -322,6 +342,21 @@ def game():
             continue
         time.sleep(1)
         # TODO: add random events and main game loop
+
+        # Set events for a players' level
+        if player['level'] == 1:
+            event_dict = {'event1': level_1.default,
+                          'event2': level_1.fish,
+                          'event3': level_1.slippery_rock,
+                          'event4': level_1.heavy_current,
+                          'event5': egg}
+        elif player['level'] == 2:
+            event_dict = {}
+        elif player['level'] == 3:
+            event_dict = {}
+
+        # Check if there is an event at the player's location
+        check_event(board, player, event_dict)
 
         input('the end....')
         level_up(player) if player['xp'] >= player['max_xp'] else None
