@@ -4,7 +4,7 @@ import time
 from pathlib import Path
 
 
-# from levels import level_1, level_2, level_3, level_final
+from levels import level_1, level_2, level_3, level_final
 
 
 # TODO: use itertools
@@ -188,7 +188,13 @@ def choose_item(player_dict: dict):
 def use_item(player_dict: dict, choice: str):
     item = list(player_dict['inventory'].keys())[int(choice)]
     # TODO: make dictionary of items and their effects
-    if item == 'rabbit':
+    if item == 'fish':
+        player_dict['hp'] += 5
+        if player_dict['hp'] > player_dict['max_hp']:
+            player_dict['hp'] = player_dict['max_hp']
+        print(f'You eat the fish and feel better. Your health is now {player_dict["hp"]}.\n')
+        player_dict['inventory'][item] -= 1
+    elif item == 'rabbit':
         player_dict['hp'] += 10
         if player_dict['hp'] > player_dict['max_hp']:
             player_dict['hp'] = player_dict['max_hp']
