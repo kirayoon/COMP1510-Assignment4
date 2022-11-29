@@ -162,8 +162,27 @@ def player_information(player_dict: dict):
 def show_inventory(player_dict: dict):
     heading = "\033[4mInventory\033[0m"
     print(f'{heading:>25}')
-    for item, amount in player_dict['inventory']:
-        print(f'\t\t{item}: {amount}')
+    for item, amount in player_dict['inventory'].items():
+        print(f'\t{item}: {amount}')
+
+    choose_item(player_dict)
+
+
+def choose_item(player_dict: dict):
+    choice = input('Type the number of a item you want to use or press enter to continue: ')
+    if choice == '':
+        return
+    elif len(player_dict['inventory']) < int(choice):
+        print_out = '*** Invalid choice. Please try again. ***'
+        print(f'\n{print_out:^47}\n')
+        choose_item(player_dict)
+    else:
+        use_item(player_dict, choice)
+    # I think this can return the item name and quantity
+    pass
+
+
+def use_item(player_dict: dict, choice: str):
     pass
 
 
@@ -191,7 +210,7 @@ def game():
               'location': (0, 0),
               'i-coord': 0,
               'j-coord': 0,
-              'inventory': {},
+              'inventory': {'rabbit': 3, 'deer': 1},
               'hp': 25,
               'max_hp': 25,
               'attack': 5,
