@@ -9,7 +9,6 @@ def intro_text():
     GOAL: find the perfect soup
     ''')
 
-
 def default(player_dict: dict):
     print('''
     nothing here...
@@ -22,30 +21,32 @@ def soup(player_dict: dict):
     ''')
 
 
+def scraps(player_dict: dict):
+    choice = random.randint(1, 4)
+    if choice == 1:
+        print('''
+
+        ''')
+    elif choice == 2:
+        print('''
+
+        ''')
+    elif choice == 3:
+        print('''
+
+        ''')
+    else:
+        print('''
+
+        ''')
+
+
 def egg(player_dict: dict):
     print('''
     ?
     ''')
 
 
-def scraps(player_dict: dict):
-    choice = random.randint(1, 4)
-    if choice == 1:
-        print('''
-        
-        ''')
-    elif choice == 2:
-        print('''
-        
-        ''')
-    elif choice == 3:
-        print('''
-        
-        ''')
-    else:
-        print('''
-        
-        ''')
 
 
 def level2():
