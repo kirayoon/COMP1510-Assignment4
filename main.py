@@ -16,7 +16,7 @@ def print_map(board: dict, board_height: int, board_width: int) -> None:
     for row in range(board_height):
         print("  +-------+-------+-------+-------+-------+")
         for col in range(board_width):
-            print("  | ", '(!)' if board[(row, col)].startswith('event1') else "   ", end="")
+            print("  | ", '(!)' if board[(row, col)] == 'event2' else "   ", end="")
         print('  |', end="\n")
     print("  +-------+-------+-------+-------+-------+")
 

@@ -1,10 +1,12 @@
 import random
 
+
 def intro_text():
     print('''
     You smell a whiff of something delicious.. You follow the smell until it leads you to a house.
     You knock on the door, but when no one answered, you decided to go inside.
-    You 
+    
+    GOAL: find the perfect soup
     ''')
 
 
@@ -22,7 +24,7 @@ def soup(player_dict: dict):
 
 def egg(player_dict: dict):
     print('''
-    
+    ?
     ''')
 
 
