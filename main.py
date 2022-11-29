@@ -335,7 +335,7 @@ def game():
         time.sleep(1)
         if valid_move:
             # Change player location key to new location value
-            player['location'] = command(player)
+            player['location'] = command(player['location'])
         else:
             print(f'*** You cannot move {player_choice}. Please try again. ***')
             input('Press enter to continue...')
