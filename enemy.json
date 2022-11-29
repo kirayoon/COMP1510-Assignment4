@@ -1,0 +1,12 @@
+{
+  "fish": {
+    "name": "Bass",
+    "length": 12,
+    "weight": 1.5
+  },
+  "dog": {
+    "name": "Fido",
+    "age": 4,
+    "weight": 25
+  }
+}

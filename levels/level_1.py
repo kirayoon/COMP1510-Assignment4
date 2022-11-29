@@ -51,7 +51,7 @@ def fish(player_dict: dict):
     Splish splash a salmon jumps out and slaps you in the face.
     You better show it who's boss.
     ''')
-    fight('fish')
+    fight('fish', player_dict)
 
 
 def fight(enemy: str, player_dict: dict):
