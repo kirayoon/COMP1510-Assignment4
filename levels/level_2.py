@@ -1,4 +1,8 @@
+import json
 import random
+
+
+soup_counter = 0
 
 
 def default():
@@ -8,9 +12,38 @@ def default():
 
 
 def soup(player_dict: dict):
+    global soup_counter
+    soup_counter += 1
     print('''
-    OH GOODY! SOUP!
-    ''')
+    OHH GOODY! SOUP!
+        ''')
+
+    if soup_counter == 0:
+        print('''
+    You taste the soup and it's TOO SPICY!
+    
+    You gain 150 XP! But you still need to find the perfect soup...
+        ''')
+        player_dict['xp'] += 200
+
+    elif soup_counter == 1:
+        print('''
+    You taste the soup and it's TOO SWEET!??!
+    
+    You gain 150 XP! But you still need to find the perfect soup...
+        ''')
+        player_dict['xp'] += 200
+
+    elif soup_counter == 2:
+        print('''
+    You taste the soup and it's...
+    
+        PERFECT!
+    
+    You gain 300 XP!
+        ''')
+        player_dict['xp'] += 300
+        fight('papa', player_dict)
 
 
 def scraps(player_dict: dict):
@@ -71,3 +104,13 @@ def scraps(player_dict: dict):
         You lost 3 hp
         ''')
         player_dict['hp'] -= 3
+
+
+def fight(enemy: str, player_dict: dict):
+    # fight code here
+    # code to read json file
+    with open('enemy.json') as f:
+        enemy_dict = json.load(f)
+        print(enemy_dict)
+
+    return True
