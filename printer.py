@@ -5,7 +5,6 @@ import time
 
 def print_map(board: dict, board_height: int, board_width: int, player_loc: tuple) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
-    board_width = board_height
     for row in range(board_height):
         print("  +-------+-------+-------+-------+-------+")
         for col in range(board_width):
