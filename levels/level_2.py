@@ -1,15 +1,7 @@
 import random
 
 
-def intro_text():
-    print('''
-    You smell a whiff of something delicious.. You follow the smell until it leads you to a house.
-    You knock on the door, but when no one answered, you decided to go inside.
-    
-    GOAL: find the perfect soup
-    ''')
-
-def default(player_dict: dict):
+def default():
     print('''
     nothing here...
     ''')
@@ -17,37 +9,51 @@ def default(player_dict: dict):
 
 def soup(player_dict: dict):
     print('''
-    OH GOODY! SOUP! 
+    OH GOODY! SOUP!
     ''')
 
 
 def scraps(player_dict: dict):
-    choice = random.randint(1, 4)
-    if choice == 1:
+    rand = random.randint(1, 2)
+    if rand == 1:
         print('''
-
+        *crunch* *squish*
+        You stepped on a rat...
         ''')
-    elif choice == 2:
+        choice = input("Eat the rat? (y/n)")
+        if choice == 'y':
+            print('yummy.. You gained 1 HP!')
+            player_dict['hp'] += 1
+        elif choice == 'n':
+            pass
+        else:
+            print('Invalid input. Enter y or n')
+    elif rand == 2:
         print('''
-
+        WoooaaaaAAAAHHH!
+        You slipped on a banana peel and fell on your face. 
+        You have a nosebleed. boohoo :(
+    
+        You lost 1 hp
         ''')
-    elif choice == 3:
+        player_dict['hp'] -= 1
+    elif rand == 3:
         print('''
-
+        You found a jar of honey!
         ''')
+        choice = input("Eat the honey? (y/n)")
+        if choice == 'y':
+            print('yummy.. You gained 1 HP!')
+            player_dict['hp'] += 1
+        elif choice == 'n':
+            pass
+        else:
+            print('Invalid input. Enter y or n')
     else:
         print('''
-
+        OUCH! 
+        You stepped on a nail!
+        
+        You lost 1 hp
         ''')
-
-
-def egg(player_dict: dict):
-    print('''
-    ?
-    ''')
-
-
-
-
-def level2():
-    print('hello')
+        player_dict['hp'] -= 1
