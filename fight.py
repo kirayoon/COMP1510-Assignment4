@@ -12,21 +12,6 @@ def load_enemy(enemy: str) -> dict:
     return enemy_json[enemy]
 
 
-fish_dict = load_enemy('fish')
-player = {'name': 'abc',
-          'location': (0, 0),
-          'i-coord': 0,
-          'j-coord': 0,
-          'inventory': {'rabbit': 3, 'deer': 1},
-          'hp': 20,
-          'max_hp': 20,
-          'attack': 5,
-          'level': 1,
-          'xp': 900,
-          'max_xp': 1000,
-          'turn': 1}
-
-
 def calc_min_roll(player_dict: dict, enemy_dict: dict) -> tuple[int, int]:
     min_roll = max(1, player_dict['attack'] - 10)
     enemy_min_roll = max(1, enemy_dict['attack'] - 10)
@@ -101,7 +86,8 @@ def enemy_turn(player_dict: dict, enemy_dict: dict, enemy_min_roll: int) -> None
     print('      ', random.choice(enemy_dict['attack_flavour_text']), '\n\n')
 
 
-def fight_sequence(enemy_dict: dict, player_dict: dict) -> None:
+def fight_sequence(enemy: str, player_dict: dict) -> None:
+    enemy_dict = load_enemy(enemy)
     print(f'{"FIGHT!":^56}')
     time.sleep(1)
     print(type(enemy_dict['hp']))
@@ -150,7 +136,6 @@ def fight_sequence(enemy_dict: dict, player_dict: dict) -> None:
 
 def main():
     print('Please run game.py. This is a module.')
-    fight_sequence(fish_dict, player)
 
 
 if __name__ == '__main__':
