@@ -69,6 +69,9 @@ def check_event(board: dict, player_dict: dict, level_events: dict) -> None:
     if current_event == 'clear':
         print('You have already been here. Try a different spot.')
         input('Press enter to continue... ')
+    elif current_event == 'start':
+        print('You started here! Why are you back?')
+        input('Press enter to continue... ')
     else:
         # Clear the event from the board
         board[location] = 'clear'
