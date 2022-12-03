@@ -75,7 +75,7 @@ def game():
             help documentation
             ''')
             print_from_text_file('help.txt')
-            input('Press enter to continue...')
+            player['turn'] += 1
             continue
         # Quit the game if the player enters "quit"
         elif player_choice == 'quit':
@@ -90,6 +90,7 @@ def game():
         if player_choice not in list(command_map.keys())[:4]:
             command(player)
             input('Press enter to continue...')
+            player['turn'] += 1
             continue
 
         # Check if player can move in the direction they chose
@@ -101,6 +102,7 @@ def game():
         else:
             print(f'*** You cannot move {player_choice}. Please try again. ***')
             input('Press enter to continue...')
+            player['turn'] += 1
             continue
         time.sleep(1)
         # TODO: add random events and main game loop
