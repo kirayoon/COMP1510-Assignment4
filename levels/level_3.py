@@ -1,5 +1,4 @@
 import random
-import json
 from fight import fight_sequence
 
 

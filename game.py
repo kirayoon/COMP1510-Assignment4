@@ -3,6 +3,7 @@ from levels import level_1, level_2, level_3
 from skeleton import make_board, get_player_choice, validate_move, up, down, left, right, egg, check_event
 from player import player_sleep, player_information, show_inventory, level_up
 from printer import print_map, print_scrolling_text, print_from_text_file, print_choices_menu, print_attack_menu
+from fight import death_sequence
 
 
 def game():
@@ -53,6 +54,9 @@ def game():
     while not game_is_won:
         if player['turn'] == 1:
             board = make_board(board_height, board_width, player['level'])
+
+        # check if player is dead
+        death_sequence() if player['hp'] <= 0 else None
 
         # Print the grid
         # TODO: update second param for final
@@ -127,7 +131,6 @@ def game():
                           'event4': level_3.nut,
                           'event5': level_3.deer,
                           'egg': egg}
-
         elif player['level'] == 4:
             event_dict = {}
 
