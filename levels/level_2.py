@@ -43,9 +43,21 @@ def soup(player_dict: dict):
     
         PERFECT!
     
-    You gain 300 XP!
+    You drink the entire bowl. You gain 300 XP!
         ''')
         player_dict['xp'] += 300
+        print('...')
+        time.sleep(3)
+        print('''
+        
+        The door swings wide open. The Lobs are here!''')
+        time.sleep(2)
+        print('''
+        They see the house in shambles and the soup bowl empty.''')
+        time.sleep(2)
+        print('''
+        Papa Lob yells, "You're not going anywhere, Bear!"
+        ''')
         fight('papa', player_dict)
     soup_counter += 1
 
