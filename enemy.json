@@ -1,8 +1,13 @@
 {
   "fish": {
-    "name": "Bass",
-    "length": 12,
-    "weight": 1.5
+    "name": "Salmon",
+    "attack": 5,
+    "hp": 20,
+    "max_hp": 20,
+    "xp_gain": 200,
+    "attack_flavour_text": ["The salmon slaps your face with its tail!",
+                            "Flip Flop Flippity Flop! The salmon flops on!"],
+    "death_flavour_text": "The salmon flops around on the ground, dead."
   },
   "dog": {
     "name": "Fido",
