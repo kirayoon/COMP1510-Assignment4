@@ -34,6 +34,6 @@
     - You can use items to gain HP
 
 8. ATTACK:
-    - Claw:
-    - Bite:
-    - Charge:
+    - Claw: Use those pointy claws to attack. Damage: a random number up to your attack points
+    - Bite: Chomp chomp. It's feeding time. Damage: between 0 and 2x your attack points.
+    - Charge: Charge at your enemy. Damage: 2x your attack points. Damages yourself by up to your attack points.
