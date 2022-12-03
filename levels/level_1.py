@@ -2,7 +2,7 @@ import json
 import random
 import time
 
-import main
+import skeleton
 
 
 # 10, 5, 3, 2,
@@ -122,8 +122,8 @@ def fight_sequence(enemy: str, player_dict: dict):
         # 6. subtract hp from enemy
         enemy_hp -= player_damage
         # 7. subtract hp from player
-        enemy_damange = random.randint(enemy_min_roll, enemy_attack)
-        player_dict['hp'] -= enemy_damange
+        enemy_damage = random.randint(enemy_min_roll, enemy_attack)
+        player_dict['hp'] -= enemy_damage
 
         input('Press enter to continue...')
 
@@ -145,18 +145,6 @@ def fight_sequence(enemy: str, player_dict: dict):
 
 
 
-
-def print_attack_menu(command_map: dict):
-    menu = list(enumerate(command_map.keys(), 1))
-    headings = ["\033[4mMoves\033[0m"]
-
-    print(f'\n{headings[0]:^62}')
-
-    for move in menu:
-        print(f'{move[0]:2}. {move[1].title()}', end='    ')
-    print()
-
-
 def get_player_choice(command_map: dict) -> str:
     choices = list(command_map.keys())
     player_choice = input('Enter the number or first letter of an option: ')
@@ -173,23 +161,3 @@ def get_player_choice(command_map: dict) -> str:
         return get_player_choice(command_map)
 
     return valid_choice[0]
-
-
-def convert_health_to_bars(health: int, max_health: int) -> tuple[str, str]:
-    health_bar_size = 20
-    health_per_dash = int(max_health / health_bar_size)
-    current_health_dashes = int(health / health_per_dash)
-    lost_health = health_bar_size - current_health_dashes
-    health_percentage = str(int(health / max_health * 100)) + '%'
-    health_bar = '█' * current_health_dashes + ' ' * lost_health
-    return health_bar, health_percentage
-
-
-def print_health(player_dict: dict, enemy_dict: dict):
-    player_health_bar, player_health_percentage = convert_health_to_bars(player_dict['hp'], player_dict['max_hp'])
-    enemy_health_bar, enemy_health_percentage = convert_health_to_bars(enemy_dict['hp'], enemy_dict['max_hp'])
-
-    print(f'{player_dict["name"]:^22} {enemy_dict["name"]:^41}')
-    print('|' + player_health_bar + '|' + ' ' * 10 + '|' + enemy_health_bar + '|')
-    print(f'{player_health_percentage:^22} {enemy_health_percentage:^40}')
-

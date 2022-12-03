@@ -77,6 +77,25 @@ def print_attack_menu(command_map: dict):
     print()
 
 
+def convert_health_to_bars(health: int, max_health: int) -> tuple[str, str]:
+    health_bar_size = 20
+    health_per_dash = int(max_health / health_bar_size)
+    current_health_dashes = int(health / health_per_dash)
+    lost_health = health_bar_size - current_health_dashes
+    health_percentage = str(int(health / max_health * 100)) + '%'
+    health_bar = '█' * current_health_dashes + ' ' * lost_health
+    return health_bar, health_percentage
+
+
+def print_health(player_dict: dict, enemy_dict: dict):
+    player_health_bar, player_health_percentage = convert_health_to_bars(player_dict['hp'], player_dict['max_hp'])
+    enemy_health_bar, enemy_health_percentage = convert_health_to_bars(enemy_dict['hp'], enemy_dict['max_hp'])
+
+    print(f'{player_dict["name"]:^22} {enemy_dict["name"]:^41}')
+    print('|' + player_health_bar + '|' + ' ' * 10 + '|' + enemy_health_bar + '|')
+    print(f'{player_health_percentage:^22} {enemy_health_percentage:^40}')
+
+
 def main():
     print('Please run the game.py file. This is a module.')
 
