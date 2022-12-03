@@ -32,7 +32,7 @@ def game():
               'inventory': {'rabbit': 3, 'deer': 1},
               'hp': 20,
               'max_hp': 20,
-              'attack': 10,
+              'attack': 5,
               'level': 1,
               'xp': 0,
               'max_xp': 1000,

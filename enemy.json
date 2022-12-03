@@ -1,7 +1,7 @@
 {
   "fish": {
     "name": "Salmon",
-    "attack": 5,
+    "attack": 2,
     "hp": 20,
     "max_hp": 20,
     "xp_gain": 200,

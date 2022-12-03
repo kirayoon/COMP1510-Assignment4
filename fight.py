@@ -19,16 +19,16 @@ def fight_sequence(enemy: str, player_dict: dict):
     print(enemy_dict)
 
     #  Select the right enemy
-    enemy_attack = enemy_dict['attack']
-    enemy_hp = enemy_dict['max_hp']
-    xp_gain = enemy_dict['xp_gain']
+    # enemy_attack = enemy_dict['attack']
+    # enemy_hp = enemy_dict['max_hp']
+    # xp_gain = enemy_dict['xp_gain']
     #
     # print(enemy_hp, enemy_attack, xp_gain)
     # while enemy_hp > 0:
     #     print from
     time.sleep(1)
     print(f'{"FIGHT!":^56}')
-    while enemy_hp > 0 and player_dict['hp'] > 0:
+    while enemy_dict['hp'] > 0 and player_dict['hp'] > 0:
         # 1. print ascii image from file
 
         # 2. print health bars
@@ -40,14 +40,14 @@ def fight_sequence(enemy: str, player_dict: dict):
         move = get_player_choice(player_attacks)
 
         min_roll = max(1, player_dict['attack'] - 10)
-        enemy_min_roll = max(1, enemy_attack - 10)
+        enemy_min_roll = max(1, enemy_dict['attack'] - 10)
         if move == 'inventory':
             # TODO: remove main from here
             show_inventory(player_dict)
             continue
         elif move == 'charge':
             player_damage = 2 * player_dict['attack']
-            enemy_hp -= player_damage
+            enemy_dict['hp'] -= player_damage
             self_damage = random.randint(min_roll, player_dict['attack'])
             player_dict['hp'] -= self_damage
 
@@ -72,19 +72,20 @@ def fight_sequence(enemy: str, player_dict: dict):
         ''')
         print(random.choice(enemy_dict['attack_flavour_text']))
         # 6. subtract hp from enemy
-        enemy_hp -= player_damage
+        enemy_dict['hp'] -= player_damage
         # 7. subtract hp from player
-        enemy_damage = random.randint(enemy_min_roll, enemy_attack)
+        enemy_damage = random.randint(enemy_min_roll, enemy_dict['attack'])
         player_dict['hp'] -= enemy_damage
 
         input('Press enter to continue...')
 
-    if enemy_hp <= 0:
+    if enemy_dict['hp'] <= 0:
+        print_health(player_dict, enemy_dict)
         print(f'''
         You defeated the {enemy}!
-        You gained {xp_gain} xp!
+        You gained {enemy_dict['xp_gain']} xp!
         ''')
-        player_dict['xp'] += xp_gain
+        player_dict['xp'] += enemy_dict['xp_gain']
         input('Press enter to continue...')
     if player_dict['hp'] <= 0:
         print('''
