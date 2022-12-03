@@ -1,9 +1,8 @@
 import random
 import json
-import time
 
 
-def default(player_dict: dict):
+def default():
     print('''
     nothing here...
     ''')
@@ -71,4 +70,19 @@ def nut(player_dict: dict):
 
 
 def deer(player_dict: dict):
-    pass
+    print('''
+    It's a deer! Just standing there.
+    The deer doesn't know what's about to happen.
+    Let's hurry up and kill it.
+    ''')
+    fight('deer', player_dict)
+
+
+def fight(enemy: str, player_dict: dict):
+    # fight code here
+    # code to read json file
+    with open('enemy.json') as f:
+        enemy_dict = json.load(f)
+        print(enemy_dict)
+
+    return True
