@@ -47,7 +47,27 @@ def berry(player_dict: dict):
 
 
 def nut(player_dict: dict):
-    pass
+    print('''
+    You found a hazelnut. We love hazelnuts!
+    ''')
+    choice = input('    Crack the nut? (y/n)')
+    if choice == 'y':
+        print('''
+    You cracked the nut. How fun and delicious!
+    
+    You gained 10 XP. 1 hazelnut has been added to your inventory.
+    ''')
+        player_dict['xp'] += 10
+        if 'hazelnut' in player_dict['inventory']:
+            player_dict['inventory']['hazelnut'] += 1
+        else:
+            player_dict['inventory']['hazelnut'] = 1
+    elif choice == 'n':
+        print('''
+    You left the nut alone.
+    Interesting choice.''')
+    else:
+        print('Invalid input. Enter y or n')
 
 
 def deer(player_dict: dict):
