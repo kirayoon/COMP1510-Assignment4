@@ -98,6 +98,16 @@ def print_health(player_dict: dict, enemy_dict: dict):
     print(f'{player_health_percentage:^22} {enemy_health_percentage:^40}')
 
 
+def print_enemy_picture(text_file: str):
+    os.system('cls' if os.name == 'nt' else 'clear')
+    folder = Path("text/")
+    text_file = folder / text_file
+    with open(text_file, 'r') as text_file:
+        script = [line.rstrip('\n') for line in text_file]
+    for line in script:
+        print(line)
+
+
 def main():
     print('Please run the game.py file. This is a module.')
 
