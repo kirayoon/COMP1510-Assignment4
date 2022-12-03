@@ -1,0 +1,8 @@
+
+
+You smell a whiff of something delicious...
+You follow the smell until it leads you to a house.
+It reads:    "Welcome to Goldy Lob's Home"
+You knock on the door, but when no one answered, you decide to go inside.
+
+    GOAL: find the perfect soup
