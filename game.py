@@ -95,7 +95,6 @@ def game():
         # Check if player can move in the direction they chose
         valid_move = validate_move(player_choice, player['location'], board_height, board_width)
         print(f'Walking {player_choice}...')
-        time.sleep(1)
         if valid_move:
             # Change player location key to new location value
             player['location'] = command(player['location'])
@@ -130,9 +129,9 @@ def game():
         # Check if there is an event at the player's location
         check_event(board, player, event_dict)
 
-        input('the end....')
-        level_up(player) if player['xp'] >= player['max_xp'] else None
         player['turn'] += 1
+        input('\n\nEnter to continue...')
+        level_up(player) if player['xp'] >= player['max_xp'] else None
 
 
 def main():

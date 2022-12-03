@@ -1,6 +1,7 @@
 import json
 import random
 import time
+from fight import fight_sequence
 
 
 soup_counter = 0
@@ -58,7 +59,7 @@ def soup(player_dict: dict):
         print('''
         Papa Lob yells, "You're not going anywhere, Bear!"
         ''')
-        fight('papa', player_dict)
+        fight_sequence('papa', player_dict)
     soup_counter += 1
 
 
@@ -75,7 +76,8 @@ def scraps(player_dict: dict):
             player_dict['hp'] += 5
             player_dict['xp'] += 10
         elif choice == 'n':
-            pass
+            print('''
+        You left the dead rat alone.''')
         else:
             print('Invalid input. Enter y or n')
 

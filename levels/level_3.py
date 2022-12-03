@@ -1,5 +1,6 @@
 import random
 import json
+from fight import fight_sequence
 
 
 def default():
@@ -75,7 +76,7 @@ def deer(player_dict: dict):
     The deer doesn't know what's about to happen.
     Let's hurry up and kill it.
     ''')
-    fight('deer', player_dict)
+    fight_sequence('deer', player_dict)
 
 
 def fight(enemy: str, player_dict: dict):
