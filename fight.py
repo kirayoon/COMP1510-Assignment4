@@ -1,7 +1,7 @@
 import json
 import random
 import time
-from printer import print_health, print_attack_menu, print_enemy_picture
+from printer import print_health, print_attack_menu, print_enemy_picture, print_from_text_file
 from skeleton import get_player_choice
 from player import show_inventory
 
@@ -18,14 +18,28 @@ def calc_min_roll(player_dict: dict, enemy_dict: dict) -> tuple[int, int]:
     return min_roll, enemy_min_roll
 
 
-def death_sequence():
+def death_sequence(player_dict: dict) -> None:
     print('''
     You died.
     That was unfortunate.
+    
+    You can start again from the beginning of the level with your inventory intact.
     ''')
-    if input('Would you like to play again? (y/n) ').lower() == 'y':
-        # need to decide what to do if they die
-        pass
+    restart = input(input('Restart the level? (y/n)').lower())
+    if restart == 'y':
+        player_dict['turns'] = 0
+        player_dict['hp'] = player_dict['max_hp']
+        player_dict['xp'] = 0
+        player_dict['location'] = (0, 0)
+    elif restart == 'n':
+        if input('Quit the game? (y/n)').lower() == 'y':
+            print_from_text_file('goodbye.txt')
+            exit()
+        else:
+            return death_sequence(player_dict)
+    else:
+        print('Please enter y or n.')
+        return death_sequence(player_dict)
 
 
 def victory(player_dict: dict, enemy_dict: dict) -> None:
@@ -128,7 +142,7 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
         # 7. Enemy's turn
         enemy_turn(player_dict, enemy_dict, enemy_min_roll)
         if player_dict['hp'] <= 0:
-            death_sequence()
+            death_sequence(player_dict)
 
         print_health(player_dict, enemy_dict)
         input('Press enter to continue...')
