@@ -157,7 +157,22 @@ def print_attack_menu(command_map: dict):
     print()
 
 
+def get_player_choice(command_map: dict) -> str:
+    choices = list(command_map.keys())
+    player_choice = input('Enter the number or first letter of an option: ')
 
+    if player_choice.isdigit() and 1 <= int(player_choice) <= len(choices):
+        return choices[int(player_choice) - 1]
+
+    # TODO: see if this can be reformatted
+    valid_choice = list(filter(lambda choice: choice.startswith(player_choice.lower()), choices))
+
+    if len(valid_choice) != 1:
+        print_out = '*** Invalid choice. Please try again. ***'
+        print(f'\n{print_out:^47}\n')
+        return get_player_choice(command_map)
+
+    return valid_choice[0]
 
 
 def convert_health_to_bars(health: int, max_health: int) -> tuple[str, str]:
