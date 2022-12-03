@@ -70,12 +70,12 @@ def scraps(player_dict: dict):
         *crunch* *squish*
         You stepped on a rat...
         ''')
-        choice = input("Eat the rat? (y/n)")
-        if choice.lower() == 'y':
+        choice = input("Eat the rat? (y/n)").lower()
+        if choice == 'y':
             print('yummy.. You gained 5 HP & 10 XP!')
             player_dict['hp'] += 5
             player_dict['xp'] += 10
-        elif choice.lower() == 'n':
+        elif choice == 'n':
             print('''
         You left the dead rat alone.''')
         else:
@@ -96,14 +96,14 @@ def scraps(player_dict: dict):
         print('''
         You found a jar of honey!
         ''')
-        choice = input("Steal the honey? (y/n)")
-        if choice.lower() == 'y':
+        choice = input("Steal the honey? (y/n)").lower()
+        if choice == 'y':
             if 'honey' in player_dict['inventory']:
                 player_dict['inventory']['honey'] += 1
             else:
                 player_dict['inventory']['honey'] = 1
             print('1 honey has been added to your inventory')
-        elif choice.lower() == 'n':
+        elif choice == 'n':
             print('''
             You left the honey alone.
             What an ethical choice!
@@ -176,13 +176,3 @@ def chair(player_dict: dict):
         player_dict['xp'] += 10
         player_dict['hp'] += 10
     chair_counter += 1
-
-
-def fight(enemy: str, player_dict: dict):
-    # fight code here
-    # code to read json file
-    with open('enemy.json') as f:
-        enemy_dict = json.load(f)
-        print(enemy_dict)
-
-    return True

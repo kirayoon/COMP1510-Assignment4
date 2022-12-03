@@ -1,4 +1,5 @@
 import time
+from printer import print_scrolling_text
 
 
 def player_sleep(player_dict: dict):
@@ -83,4 +84,8 @@ def level_up(player_dict: dict):
         player_dict['location'] = (0, 0)
         print('\nYou have leveled up, and moved onto the next zone')
         print(f'You are now level {player_dict["level"]}')
+        if player_dict['level'] == 2:
+            print_scrolling_text('level_2.txt')
+        elif player_dict['level'] == 3:
+            print_scrolling_text('level_3.txt')
         input('Press enter to continue...')

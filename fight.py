@@ -86,7 +86,8 @@ def fight_sequence(enemy: str, player_dict: dict):
         You gained {enemy_dict['xp_gain']} xp!
         ''')
         player_dict['xp'] += enemy_dict['xp_gain']
-        input('Press enter to continue...')
+        # input('Press enter to continue...')
+
     if player_dict['hp'] <= 0:
         print('''
         You died.

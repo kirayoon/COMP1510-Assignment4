@@ -12,8 +12,8 @@ def default():
 def mushroom(player_dict: dict):
     print('''
     You found a mushroom.''')
-    choice = input('    Eat mushroom? (y/n)')
-    if choice.lower() == 'y':
+    choice = input('    Eat mushroom? (y/n)').lower()
+    if choice == 'y':
         rand = random.randint(1, 2)
         if rand == 1:
             print('''
@@ -28,7 +28,7 @@ def mushroom(player_dict: dict):
     ''')
             player_dict['hp'] -= 5
 
-    elif choice.lower() == 'n':
+    elif choice == 'n':
         print('''
     You left the mushroom alone.''')
     else:
@@ -50,8 +50,8 @@ def nut(player_dict: dict):
     print('''
     You found a hazelnut. We love hazelnuts!
     ''')
-    choice = input('    Crack the nut? (y/n)')
-    if choice.lower() == 'y':
+    choice = input('    Crack the nut? (y/n)').lower()
+    if choice == 'y':
         print('''
     You cracked the nut. How fun and delicious!
     
@@ -62,7 +62,7 @@ def nut(player_dict: dict):
             player_dict['inventory']['hazelnut'] += 1
         else:
             player_dict['inventory']['hazelnut'] = 1
-    elif choice.lower() == 'n':
+    elif choice == 'n':
         print('''
     You left the nut alone.
     Interesting choice.''')
@@ -77,13 +77,3 @@ def deer(player_dict: dict):
     Let's hurry up and kill it.
     ''')
     fight_sequence('deer', player_dict)
-
-
-def fight(enemy: str, player_dict: dict):
-    # fight code here
-    # code to read json file
-    with open('enemy.json') as f:
-        enemy_dict = json.load(f)
-        print(enemy_dict)
-
-    return True
