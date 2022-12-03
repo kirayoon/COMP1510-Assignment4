@@ -1,11 +1,11 @@
 import json
 import random
-from typing import Callable
+import time
+
+import main
 
 
 # 10, 5, 3, 2,
-
-
 
 
 def default(player_dict: dict):
@@ -51,14 +51,26 @@ def fish(player_dict: dict):
     Splish splash a salmon jumps out and slaps you in the face.
     You better show it who's boss.
     ''')
-    fight('fish', player_dict)
+    fight_sequence('fish', player_dict)
 
 
-def fight(enemy: str, player_dict: dict):
+def fight_sequence(enemy: str, player_dict: dict):
     # fight code here
     # code to read json file
-    with open('enemy.json') as f:
-        enemy_dict = json.load(f)
-        print(enemy_dict)
+    # with open('enemy.json') as f:
+    #     enemy_dict = json.load(f)
 
-    return True
+    # for testing
+    with open('..\\enemy.json') as f:
+        enemy_json = json.load(f)
+    enemy_dict = enemy_json[enemy]
+    print(enemy_dict)
+
+def convert_health_to_bars(health: int, max_health: int) -> tuple[str, str]:
+    health_bar_size = 20
+    health_per_dash = int(max_health / health_bar_size)
+    current_health_dashes = int(health / health_per_dash)
+    lost_health = health_bar_size - current_health_dashes
+    health_percentage = str(int(health / max_health * 100)) + '%'
+    health_bar = '█' * current_health_dashes + ' ' * lost_health
+    return health_bar, health_percentage
