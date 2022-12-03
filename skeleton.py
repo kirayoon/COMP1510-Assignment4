@@ -238,12 +238,8 @@ def egg(player_dict: dict):
     print('egg!')
 
 
-
 def main():
-    """
-    Drive the program.
-    """
-    game()
+    print('Please run game.py. This is a module.')
 
 
 if __name__ == '__main__':
