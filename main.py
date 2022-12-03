@@ -205,7 +205,6 @@ def level_up(player_dict: dict):
     answer = input('\nWould you like to move to the next level (y/n)?: ').lower()
     if answer == 'y':
         player_dict['level'] += 1
-        player_dict['max_xp'] += 10
         player_dict['xp'] = 0
         player_dict['max_hp'] += 25
         player_dict['hp'] = player_dict['max_hp']
