@@ -66,6 +66,21 @@ def fight_sequence(enemy: str, player_dict: dict):
     enemy_dict = enemy_json[enemy]
     print(enemy_dict)
 
+
+def print_attack_menu(command_map: dict):
+    menu = list(enumerate(command_map.keys(), 1))
+    headings = ["\033[4mMoves\033[0m"]
+
+    print(f'\n{headings[0]:^62}')
+
+    for move in menu:
+        print(f'{move[0]:2}. {move[1].title()}', end='    ')
+    print()
+
+
+
+
+
 def convert_health_to_bars(health: int, max_health: int) -> tuple[str, str]:
     health_bar_size = 20
     health_per_dash = int(max_health / health_bar_size)
