@@ -1,3 +1,11 @@
+import json
+import random
+import time
+from printer import print_health, print_attack_menu
+from skeleton import get_player_choice
+from player import show_inventory
+
+
 def fight_sequence(enemy: str, player_dict: dict):
     # fight code here
     # code to read json file
@@ -35,7 +43,7 @@ def fight_sequence(enemy: str, player_dict: dict):
         enemy_min_roll = max(1, enemy_attack - 10)
         if move == 'inventory':
             # TODO: remove main from here
-            main.show_inventory(player_dict)
+            show_inventory(player_dict)
             continue
         elif move == 'charge':
             player_damage = 2 * player_dict['attack']

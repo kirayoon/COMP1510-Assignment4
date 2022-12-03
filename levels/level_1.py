@@ -1,11 +1,5 @@
-import json
 import random
-import time
-
-import skeleton
-
-
-# 10, 5, 3, 2,
+from fight import fight_sequence
 
 
 def default(player_dict: dict):
@@ -52,4 +46,3 @@ def fish(player_dict: dict):
     You better show it who's boss.
     ''')
     fight_sequence('fish', player_dict)
-
