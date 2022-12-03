@@ -64,13 +64,13 @@ def fight_sequence(enemy: str, player_dict: dict):
             player_damage = random.randint(0, 2 * player_dict['attack'])
             if player_damage == 0:
                 print('''
-                You haven't had food in too long! 
-                You forgot how to bite and you missed!
+            You haven't had food in too long! 
+            You forgot how to bite and you missed!
                 ''')
         print(f'''
         You used {move}! It did {player_damage} damage!
         ''')
-        print(random.choice(enemy_dict['attack_flavour_text']))
+        print('      ', random.choice(enemy_dict['attack_flavour_text']), '\n\n')
         # 6. subtract hp from enemy
         enemy_dict['hp'] -= player_damage
         # 7. subtract hp from player
