@@ -7,7 +7,7 @@ soup_counter = 0
 chair_counter = 0
 
 
-def default():
+def default(player_dict: dict):
     print('''
     nothing here...
     ''')
@@ -63,7 +63,7 @@ def soup(player_dict: dict):
 
 
 def scraps(player_dict: dict):
-    rand = random.randint(1, 2)
+    rand = random.randint(1, 4)
     if rand == 1:
         print('''
         *crunch* *squish*

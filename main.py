@@ -10,13 +10,18 @@ from levels import level_1, level_2, level_3, level_final
 # TODO: use itertools
 
 
-def print_map(board: dict, board_height: int, board_width: int) -> None:
+def print_map(board: dict, board_height: int, board_width: int, player_loc: tuple) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
     board_width = board_height
     for row in range(board_height):
         print("  +-------+-------+-------+-------+-------+")
         for col in range(board_width):
-            print("  | ", '(!)' if board[(row, col)] == 'event2' else "   ", end="")
+            if board[(row, col)] == 'event2':
+                print("  |  (!)", end="")
+            elif (row, col) == player_loc:
+                print("  |  (P)", end="")
+            else:
+                print("  |     ", end="")
         print('  |', end="\n")
     print("  +-------+-------+-------+-------+-------+")
 
@@ -229,8 +234,8 @@ def check_event(board: dict, player_dict: dict, level_events: dict) -> None:
         event_func(player_dict)
 
 
-def egg():
-    pass
+def egg(player_dict: dict):
+    print('egg!')
 
 
 def game():
@@ -285,7 +290,7 @@ def game():
         # Print the grid
         # TODO: update second param for final
         print(player['location'])
-        print_map(board, board_height, board_width)
+        print_map(board, board_height, board_width, player['location'])
 
         # Need function to describe room
 
