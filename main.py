@@ -27,7 +27,7 @@ def make_board(num_row: int, num_col: int, current_level: int) -> dict:
     # TODO: Change for live
     level_events = {1: {'start': 1, 'event1': 10, 'event2': 5, 'event3': 3, 'event4': 3, 'egg': 3},
                     2: {'start': 1, 'event1': 5, 'event2': 3, 'event3': 10, 'event4': 3, 'egg': 3},
-                    3: {'start': 1, 'event1': 4, 'event2': 3, 'event3': 1, 'event4': 16},
+                    3: {'start': 1, 'event1': 7, 'event2': 3, 'event3': 3, 'event4': 3, 'event5': 5, 'egg': 3},
                     4: {'empty': 25}}
     for event, occurrence in level_events[current_level].items():
         board_values.extend([event] * occurrence)
@@ -348,7 +348,12 @@ def game():
                           'event4': level_2.chair,
                           'egg': egg}
         elif player['level'] == 3:
-            event_dict = {}
+            event_dict = {'event1': level_3.default,
+                          'event2': level_3.mushroom,
+                          'event3': level_3.berry,
+                          'event4': level_3.nut,
+                          'event5': level_3.deer,
+                          'egg': egg}
 
         # Check if there is an event at the player's location
         check_event(board, player, event_dict)
