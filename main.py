@@ -92,7 +92,7 @@ def get_player_choice(command_map: dict) -> str:
     choices = list(command_map.keys())
     player_choice = input('Enter the number or first letter of an option: ')
 
-    if player_choice.isdigit() and 1 <= int(player_choice) <= 9:
+    if player_choice.isdigit() and 1 <= int(player_choice) <= len(choices):
         return choices[int(player_choice) - 1]
 
     # TODO: see if this can be reformatted
@@ -206,7 +206,7 @@ def level_up(player_dict: dict):
     if answer == 'y':
         player_dict['level'] += 1
         player_dict['xp'] = 0
-        player_dict['max_hp'] += 25
+        player_dict['max_hp'] += 20
         player_dict['hp'] = player_dict['max_hp']
         player_dict['attack'] += 10
         player_dict['turn'] = 1
@@ -258,9 +258,9 @@ def game():
               'i-coord': 0,
               'j-coord': 0,
               'inventory': {'rabbit': 3, 'deer': 1},
-              'hp': 25,
-              'max_hp': 25,
-              'attack': 10,
+              'hp': 20,
+              'max_hp': 20,
+              'attack': 20,
               'level': 1,
               'xp': 0,
               'max_xp': 1000,
