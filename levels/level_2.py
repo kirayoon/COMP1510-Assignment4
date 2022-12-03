@@ -1,8 +1,10 @@
 import json
 import random
+import time
 
 
 soup_counter = 0
+chair_counter = 0
 
 
 def default():
@@ -13,10 +15,11 @@ def default():
 
 def soup(player_dict: dict):
     global soup_counter
-    soup_counter += 1
+
     print('''
     OHH GOODY! SOUP!
         ''')
+    time.sleep(1)
 
     if soup_counter == 0:
         print('''
@@ -44,6 +47,7 @@ def soup(player_dict: dict):
         ''')
         player_dict['xp'] += 300
         fight('papa', player_dict)
+    soup_counter += 1
 
 
 def scraps(player_dict: dict):
@@ -104,6 +108,60 @@ def scraps(player_dict: dict):
         You lost 3 hp
         ''')
         player_dict['hp'] -= 3
+
+
+def chair(player_dict: dict):
+    global chair_counter
+
+    print('''
+    You found a chair!
+    ''')
+
+    if chair_counter == 0:
+        print('''
+        You sit on the chair and it's TOO SMALL!
+    
+        Uh oh. You're stuck!
+        ''')
+        time.sleep(1)
+        print('''
+        still stuck..''')
+        time.sleep(1)
+        print('''
+        POP! You're free!
+    
+        But what a waste of time. You lost 5 XP.''')
+        player_dict['xp'] -= 5
+
+    elif chair_counter == 1:
+        print('''
+        You sit on the chair and it's TOO STINKY!??!
+        ''')
+        time.sleep(1)
+        print('''
+        Yuck.
+    
+        You lose 5 HP.''')
+
+        player_dict['hp'] -= 5
+
+    elif chair_counter == 2:
+        print('''
+        You sit on the chair and it's...
+        ''')
+        time.sleep(1)
+        print('''
+        PERFECT!''')
+        time.sleep(1)
+        print('''
+    
+        But it shatters into pieces... bad bear.
+    
+        You gain 10 XP & 10 HP.
+        ''')
+        player_dict['xp'] += 10
+        player_dict['hp'] += 10
+    chair_counter += 1
 
 
 def fight(enemy: str, player_dict: dict):

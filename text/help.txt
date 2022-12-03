@@ -1,12 +1,11 @@
 
-
 1. WHOAMI: You are a bear. roar.
 
 2. STATS:
     - Press 6 or 'p' to see your stats
     - HP: Health Points
     - XP: Experience Points
-    - ATK: Attack Points
+    - Attack: Attack Points
 
 3. XP:
     - You need 1000 XP to level up

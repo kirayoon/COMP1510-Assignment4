@@ -26,7 +26,7 @@ def make_board(num_row: int, num_col: int, current_level: int) -> dict:
     board_values = []
     # TODO: Change for live
     level_events = {1: {'start': 1, 'event1': 10, 'event2': 5, 'event3': 3, 'event4': 3, 'egg': 3},
-                    2: {'start': 1, 'event1': 8, 'event2': 3, 'event3': 10, 'egg': 3},
+                    2: {'start': 1, 'event1': 5, 'event2': 3, 'event3': 10, 'event4': 3, 'egg': 3},
                     3: {'start': 1, 'event1': 4, 'event2': 3, 'event3': 1, 'event4': 16},
                     4: {'empty': 25}}
     for event, occurrence in level_events[current_level].items():
@@ -301,7 +301,6 @@ def game():
             # TODO: create help documentation
             print('''
             help documentation
-            Type "quit" to quit the game, or "help" for help.
             ''')
             print_from_text_file('help.txt')
             input('Press enter to continue...')
@@ -346,7 +345,8 @@ def game():
             event_dict = {'event1': level_2.default,
                           'event2': level_2.soup,
                           'event3': level_2.scraps,
-                          'event4': level_2.egg}
+                          'event4': level_2.chair,
+                          'egg': egg}
         elif player['level'] == 3:
             event_dict = {}
 
