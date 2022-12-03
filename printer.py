@@ -94,7 +94,7 @@ def print_health(player_dict: dict, enemy_dict: dict):
     enemy_health_bar, enemy_health_percentage = convert_health_to_bars(enemy_dict['hp'], enemy_dict['max_hp'])
 
     print(f'{player_dict["name"]:^22} {enemy_dict["name"]:^41}')
-    print('|' + player_health_bar + '|' + ' ' * 10 + '|' + enemy_health_bar + '|')
+    print(f'|{player_health_bar}|{" " * 10}|{enemy_health_bar}|')
     print(f'{player_health_percentage:^22} {enemy_health_percentage:^40}')
 
 
