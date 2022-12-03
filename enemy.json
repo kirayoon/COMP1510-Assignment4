@@ -15,8 +15,23 @@
     "weight": 25
   },
   "papa": {
-    "name": "Mr. Lobs",
-    "age": 45,
-    "weight": 180
+    "name": "Mr.Lobs",
+    "attack": 10,
+    "hp": 40,
+    "max_hp": 40,
+    "xp_gain": 400,
+    "attack_flavour_text": ["Papa Lobs slaps you with his big, fat, hairy hand!",
+                            "AHH! Papa Lobs headbutts you!"],
+    "death_flavour_text": "Papa Lobs falls to the ground, dead."
+  },
+  "deer": {
+    "name": "Deer",
+    "attack": 5,
+    "hp": 20,
+    "max_hp": 20,
+    "xp_gain": 200,
+    "attack_flavour_text": ["The deer kicks you in the shins!",
+                            "The deer bites you!"],
+    "death_flavour_text": "The deer falls to the ground, dead."
   }
 }
