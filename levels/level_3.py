@@ -36,7 +36,14 @@ def mushroom(player_dict: dict):
 
 
 def berry(player_dict: dict):
-    pass
+    print('''
+    You found a berry.
+    1 berry has been added to your inventory.
+    ''')
+    if 'berry' in player_dict['inventory']:
+        player_dict['inventory']['berry'] += 1
+    else:
+        player_dict['inventory']['berry'] = 1
 
 
 def nut(player_dict: dict):
