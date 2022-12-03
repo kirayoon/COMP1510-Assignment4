@@ -22,7 +22,7 @@ def make_board(num_row: int, num_col: int, current_level: int) -> dict:
 # player_location is a tuple with i and j coordinates (row, col)
 def get_player_choice(command_map: dict) -> str:
     choices = list(command_map.keys())
-    player_choice = input('Enter the number or first letter of an option: ')
+    player_choice = input('\nEnter the number or first letter of an option: ')
 
     if player_choice.isdigit() and 1 <= int(player_choice) <= len(choices):
         return choices[int(player_choice) - 1]

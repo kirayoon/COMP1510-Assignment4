@@ -88,4 +88,5 @@ def level_up(player_dict: dict):
             print_scrolling_text('level_2.txt')
         elif player_dict['level'] == 3:
             print_scrolling_text('level_3.txt')
-        input('Press enter to continue...')
+        elif player_dict['level'] == 4:
+            print_scrolling_text('level_final.txt')
