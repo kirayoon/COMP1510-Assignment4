@@ -29,7 +29,7 @@ def game():
               'location': (0, 0),
               'i-coord': 0,
               'j-coord': 0,
-              'inventory': {'rabbit': 3, 'deer': 1},
+              'inventory': {'fish': 3, 'deer': 1, 'honey': 2},
               'hp': 20,
               'max_hp': 20,
               'attack': 5,
@@ -127,6 +127,9 @@ def game():
                           'event4': level_3.nut,
                           'event5': level_3.deer,
                           'egg': egg}
+
+        elif player['level'] == 4:
+            event_dict = {}
 
         # Check if there is an event at the player's location
         check_event(board, player, event_dict)
