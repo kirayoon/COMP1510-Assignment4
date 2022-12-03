@@ -116,26 +116,18 @@ def validate_move(player_input: str, player_coordinate: tuple, board_width: int,
 
 # Functions for each basic command
 def up(player_location: tuple):
-    print('Walking up...')
-    time.sleep(1)
     return player_location[0] - 1, player_location[1]
 
 
 def down(player_location: tuple):
-    print('Walking down...')
-    time.sleep(1)
     return player_location[0] + 1, player_location[1]
 
 
 def left(player_location: tuple):
-    print('Walking left...')
-    time.sleep(1)
     return player_location[0], player_location[1] - 1
 
 
 def right(player_location: tuple):
-    print('Walking right...')
-    time.sleep(1)
     return player_location[0], player_location[1] + 1
 
 
@@ -213,7 +205,6 @@ def level_up(player_dict: dict):
     answer = input('\nWould you like to move to the next level (y/n)?: ').lower()
     if answer == 'y':
         player_dict['level'] += 1
-        player_dict['max_xp'] += 10
         player_dict['xp'] = 0
         player_dict['max_hp'] += 25
         player_dict['hp'] = player_dict['max_hp']
