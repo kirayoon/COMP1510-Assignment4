@@ -1,11 +1,4 @@
-import os
 import random
-import time
-from pathlib import Path
-
-from levels import level_1, level_2, level_3, level_final
-
-
 # TODO: use itertools
 
 
