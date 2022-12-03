@@ -1,4 +1,6 @@
-from skeleton import make_board, get_player_choice, validate_move, up, down, left, right
+import time
+from levels import level_1, level_2, level_3
+from skeleton import make_board, get_player_choice, validate_move, up, down, left, right, egg, check_event
 from player import player_sleep, player_information, show_inventory, level_up
 from printer import print_map, print_scrolling_text, print_from_text_file, print_choices_menu, print_attack_menu
 
@@ -30,7 +32,7 @@ def game():
               'inventory': {'rabbit': 3, 'deer': 1},
               'hp': 20,
               'max_hp': 20,
-              'attack': 20,
+              'attack': 10,
               'level': 1,
               'xp': 0,
               'max_xp': 1000,

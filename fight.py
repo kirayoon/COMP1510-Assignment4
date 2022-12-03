@@ -13,8 +13,8 @@ def fight_sequence(enemy: str, player_dict: dict):
     #     enemy_dict = json.load(f)
 
     # for testing
-    with open('..\\enemy.json') as f:
-        enemy_json = json.load(f)
+    with open('enemy.json') as file:
+        enemy_json = json.load(file)
     enemy_dict = enemy_json[enemy]
     print(enemy_dict)
 
