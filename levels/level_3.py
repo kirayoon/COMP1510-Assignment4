@@ -13,7 +13,7 @@ def mushroom(player_dict: dict):
     print('''
     You found a mushroom.''')
     choice = input('    Eat mushroom? (y/n)')
-    if choice == 'y':
+    if choice.lower() == 'y':
         rand = random.randint(1, 2)
         if rand == 1:
             print('''
@@ -28,7 +28,7 @@ def mushroom(player_dict: dict):
     ''')
             player_dict['hp'] -= 5
 
-    elif choice == 'n':
+    elif choice.lower() == 'n':
         print('''
     You left the mushroom alone.''')
     else:
@@ -51,7 +51,7 @@ def nut(player_dict: dict):
     You found a hazelnut. We love hazelnuts!
     ''')
     choice = input('    Crack the nut? (y/n)')
-    if choice == 'y':
+    if choice.lower() == 'y':
         print('''
     You cracked the nut. How fun and delicious!
     
@@ -62,7 +62,7 @@ def nut(player_dict: dict):
             player_dict['inventory']['hazelnut'] += 1
         else:
             player_dict['inventory']['hazelnut'] = 1
-    elif choice == 'n':
+    elif choice.lower() == 'n':
         print('''
     You left the nut alone.
     Interesting choice.''')
