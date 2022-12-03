@@ -1,28 +1,39 @@
 
 1. WHOAMI: You are a bear. roar.
 
-2. STATS:
+2. MAP:
+    - |   X   |: Your location
+    - |  (!)  |: Level goal
+    - |   ?   |: Unvisited location
+    - |       |: Visited location
+
+3. STATS:
     - Press 6 or 'p' to see your stats
     - HP: Health Points
     - XP: Experience Points
     - Attack: Attack Points
 
-3. XP:
+4. XP:
     - You need 1000 XP to level up
     - You gain XP by completing goals
     - You can gain XP by interacting with objects
 
-4. HP:
+5. HP:
     - You lose HP by being attacked
     - You can gain / lose HP by interacting with objects
 
-4. LEVELS:
+6. LEVELS:
     - There are 3 levels in this game
     - Each level has a goal
     - You can only move to the next level if you have completed the goal
     - You can choose to stay in a level and gain more XP
     - Reach level 3 and beat the final boss to win the game
 
-5. INVENTORY:
+7. INVENTORY:
     - You can gain items by interacting with objects
     - You can use items to gain HP
+
+8. ATTACK:
+    - Claw:
+    - Bite:
+    - Charge:
