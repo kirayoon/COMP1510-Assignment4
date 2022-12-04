@@ -61,8 +61,7 @@ def heavy_current(player_dict: dict) -> None:
     Print a simple message.
     """
     print('''
-    You're in a heavy current.
-    ''')
+    You're in a heavy current.''')
 
 
 def fish(player_dict: dict):

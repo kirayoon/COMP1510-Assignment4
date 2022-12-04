@@ -226,6 +226,7 @@ def final_boss_defeated():
 
 
 def fight_sequence(enemy: str, player_dict: dict) -> None:
+    input('Press enter to continue...')
     enemy_dict = load_enemy(enemy)
     # Get dictionary of possible player attacks
     player_attacks = player_dict['attacks']
