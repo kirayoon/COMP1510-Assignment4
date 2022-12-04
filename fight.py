@@ -1,3 +1,8 @@
+"""
+This module contains the basic fight sequence and the functions that are used in the fight sequence.
+"""
+
+
 import json
 import random
 import time
@@ -7,12 +12,30 @@ from player import show_inventory
 
 
 def load_enemy(enemy: str) -> dict:
+    """
+    Return a dictionary of the enemy's stats from enemy.json file.
+
+    :param enemy: a string of the enemy's name
+    :precondition: enemy must be a valid enemy name
+    :precondition: enemy must be in enemy.json
+    :postcondition: returns a dictionary of the enemy's stats
+    :return: dictionary of the enemy's stats
+    """
     with open('enemy.json') as file:
         enemy_json = json.load(file)
     return enemy_json[enemy]
 
 
 def calc_min_roll(player_dict: dict, enemy_dict: dict) -> tuple[int, int]:
+    """
+    Calculate the minimum possible damage the player and enemy can make.
+
+    :param player_dict: dictionary of the player's stats
+    :param enemy_dict: dictionary of the enemy's stats
+    :precdondition: player_dict and enemy_dict must contain 'attack' key
+    :postcondition: returns a tuple of the minimum damage the player and enemy can make
+    :return: a tuple of the minimum possible damage for the player and enemy as integers
+    """
     min_roll = max(1, player_dict['attack'] - 10)
     enemy_min_roll = max(1, enemy_dict['attack'] - 10)
     return min_roll, enemy_min_roll
