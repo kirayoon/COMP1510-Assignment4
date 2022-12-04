@@ -1,3 +1,8 @@
+"""
+This module contains event functions for level 1.
+"""
+
+
 import random
 from fight import fight_sequence
 
