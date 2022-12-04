@@ -82,7 +82,7 @@ def soup(player_dict: dict) -> None:
     soup_counter += 1
 
 
-def scraps(player_dict: dict):
+def scraps(player_dict: dict) -> None:
     """
     Execute random events.
 
@@ -152,7 +152,17 @@ def scraps(player_dict: dict):
         player_dict['hp'] -= 3
 
 
-def chair(player_dict: dict):
+def chair(player_dict: dict) -> None:
+    """
+    Execute chair events based on how many chairs have been found.
+
+    Use the global variable chair_counter to keep track of how many chairs have been found.
+
+    :param player_dict: dictionary containing player information
+    :precondition: player_dict must be a dictionary containing 'hp' and 'xp' as keys
+    :postcondition: executes events based on how many chairs have been found
+    :postcondition: chair events can result in gain or loss in hp or xp
+    """
     global chair_counter
 
     print('''
