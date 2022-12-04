@@ -30,15 +30,18 @@ def show_inventory(player_dict: dict):
         item_json = json.load(file)
     player_inventory = player_dict['inventory'].items()
     heading = "\033[4mInventory\033[0m"
-    print(f'{heading:>25}')
-    for count, (item, amount) in enumerate(player_inventory):
-        item_dict = item_json[item]
-        if 'hp' in item_dict:
-            print(f'\t{count}) {item}: {amount} [+{item_dict["hp"]} hp]')
-        else:
-            print(f'\t{count}) {item}: {amount} [{item_dict["?"]}]')
+    print(f'\n{heading:>25}')
+    if len(player_inventory) == 0:
+        print('\tnothing here\n')
+    else:
+        for count, (item, amount) in enumerate(player_inventory):
+            item_dict = item_json[item]
+            if 'hp' in item_dict:
+                print(f'\t{count}) {item}: {amount} [+{item_dict["hp"]} hp]')
+            else:
+                print(f'\t{count}) {item}: {amount} [{item_dict["?"]}]')
 
-    choose_item(player_dict)
+        choose_item(player_dict)
 
 
 def choose_item(player_dict: dict):
@@ -96,25 +99,29 @@ def egg_select(player_dict: dict):
             player_dict['xp'] += egg_dict['xp']
             print(f'''
         How nice. You have gained {egg_dict["xp"]} xp.
-        XP: {player_dict["xp"]}''')
+        XP: {player_dict["xp"]}
+        ''')
 
         elif egg_dict['name'] == 'shard':
             player_dict['attack'] += egg_dict['attack']
             print(f'''
         You're stronger now. You gained {egg_dict["attack"]} attack points.
-        Attack: {player_dict["attack"]}''')
+        Attack: {player_dict["attack"]}
+        ''')
 
         elif egg_dict['name'] == 'magic hat':
             player_dict['max_hp'] += egg_dict['max_hp']
             print(f'''
         You're healthier now. Your max-hp has been increased by {egg_dict["max_hp"]} points.
-        Max HP: {player_dict["max_hp"]}''')
+        Max HP: {player_dict["max_hp"]}
+        ''')
 
     elif choice == 'n' and egg_dict['name'] == 'chicky':
         player_dict['attack'] += egg_dict['attack']
         print(f'''
         You eat the chicky. It was delicious. You gained {egg_dict["attack"]} attack points.
-        Attack: {player_dict["attack"]}''')
+        Attack: {player_dict["attack"]}
+        ''')
 
     else:
         print(f'''
