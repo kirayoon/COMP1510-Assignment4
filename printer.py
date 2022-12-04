@@ -47,7 +47,7 @@ def print_scrolling_text(text_file: str) -> None:
 def print_from_text_file(text_file: str) -> None:
     folder = Path("text/")
     text_file = folder / text_file
-    with open(text_file, 'r') as text_file:
+    with open(text_file, 'r', encoding='utf-8') as text_file:
         script = [line.rstrip('\n') for line in text_file]
     for line in script:
         print(line)

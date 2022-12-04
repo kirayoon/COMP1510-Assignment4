@@ -13,7 +13,6 @@ def player_sleep(player_dict: dict):
 
     Your health has recovered to {player_dict["max_hp"]}.
     ''')
-    input('Press enter to continue...')
 
 
 def player_information(player_dict: dict):
@@ -129,7 +128,8 @@ def egg_select(player_dict: dict):
 
 
 def level_up(player_dict: dict):
-    answer = input('\nWould you like to move to the next level (y/n)?: ').lower()
+    print("\nYou're ready to level up.")
+    answer = validate_yes_no('Would you like to move to the next level (y/n)?')
     if answer == 'y':
         player_dict['level'] += 1
         player_dict['xp'] = 0
@@ -140,6 +140,8 @@ def level_up(player_dict: dict):
         player_dict['location'] = (0, 0)
         print('\nYou have leveled up, and moved onto the next zone')
         print(f'You are now level {player_dict["level"]}')
+        player_information(player_dict)
+        input('Press enter to continue...')
         if player_dict['level'] == 2:
             print_scrolling_text('level_2.txt')
         elif player_dict['level'] == 3:

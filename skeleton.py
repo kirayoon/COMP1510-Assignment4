@@ -44,7 +44,7 @@ def get_player_choice(command_map: dict) -> str:
 
 def validate_yes_no(prompt: str) -> str:
     while True:
-        choice = input(prompt + '  ').lower()
+        choice = input(prompt + ':  ').lower()
         if choice not in ('y', 'n'):
             print('\nPlease enter y or n.')
             continue
