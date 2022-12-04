@@ -30,7 +30,7 @@ def game():
               'location': (0, 0),
               'i-coord': 0,
               'j-coord': 0,
-              'inventory': {'fish': 3, 'deer': 1, 'honey': 2, "egg": 2},
+              'inventory': {},
               'hp': 20,
               'max_hp': 20,
               'attack': 5,
@@ -61,7 +61,7 @@ def game():
         # Print the grid
         # TODO: update second param for final
         print(player['location'])
-        print_map(board, board_height, board_width, player['location'])
+        print_map(board, board_height, board_width, player['location'], player['level'])
 
         # Need function to describe room
 

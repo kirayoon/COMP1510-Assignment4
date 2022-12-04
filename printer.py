@@ -1,10 +1,17 @@
 import os
 from pathlib import Path
 import time
+import json
 
 
-def print_map(board: dict, board_height: int, board_width: int, player_loc: tuple) -> None:
+def print_map(board: dict, board_height: int, board_width: int, player_loc: tuple, current_level: int) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
+    with open('level_desc.json') as file:
+        level_json = json.load(file)
+    level_dict = level_json[str(current_level)]
+    print(f'''
+            Level {current_level}: {level_dict["name"]}
+            Goal: {level_dict["goal"]}''')
     for row in range(board_height):
         print("  +-------+-------+-------+-------+-------+")
         print("  ", end="")
