@@ -73,7 +73,7 @@ class Boss:
         {self.abilities["shoot"]["flavour_text"]}
         It does {self.abilities["shoot"]["damage"]} damage!
         
-        Mama Lob has {self.shot_count} shots left!
+        Mama Lob has {self.shot_count} shot(s) left!
         ''')
             # return self.abilities['shoot']['damage']
             player_dict['hp'] -= self.abilities['shoot']['damage']

@@ -45,7 +45,7 @@
         "name": "Shoot",
         "damage": 10,
         "flavour_text": "Ms. Lobs shoots you with a gun!",
-        "flavour_text_miss": "\tMs. Lobs shoots but whiffs her shot!\n\t\tNow's your chance!"
+        "flavour_text_miss": "Ms. Lobs shoots but whiffs her shot!\n\t\tNow's your chance!"
       },
       "bomb": {
         "name": "Bomb",
