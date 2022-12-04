@@ -149,6 +149,20 @@ def print_attack_menu(command_map: dict) -> None:
 
 
 def convert_health_to_bars(health: int, max_health: int) -> tuple[str, str]:
+    """
+    Convert the health of the player or enemy to a tuple of strings.
+
+    :param health: an integer of the health of the player or enemy
+    :param max_health: an integer of the maximum health of the player or enemy
+    :precondition: health must be an integer
+    :precondition: max_health must be an integer
+    :precondition: health must be less than or equal to max_health
+    :postcondition: calculates the number of bars to be filled and empty
+    :postcondition: calculates the percentage of health remaining
+    :postcondition: converts the health bar and percentage to a tuple of strings
+    :postcondition: the first string is the health in bars and the second string is the percentage of health in numbers
+    :return: a tuple of strings
+    """
     health = max(health, 0)
     health_bar_size = 20
     health_per_dash = int(max_health / health_bar_size)
