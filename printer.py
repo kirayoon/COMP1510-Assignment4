@@ -125,7 +125,15 @@ def print_choices_menu(command_map: dict) -> None:
     print(f"{menu[4][0]:8}: {menu[4][1].title(): <15}\n")
 
 
-def print_attack_menu(command_map: dict):
+def print_attack_menu(command_map: dict) -> None:
+    """
+    Print the attack menu to the screen.
+
+    :param command_map: dictionary of the commands and their functions
+    :precondition: command_map must be a dictionary with the keys as strings and values as integers
+    :precondition: keys must be the names of the attack move and values must be the damages
+    :postcondition: prints the attack menu with possible moves to the screen
+    """
     attack_menu = list(enumerate(command_map.keys(), 1))
     headings = ["\033[4mMoves\033[0m"]
 
