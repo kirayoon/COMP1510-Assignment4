@@ -46,3 +46,11 @@ def fish(player_dict: dict):
     You better show it who's boss.
     ''')
     fight_sequence('fish', player_dict)
+
+
+def main():
+    print('Please run game.py. This is a module.')
+
+
+if __name__ == '__main__':
+    main()

@@ -176,3 +176,11 @@ def chair(player_dict: dict):
         player_dict['xp'] += 10
         player_dict['hp'] += 10
     chair_counter += 1
+
+
+def main():
+    print('Please run game.py. This is a module.')
+
+
+if __name__ == '__main__':
+    main()

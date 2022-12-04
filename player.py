@@ -252,3 +252,11 @@ def level_up(player_dict: dict) -> None:
             print_scrolling_text('level_3.txt')
         elif player_dict['level'] == 4:
             print_scrolling_text('level_final.txt')
+
+
+def main():
+    print('Please run game.py. This is a module.')
+
+
+if __name__ == '__main__':
+    main()
