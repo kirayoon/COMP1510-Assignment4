@@ -8,6 +8,7 @@ from fight import death_sequence, load_enemy, final_boss_loop, final_boss_defeat
 
 
 def game():
+    start_time = time.time()
     # # TODO: store ascii art in a file
     # TODO: remove comment for production
     # # Print the title screen
@@ -29,8 +30,6 @@ def game():
     # Initialize player information
     player = {'name': char_name,
               'location': (0, 0),
-              'i-coord': 0,
-              'j-coord': 0,
               'inventory': {},
               'hp': 20,
               'max_hp': 20,
@@ -39,7 +38,11 @@ def game():
               'xp': 0,
               'max_xp': 1000,
               'turn': 1,
-              'attacks': {'claw': 1, 'bite': 2, 'charge': 3}}
+              'attacks': {'claw': 1, 'bite': 2, 'charge': 3},
+              'deaths': 0,
+              'killed': 0,
+              'damage_dealt': 0,
+              'eggs_found': 0}
 
     command_map = {'up': up,
                    'down': down,
@@ -145,7 +148,9 @@ def game():
             final_boss_loop(player, 'mama')
             game_is_won = True
 
-    final_boss_defeated()
+    end_time = time.time()
+    total_time = end_time - start_time
+    final_boss_defeated(player, total_time)
 
 
 def main():

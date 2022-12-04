@@ -85,13 +85,14 @@ def victory(player_dict: dict, enemy_dict: dict) -> None:
 
     :param player_dict: dictionary of the player's stats
     :param enemy_dict: dictionary of the enemy's stats
-    :precondition: player_dict must contain 'xp' and 'inventory' keys
-    :precondition: player_dict['xp'] must be an integer
+    :precondition: player_dict must contain 'xp' and 'inventory' and 'kills' keys
+    :precondition: player_dict['xp'], and player_dict['kills'] must be integers
     :precondition: player_dict['inventory'] must be a dictionary with string keys and integer values
     :precondition: enemy_dict must contain 'name', 'drop', and 'xp_gain' keys
     :precondition: enemy_dict['name'] must be a string
     :precondition: enemy_dict['drop'] must be a string
     :precondition: enemy_dict['xp_gain'] must be an integer
+    :postcondition: add kill to player_dict['kills']
     :postcondition: add xp to player_dict['xp']
     :postcondition: add loot to player_dict['inventory']
     """
@@ -110,6 +111,7 @@ def victory(player_dict: dict, enemy_dict: dict) -> None:
         player_dict['inventory'][enemy_drop_name] += 1
     else:
         player_dict['inventory'][enemy_drop_name] = 1
+    player_dict['kills'] += 1
 
 
 def charge(player_dict: dict, enemy_name: str, player_min_roll: int) -> int:
@@ -251,11 +253,28 @@ def final_boss_defeated() -> None:
     Print final boss defeated message and ascii art.
     """
     print_from_text_file('hunter_dead.txt')
-    print('''
+    minutes = int(time_played // 60)
+    print(f'''
     You have defeated the final boss!
     You have won the game!
-    
     ''')
+
+    print(f''' 
+    Stats:
+    You played for {minutes:.2f} minutes!
+    In total, you did {player_dict['damage_dealt']} damage!
+    You killed {player_dict['kills']} enemies!
+    You died {player_dict['deaths']} times!
+    
+    You found {player_dict['egg']}/9 eggs!
+    ''')
+    if player_dict['eggs_found'] == 9:
+        print('''\n\tYou found all the eggs! You are the best!
+        ''')
+    else:
+        print('''\n\tYou did not find all the eggs. Better luck next time!
+        ''')
+
     exit()
 
 
@@ -301,6 +320,7 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
             continue
 
         # 4. subtract hp from enemy
+        player_dict['damage_dealt'] += damage
         enemy_dict['hp'] -= damage
         if enemy_dict['hp'] <= 0 or player_dict['hp'] <= 0:
             break
@@ -365,6 +385,7 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
             continue
 
         # 4. subtract hp from enemy
+        player_dict['damage_dealt'] += damage
         final_boss.is_damaged(damage)
         if final_boss.is_dead() or player_dict['hp'] <= 0:
             break
