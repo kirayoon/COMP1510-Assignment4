@@ -139,7 +139,15 @@ def check_event(board: dict, player_dict: dict, level_events: dict) -> None:
         event_func(player_dict)
 
 
-def egg(player_dict: dict):
+def egg(player_dict: dict) -> None:
+    """
+    Add an egg to the player's inventory.
+
+    :param player_dict: a dictionary containing the player's information
+    :precondition: player_dict must be a dictionary
+    :precondition: player_dict must have a key 'inventory' with a list as a value
+    :postcondition: player_dict['egg'] is incremented by 1
+    """
     if 'egg' in player_dict['inventory']:
         print('\nYou found another egg! \nIt has been added to your inventory.')
         player_dict['inventory']['egg'] += 1
