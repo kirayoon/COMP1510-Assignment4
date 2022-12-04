@@ -16,6 +16,8 @@ def player_sleep(player_dict: dict) -> None:
 
     :param player_dict: dictionary of player stats
     :precondition: player_dict must be a dictionary containing 'hp' and 'max_hp' keys
+    :precondition: player_dict['hp'] and player_dict['max_hp'] must be positive integers
+    :postcondition: recover to max hp after waiting 3 seconds
     :postcondition: player_dict['hp'] will be set to player_dict['max_hp']
     """
     player_dict['hp'] = player_dict['max_hp']
@@ -39,6 +41,8 @@ def player_information(player_dict: dict) -> None:
     :param player_dict: dictionary of player stats
     :precondition: player_dict must be a dictionary
     :precondition: player_dict must contain 'name', 'hp', 'max_hp', 'level', 'attack', 'xp', and 'max_xp' keys
+    :precondition: value of 'name' must be a string
+    :precondition: values of 'hp', 'max_hp', 'level', 'attack', 'xp', and 'max_xp' must be positive integers
     :postcondition: print out the player's information in a formatted way
     """
     stats = ['name', 'hp', 'max_hp', 'level', 'attack', 'xp', 'max_xp']
@@ -120,7 +124,7 @@ def use_item(player_dict: dict, item: str) -> None:
     :param player_dict: dictionary of player stats
     :param item: chosen item to use as a string
     :precondition: player_dict must be a dictionary containing 'hp', 'max_hp', and 'inventory' keys
-    :precondition: player_dict['hp'] and player_dict['max_hp'] must be integers
+    :precondition: player_dict['hp'] and player_dict['max_hp'] must be positive integers
     :precondition: player_dict['inventory'] must be a dictionary containing at least one item
     :precondition: item must be a string that is a key in player_dict['inventory']
     :postcondition: adds the item's hp gain to the player's hp
@@ -158,7 +162,20 @@ def use_egg(player_dict: dict) -> None:
         You leave the egg alone.''')
 
 
-def hatch_egg(player_dict: dict):
+def hatch_egg(player_dict: dict) -> None:
+    """
+    Add random stats to the player's stats.
+
+    :param player_dict: dictionary of player stats
+    :precondition: player_dict must be a dictionary
+    :precondition: player_dict must contain 'xp', 'attack', and 'max_hp' keys
+    :precondition: values of 'xp', 'attack', and 'max_hp' must be positive integers
+    :precondition: egg.json must be a valid json file containing a list of dictionaries
+    :precondition: egg.json must contain dictionaries with 'name' and 'text' keys
+    :precondition: egg.json must contain dictionaries with possible items hatched from the egg and their effects
+    :postcondition: chooses a random dictionary of hatched item from egg.json
+    :postcondition: applies the hatched item's effect to the player
+    """
     with open('egg.json') as file:
         egg_json = json.load(file)
     egg_dict = egg_json[random.choice(list(egg_json))]
