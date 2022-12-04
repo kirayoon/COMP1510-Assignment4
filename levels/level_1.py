@@ -83,6 +83,9 @@ def fish(player_dict: dict):
 
 
 def main():
+    """
+    Drive the program
+    """
     print('Please run game.py. This is a module.')
 
 

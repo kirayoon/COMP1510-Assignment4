@@ -413,6 +413,9 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
 
 
 def main():
+    """
+    Drive the program
+    """
     print('Please run game.py. This is a module.')
 
 

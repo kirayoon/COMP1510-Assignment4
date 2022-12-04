@@ -256,6 +256,9 @@ def level_up(player_dict: dict) -> None:
 
 
 def main():
+    """
+    Drive the program
+    """
     print('Please run game.py. This is a module.')
 
 

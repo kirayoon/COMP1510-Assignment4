@@ -154,6 +154,9 @@ def game():
 
 
 def main():
+    """
+    Drive the program
+    """
     game()
 
 

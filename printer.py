@@ -211,6 +211,9 @@ def print_enemy_picture(text_file: str) -> None:
 
 
 def main():
+    """
+    Drive the program
+    """
     print('Please run the game.py file. This is a module.')
 
 
