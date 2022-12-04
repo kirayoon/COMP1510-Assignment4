@@ -65,6 +65,8 @@ def death_sequence(player_dict: dict) -> None:
     ''')
     restart = validate_yes_no('Restart the level? (y/n)')
     if restart == 'y':
+        player_dict['soup_counter'] = 0
+        player_dict['chair_counter'] = 0
         player_dict['turn'] = 0
         player_dict['hp'] = player_dict['max_hp']
         player_dict['xp'] = 0

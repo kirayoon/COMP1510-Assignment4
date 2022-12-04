@@ -42,7 +42,9 @@ def game():
               'kills': 0,
               'damage_dealt': 0,
               'eggs_found': 0,
-              'useless_events': 0}
+              'useless_events': 0,
+              'soup_counter': 0,
+              'chair_counter': 0}
 
     command_map = {'up': up,
                    'down': down,

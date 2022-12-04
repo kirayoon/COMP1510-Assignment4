@@ -9,10 +9,6 @@ from fight import fight_sequence
 from skeleton import validate_yes_no
 
 
-soup_counter = 0
-chair_counter = 0
-
-
 def default(player_dict: dict) -> None:
     """
     Print a simple message.
@@ -35,14 +31,14 @@ def soup(player_dict: dict) -> None:
     :postcondition: increases player_dict['xp'] by 200 for each soup found
     :postcondition: executes fight_sequence with 'papa' as parameter if third soup is found
     """
-    global soup_counter
+    num_soup = player_dict['soup_counter']
 
     print('''
     OHH GOODY! SOUP!
         ''')
     time.sleep(1)
 
-    if soup_counter == 0:
+    if num_soup == 0:
         print('''
     You taste the soup and it's TOO SPICY!
     
@@ -50,7 +46,7 @@ def soup(player_dict: dict) -> None:
         ''')
         player_dict['xp'] += 200
 
-    elif soup_counter == 1:
+    elif num_soup == 1:
         print('''
     You taste the soup and it's TOO SWEET!??!
     
@@ -58,7 +54,7 @@ def soup(player_dict: dict) -> None:
         ''')
         player_dict['xp'] += 200
 
-    elif soup_counter == 2:
+    elif num_soup == 2:
         print('''
     You taste the soup and it's...
     
@@ -80,7 +76,7 @@ def soup(player_dict: dict) -> None:
             Papa Lob yells, "You're not going anywhere, Bear!"
             ''')
         fight_sequence('papa', player_dict)
-    soup_counter += 1
+    player_dict['soup_counter'] += 1
 
 
 def scraps(player_dict: dict) -> None:
@@ -164,13 +160,13 @@ def chair(player_dict: dict) -> None:
     :postcondition: executes events based on how many chairs have been found
     :postcondition: chair events can result in gain or loss in hp or xp
     """
-    global chair_counter
+    num_chair = player_dict['chair_counter']
 
     print('''
     You found a chair!
     ''')
 
-    if chair_counter == 0:
+    if num_chair == 0:
         print('''
         You sit on the chair and it's TOO STINKY!??!
         ''')
@@ -182,7 +178,7 @@ def chair(player_dict: dict) -> None:
         player_dict['hp'] = max(player_dict['hp'] - 5, 1)
         player_dict['xp'] += 5
 
-    elif chair_counter == 1:
+    elif num_chair == 1:
         print('''
         You sit on the chair and it's TOO SMALL!
 
@@ -198,7 +194,7 @@ def chair(player_dict: dict) -> None:
         But what a waste of time. You lost 5 XP.''')
         player_dict['xp'] -= 5
 
-    elif chair_counter == 2:
+    elif num_chair == 2:
         print('''
         You sit on the chair and it's...
         ''')
@@ -214,7 +210,7 @@ def chair(player_dict: dict) -> None:
         ''')
         player_dict['xp'] += 10
         player_dict['hp'] = min(player_dict['hp'] + 10, player_dict['max_hp'])
-    chair_counter += 1
+    player_dict['chair_counter'] += 1
 
 
 def main():
