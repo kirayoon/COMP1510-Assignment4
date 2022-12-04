@@ -1,3 +1,8 @@
+"""
+This module contains functions that print to the screen.
+"""
+
+
 import os
 from pathlib import Path
 import time
