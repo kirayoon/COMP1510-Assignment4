@@ -27,7 +27,7 @@ def soup(player_dict: dict):
         print('''
     You taste the soup and it's TOO SPICY!
     
-    You gain 150 XP! But you still need to find the perfect soup...
+        You gain 150 XP! But you still need to find the perfect soup...
         ''')
         player_dict['xp'] += 200
 
@@ -35,7 +35,7 @@ def soup(player_dict: dict):
         print('''
     You taste the soup and it's TOO SWEET!??!
     
-    You gain 150 XP! But you still need to find the perfect soup...
+        You gain 150 XP! But you still need to find the perfect soup...
         ''')
         player_dict['xp'] += 200
 
@@ -45,21 +45,21 @@ def soup(player_dict: dict):
     
         PERFECT!
     
-    You drink the entire bowl. You gain 300 XP!
+        You drink the entire bowl. You gain 300 XP!
         ''')
         player_dict['xp'] += 300
         print('...')
         time.sleep(3)
         print('''
         
-        The door swings wide open. The Lobs are here!''')
+            The door swings wide open. The Lobs are here!''')
         time.sleep(2)
         print('''
-        They see the house in shambles and the soup bowl empty.''')
+            They see the house in shambles and the soup bowl empty.''')
         time.sleep(2)
         print('''
-        Papa Lob yells, "You're not going anywhere, Bear!"
-        ''')
+            Papa Lob yells, "You're not going anywhere, Bear!"
+            ''')
         fight_sequence('papa', player_dict)
     soup_counter += 1
 
@@ -71,14 +71,16 @@ def scraps(player_dict: dict):
         *crunch* *squish*
         You stepped on a rat...
         ''')
-        choice = validate_yes_no("Eat the rat? (y/n)")
+        choice = validate_yes_no('''
+        Eat the rat? (y/n)''')
         if choice == 'y':
-            print('yummy.. You gained 5 HP & 10 XP!')
+            print('''
+            yummy.. You gained 5 HP & 10 XP!''')
             player_dict['hp'] += 5
             player_dict['xp'] += 10
         elif choice == 'n':
             print('''
-        You left the dead rat alone.''')
+            You left the dead rat alone.''')
 
     elif rand == 2:
         print('''
@@ -95,13 +97,15 @@ def scraps(player_dict: dict):
         print('''
         You found a jar of honey!
         ''')
-        choice = validate_yes_no("Steal the honey? (y/n)")
+        choice = validate_yes_no('''
+        Steal the honey? (y/n)''')
         if choice == 'y':
             if 'honey' in player_dict['inventory']:
                 player_dict['inventory']['honey'] += 1
             else:
                 player_dict['inventory']['honey'] = 1
-            print('1 honey has been added to your inventory')
+            print('''
+            1 honey has been added to your inventory''')
         elif choice == 'n':
             print('''
             You left the honey alone.

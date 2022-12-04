@@ -12,9 +12,9 @@ def make_board(num_row: int, num_col: int, current_level: int) -> dict:
                     4: {'clear': 25}}
     for event, occurrence in level_events[current_level].items():
         board_values.extend([event] * occurrence)
-    copy = board_values[2:]
+    copy = board_values[1:]
     random.shuffle(copy)
-    board_values[2:] = copy
+    board_values[1:] = copy
 
     board_dict = dict(zip(board_key, board_values))
     if current_level == 4:
@@ -44,12 +44,7 @@ def get_player_choice(command_map: dict) -> str:
 
 def validate_yes_no(prompt: str) -> str:
     while True:
-        choice = input(prompt).lower()
-        try:
-            choice = str(choice)
-        except ValueError:
-            print('\nPlease enter y or n.')
-            continue
+        choice = input(prompt + '  ').lower()
         if choice not in ('y', 'n'):
             print('\nPlease enter y or n.')
             continue
