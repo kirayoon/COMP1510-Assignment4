@@ -74,6 +74,23 @@ def death_sequence(player_dict: dict) -> None:
 
 
 def victory(player_dict: dict, enemy_dict: dict) -> None:
+    """
+    Gain xp and loot from the enemy if the enemy is defeated.
+
+    Enemy is defeated if their hp is 0 or less.
+    
+    :param player_dict: dictionary of the player's stats
+    :param enemy_dict: dictionary of the enemy's stats
+    :precondition: player_dict must contain 'xp' and 'inventory' keys
+    :precondition: player_dict['xp'] must be an integer
+    :precondition: player_dict['inventory'] must be a dictionary with string keys and integer values
+    :precondition: enemy_dict must contain 'name', 'drop', and 'xp_gain' keys
+    :precondition: enemy_dict['name'] must be a string
+    :precondition: enemy_dict['drop'] must be a string
+    :precondition: enemy_dict['xp_gain'] must be an integer
+    :postcondition: add xp to player_dict['xp']
+    :postcondition: add loot to player_dict['inventory']
+    """
     print_health(player_dict, enemy_dict)
     enemy_name = enemy_dict['name']
     enemy_drop_name = enemy_dict['drop']
