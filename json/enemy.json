@@ -38,8 +38,6 @@
     "hp": 40,
     "max_hp": 40,
     "xp_gain": 400,
-    "attack_flavour_text": ["Papa Lobs slaps you with his big, fat, hairy hand!",
-                            "AHH! Papa Lobs headbutts you!"],
     "abilities": {
       "shoot": {
         "name": "Shoot",
@@ -56,6 +54,9 @@
         "flavour_text": "\n\t\tMama Lob is on the move.\n\t\tIs she running away?\n\t\tOr is she coming for you?"
       }
     },
-    "death_flavour_text": "Papa Lobs falls to the ground, dead."
+    "death_flavour_text": "\n\t\tMama Lobs falls to the ground, unable to avenger her husbands death.\n\t\tHer own life fading fast. She reaches her hand out and utters a single word\n\t\t...\n\t\twhy?\n\n\t\tShe falls over, dead."
+  },
+  "test": {
+    "name": "test"
   }
 }

@@ -27,6 +27,8 @@ def print_map(board: dict, board_height: int, board_width: int, player_dict: dic
     :postcondition: prints the map to the screen
     :postcondition: each coordinate is filled depending on the event at that coordinate
     :postcondition: prints player's level and level goal at the top of the map
+
+    Too difficult to test printout.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
     with open(Path('json/') / 'level_desc.json') as file:
@@ -62,6 +64,8 @@ def print_scrolling_text(text_file: str) -> None:
     :precondition: text_file must be a valid file name in the text folder
     :postcondition: prints the text from the text file to the screen one line at a time
     :postcondition: prints a line of text every 0.5 seconds
+
+    Printout too difficult to test.
     """
     text_file = Path('text/') / text_file
     with open(text_file, 'r') as file:
@@ -91,6 +95,8 @@ def print_from_text_file(text_file: str) -> None:
     :precondition: text_file must be a string
     :precondition: text_file must be a valid file name in the text folder
     :postcondition: prints the text from the text file to the screen
+
+    Too difficult to test printout
     """
     folder = Path("text/")
     text_file = folder / text_file
@@ -113,6 +119,8 @@ def print_choices_menu(command_map: dict) -> None:
     :postcondition: prints the choices menu to the screen
     :postcondition: prints the commands and their corresponding numbers
     :postcondition: prints movement commands in the first column and other commands in the second column
+
+    Printout too difficult to test.
     """
     menu = list(enumerate(command_map.keys(), 1))
     headings = ["\033[4mMovement\033[0m", "\033[4mCommands\033[0m"]
@@ -156,12 +164,15 @@ def convert_health_to_bars(health: int, max_health: int) -> tuple[str, str]:
     :param max_health: an integer of the maximum health of the player or enemy
     :precondition: health must be an integer
     :precondition: max_health must be an integer
+    :precondition: max_health must be a multiple of 20
     :precondition: health must be less than or equal to max_health
     :postcondition: calculates the number of bars to be filled and empty
     :postcondition: calculates the percentage of health remaining
     :postcondition: converts the health bar and percentage to a tuple of strings
     :postcondition: the first string is the health in bars and the second string is the percentage of health in numbers
     :return: a tuple of strings
+
+    Testing ASCII outside scope of class.
     """
     health = max(health, 0)
     health_bar_size = 20
@@ -183,6 +194,8 @@ def print_health(player_dict: dict, enemy_dict: dict) -> None:
     :precondition: enemy_dict must be a dictionary containing 'hp', 'max_hp', and 'name' as keys
     :precondition: values of 'hp' and 'max_hp' must be integers and 'name' must be a string
     :postcondition: prints the name, health bar, and percentage of health of the player and enemy in a formatted way
+
+    ASCII printout outside scope of class.
     """
     player_health_bar, player_health_percentage = convert_health_to_bars(player_dict['hp'], player_dict['max_hp'])
     enemy_health_bar, enemy_health_percentage = convert_health_to_bars(enemy_dict['hp'], enemy_dict['max_hp'])
@@ -199,7 +212,10 @@ def print_enemy_picture(text_file: str) -> None:
     :param text_file: a string of the name of the text file to be printed
     :precondition: text_file must be a string
     :precondition: text_file must be a valid file name in the text folder
+    :precondition: text folder must be in the same directory as the main file
     :postcondition: prints the enemy's ascii picture to the screen
+
+    ASCII printout outside scope of class.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
     folder = Path("text/")

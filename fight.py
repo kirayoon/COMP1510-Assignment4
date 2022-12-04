@@ -24,6 +24,9 @@ def load_enemy(enemy: str) -> dict:
     :precondition: enemy must be in enemy.json
     :postcondition: returns a dictionary of the enemy's stats
     :return: dictionary of the enemy's stats
+
+    >>> load_enemy('test')
+    {'name': 'test'}
     """
     with open(Path('json/') / 'enemy.json') as file:
         enemy_json = json.load(file)
@@ -97,6 +100,8 @@ def victory(player_dict: dict, enemy_dict: dict) -> None:
     :postcondition: add kill to player_dict['kills']
     :postcondition: add xp to player_dict['xp']
     :postcondition: add loot to player_dict['inventory']
+
+    Too difficult to test.
     """
     print_health(player_dict, enemy_dict)
     enemy_name = enemy_dict['name']
@@ -212,6 +217,8 @@ def enemy_turn(player_dict: dict, enemy_dict: dict, enemy_min_roll: int) -> None
     :precondition: enemy_dict['attack_flavour_text'] must be a list of strings
     :postcondition: deal damage to the player
     :postcondition: print a random enemy's attack flavour text
+
+    Too difficult to test.
     """
     enemy_damage = random.randint(enemy_min_roll, enemy_dict['attack'])
     player_dict['hp'] -= enemy_damage
@@ -233,6 +240,8 @@ def player_turn(player_dict: dict, enemy_name: str, player_attacks: dict, player
     :postcondition: execute the player's move and return the amount of damage the player deals
     :postcondition: execute show_inventory if player chooses 'inventory' and return None
     :return: integer of the damage the player will deal with their move or None if 'inventory' is chosen
+
+    Too difficult to test.
     """
     print_attack_menu(player_attacks)
     move = get_player_choice(player_attacks)
@@ -261,6 +270,8 @@ def final_boss_defeated(player_dict: dict, time_played: float) -> None:
     :precondition: the values of the keys must be integers
     :precondition: time_played must be a float
     :postcondition: print the final boss defeated message
+
+    Too difficult to test.
     """
     print_from_text_file('hunter_dead.txt')
     minutes = int(time_played // 60)
@@ -303,6 +314,8 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
     :postcondition: fight with the enemy until enemy or player dies
     :postcondition: execute victory function if enemy dies
     :postcondition: execute death_sequence function if player dies
+
+    Too difficult to test.
     """
     enemy_dict = load_enemy(enemy)
     # Get dictionary of possible player attacks
@@ -363,6 +376,8 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
     :precondition: enemy_name must be a string and must be a valid enemy
     :postcondition: fight with the final boss until player or boss dies
     :postcondition: execute death_sequence function if player dies
+
+    Too difficult to test.
     """
     # Get dictionary of possible player attacks
     player_attacks = player_dict['attacks']

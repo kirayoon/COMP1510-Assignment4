@@ -45,6 +45,8 @@ def make_board(num_row: int, num_col: int, current_level: int) -> dict:
     :postcondition: values are strings representing the events at those coordinates
     :postcondition: keys are paired with random values
     :return: dictionary with keys as tuples of coordinates and values as strings of events at those coordinates
+
+    Too difficult to test.
     """
     board_key = [(row, col) for row in range(num_row) for col in range(num_col)]
     board_values = []
@@ -72,6 +74,8 @@ def get_player_choice(command_map: dict) -> str:
     :precondition: keys must be strings
     :postcondition: player's choice is validated
     :return: a string representing the player's choice of command
+
+    Testing callback is outside of scope. Only tested with valid input.
     """
     choices = list(command_map.keys())
     player_choice = input('\nEnter the number or first letter of an option: ')
@@ -100,6 +104,8 @@ def validate_yes_no(prompt: str) -> str:
     :precondition: prompt must be a string
     :postcondition: user input is validated
     :return: 'y' or 'n'
+
+    Too difficult to test.
     """
     while True:
         choice = input(prompt + ':  ').lower()
@@ -145,6 +151,11 @@ def up(player_location: tuple):
     :precondition: integers must be >= 0
     :postcondition: player_location is moved down one space
     :return: a tuple containing new x and y coordinates of the player
+
+    >>> up((2, 0))
+    (1, 0)
+    >>> up((4, 4))
+    (3, 4)
     """
     return player_location[0] - 1, player_location[1]
 
@@ -158,6 +169,11 @@ def down(player_location: tuple):
     :precondition: integers must be >= 0
     :postcondition: player_location is moved down one space
     :return: a tuple containing new x and y coordinates of the player
+
+    >>> down((2, 0))
+    (3, 0)
+    >>> down((3, 4))
+    (4, 4)
     """
     return player_location[0] + 1, player_location[1]
 
@@ -171,6 +187,11 @@ def left(player_location: tuple):
     :precondition: integers must be >= 0
     :postcondition: player_location is moved down one space
     :return: a tuple containing new x and y coordinates of the player
+
+    >>> left((2, 1))
+    (2, 0)
+    >>> left((3, 4))
+    (3, 3)
     """
     return player_location[0], player_location[1] - 1
 
@@ -184,6 +205,11 @@ def right(player_location: tuple):
     :precondition: integers must be >= 0
     :postcondition: player_location is moved down one space
     :return: a tuple containing new x and y coordinates of the player
+
+    >>> right((2, 1))
+    (2, 2)
+    >>> right((3, 3))
+    (3, 4)
     """
     return player_location[0], player_location[1] + 1
 
@@ -204,6 +230,8 @@ def check_event(board: dict, player_dict: dict, level_events: dict) -> None:
     :postcondition: player's event is executed
     :postcondition: player's event is removed from the board
     :postcondition: player_dict is updated
+
+    Too difficult to test.
     """
     location = player_dict['location']
     current_event = board[location]

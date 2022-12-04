@@ -45,6 +45,8 @@ def player_information(player_dict: dict) -> None:
     :precondition: value of 'name' must be a string
     :precondition: values of 'hp', 'max_hp', 'level', 'attack', 'xp', and 'max_xp' must be positive integers
     :postcondition: print out the player's information in a formatted way
+
+    Testing fstring spacing outside the scope of this class
     """
     stats = ['name', 'hp', 'max_hp', 'level', 'attack', 'xp', 'max_xp']
     print(f'\n{" " * 7}{player_dict[stats[0]].title()} the Scary Bear',
@@ -65,6 +67,8 @@ def show_inventory(player_dict: dict) -> None:
     :postcondition: print out the player's inventory in a formatted way if the player's inventory is not empty
     :postcondition: printed inventory includes item name, quantity, and possible effects
     :postcondition: execute choose_item function if the player's inventory is not empty
+
+    Printout too difficult to test
     """
     with open(Path('json/') / 'items.json') as file:
         item_json = json.load(file)
@@ -96,6 +100,8 @@ def choose_item(player_dict: dict):
     :postcondition: executes use_item function if the player chooses to use a valid item
     :postcondition: executes use_egg function if the player chooses to use the egg
     :postcondition: deletes the item from the player's inventory if the item's quantity is 0
+
+    Recursive function too difficult to test
     """
     choice = input('\nType the number of a item you want to use or press enter to continue: ')
     if choice == '':
@@ -132,6 +138,8 @@ def use_item(player_dict: dict, item: str) -> None:
     :postcondition: adds the item's hp gain to the player's hp
     :postcondition: sets player's hp to max_hp if the item's hp gain is greater than the player's missing hp
     :postcondition: subtracts one from the item's quantity in the player's inventory
+
+    Too difficult to test.
     """
     with open(Path('json/') / 'items.json') as file:
         item_json = json.load(file)
@@ -154,6 +162,8 @@ def use_egg(player_dict: dict) -> None:
     :postcondition: executes hatch_egg function if the player chooses to hatch the egg
     :postcondition: subtracts one egg from the player's inventory if the player hatches the egg
     :postcondition: exit the inventory menu if the player chooses not to hatch the egg
+
+    Too difficult to test. Calls another function.
     """
     choice = validate_yes_no('\n    Crack the egg? (y/n)')
     if choice == 'y':
@@ -177,6 +187,8 @@ def hatch_egg(player_dict: dict) -> None:
     :precondition: egg.json must contain dictionaries with possible items hatched from the egg and their effects
     :postcondition: chooses a random dictionary of hatched item from egg.json
     :postcondition: applies the hatched item's effect to the player
+
+    Too difficult to test. Many printouts, and loading file.
     """
     with open(Path('json/') / 'egg.json') as file:
         egg_json = json.load(file)
