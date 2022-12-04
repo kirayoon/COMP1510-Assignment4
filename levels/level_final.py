@@ -63,6 +63,16 @@ class Boss:
         eval(f'self.{current_move}')(player_dict)
 
     def shoot(self, player_dict) -> None:
+        """
+        Calculate the amount of damage done to player, print flavour text, and subtract damage from player's hp
+
+        :param player_dict: a dictionary containing the player's stats
+        :precondition: player_dict must be a dictionary
+        :precondition: player_dict must contain the following keys: 'hp'
+        :postcondition: calculates the damage done to the player and prints the flavour text
+        :postcondition: subtracts the damage done to the player from their hp
+        :postcondition: player_dict is modified
+        """
         accuracy = 60
         if random.randint(1, 100) <= accuracy:
             self.shot_count -= 1
