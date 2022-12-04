@@ -100,7 +100,8 @@ class Boss:
         else:
             self.move(player_dict)
 
-    # def randomize_attack(self):
+    def is_damaged(self, damage: int) -> None:
+        self.hp -= damage
 
 
 def main():
