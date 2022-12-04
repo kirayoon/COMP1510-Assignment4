@@ -7,16 +7,19 @@ def print_map(board: dict, board_height: int, board_width: int, player_loc: tupl
     os.system('cls' if os.name == 'nt' else 'clear')
     for row in range(board_height):
         print("  +-------+-------+-------+-------+-------+")
+        print("  ", end="")
         for col in range(board_width):
             if board[(row, col)] == 'event2':
-                print("  |  (!)", end="")
+                print("|  (!)  ", end="")
             elif (row, col) == player_loc:
-                print("  |  [X]", end="")
+                print("|  [X]  ", end="")
             elif board[(row, col)] == 'clear' or board[(row, col)] == 'start':
-                print("  |     ", end="")
+                print("|       ", end="")
+            elif board[(row, col)] == 'boss':
+                print("| •`_´• ", end="")
             else:
-                print("  |   ? ", end="")
-        print('  |', end="\n")
+                print("|   ?   ", end="")
+        print('|', end="\n")
     print("  +-------+-------+-------+-------+-------+")
 
 

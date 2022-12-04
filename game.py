@@ -31,11 +31,11 @@ def game():
               'i-coord': 0,
               'j-coord': 0,
               'inventory': {'fish': 3, 'deer': 1, 'honey': 2, "egg": 2},
-              'hp': 1,
+              'hp': 20,
               'max_hp': 20,
               'attack': 5,
-              'level': 1,
-              'xp': 900,
+              'level': 4,
+              'xp': 0,
               'max_xp': 1000,
               'turn': 1}
 
@@ -56,7 +56,7 @@ def game():
             board = make_board(board_height, board_width, player['level'])
 
         # check if player is dead
-        death_sequence() if player['hp'] <= 0 else None
+        death_sequence(player) if player['hp'] <= 0 else None
 
         # Print the grid
         # TODO: update second param for final
