@@ -26,6 +26,11 @@ class Boss:
         self.turn_count = 1
 
     def get_hp(self):
+        """
+        Get the boss's current hp
+
+        :return: The boss's current hp as an int
+        """
         return self.hp
 
     def get_location(self):
