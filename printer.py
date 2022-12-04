@@ -192,7 +192,15 @@ def print_health(player_dict: dict, enemy_dict: dict) -> None:
     print(f'{player_health_percentage:^22} {enemy_health_percentage:^40}')
 
 
-def print_enemy_picture(text_file: str):
+def print_enemy_picture(text_file: str) -> None:
+    """
+    Print the enemy's picture to the screen.
+
+    :param text_file: a string of the name of the text file to be printed
+    :precondition: text_file must be a string
+    :precondition: text_file must be a valid file name in the text folder
+    :postcondition: prints the enemy's ascii picture to the screen
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     folder = Path("text/")
     text_file = folder / text_file
