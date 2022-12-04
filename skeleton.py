@@ -35,8 +35,16 @@ def make_board(num_row: int, num_col: int, current_level: int) -> dict:
     return board_dict
 
 
-# player_location is a tuple with i and j coordinates (row, col)
 def get_player_choice(command_map: dict) -> str:
+    """
+    Get player's choice of command.
+
+    :param command_map: a dictionary containing the commands and their corresponding functions
+    :precondition: command_map must be a dictionary
+    :precondition: keys must be strings
+    :postcondition: player's choice is validated
+    :return: a string representing the player's choice of command
+    """
     choices = list(command_map.keys())
     player_choice = input('\nEnter the number or first letter of an option: ')
 
@@ -47,8 +55,9 @@ def get_player_choice(command_map: dict) -> str:
     valid_choice = list(filter(lambda choice: choice.startswith(player_choice.lower()), choices))
 
     if len(valid_choice) != 1:
-        print_out = '*** Invalid choice. Please try again. ***'
-        print(f'\n{print_out:^47}\n')
+        print(f'''
+        *** Invalid choice. Please try again. ***
+        ''')
         return get_player_choice(command_map)
 
     return valid_choice[0]
