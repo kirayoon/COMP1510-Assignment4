@@ -102,13 +102,13 @@ def mushroom(player_dict: dict) -> None:
     You ate the mushroom. Delicious!
     You gained 5 HP.
     ''')
-            player_dict['hp'] += 5
+            player_dict['hp'] = min(player_dict['hp'] + 5, player_dict['max_hp'])
         else:
             print('''
     You ate a POISONOUS mushroom. YUCK!
     You lose 5 HP.
     ''')
-            player_dict['hp'] -= 5
+            player_dict['hp'] = max(player_dict['hp'] - 5, 1)
 
     elif choice == 'n':
         print('''
