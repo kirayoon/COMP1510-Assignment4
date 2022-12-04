@@ -5,14 +5,26 @@ from printer import print_scrolling_text
 from skeleton import validate_yes_no
 
 
-def player_sleep(player_dict: dict):
+def player_sleep(player_dict: dict) -> None:
+    """
+    Recover to max hp after waiting 3 seconds.
+
+    :param player_dict: dictionary of player stats
+    :precondition: player_dict must be a dictionary containing 'hp' and 'max_hp' keys
+    :postcondition: player_dict['hp'] will be set to player_dict['max_hp']
+    """
     player_dict['hp'] = player_dict['max_hp']
-    print(f'''
+    print('''
     You sleep under the stars and dreamt of being full. 
     What a good night.
-
-    Your health has recovered to {player_dict["max_hp"]}.
     ''')
+    time.sleep(1)
+    print('\tzzz....')
+    time.sleep(1)
+    print('\tzzz....zzz......')
+    time.sleep(1)
+    print(f'''
+    Your health has recovered to {player_dict["max_hp"]}.''')
 
 
 def player_information(player_dict: dict):
