@@ -111,7 +111,7 @@ def choose_item(player_dict: dict):
             del player_dict['inventory'][item]
 
 
-def use_item(player_dict: dict, item: str):
+def use_item(player_dict: dict, item: str) -> None:
     """
     Apply the item's effect to the player.
 
@@ -138,17 +138,27 @@ def use_item(player_dict: dict, item: str):
     player_dict['inventory'][item] -= 1
 
 
-def use_egg(player_dict: dict):
+def use_egg(player_dict: dict) -> None:
+    """
+    Execute the hatch_egg function if the player chooses to use the egg.
+
+    :param player_dict: dictionary of player stats
+    :precondition: player_dict must be a dictionary containing 'inventory' key
+    :precondition: player_dict['inventory'] must be a dictionary containing 'egg' key
+    :postcondition: executes hatch_egg function if the player chooses to hatch the egg
+    :postcondition: subtracts one egg from the player's inventory if the player hatches the egg
+    :postcondition: exit the inventory menu if the player chooses not to hatch the egg
+    """
     choice = validate_yes_no('\n    Crack the egg? (y/n)')
     if choice == 'y':
-        egg_select(player_dict)
+        hatch_egg(player_dict)
         player_dict['inventory']['egg'] -= 1
     elif choice == 'n':
         print('''
         You leave the egg alone.''')
 
 
-def egg_select(player_dict: dict):
+def hatch_egg(player_dict: dict):
     with open('egg.json') as file:
         egg_json = json.load(file)
     egg_dict = egg_json[random.choice(list(egg_json))]
