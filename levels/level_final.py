@@ -144,6 +144,12 @@ class Boss:
         self.hp -= damage
 
     def is_dead(self) -> bool:
+        """
+        Check if the boss is dead
+
+        :postcondition: evaluate if the boss's hp is less than or equal to 0
+        :return: true if the boss's hp is less than or equal to 0, false otherwise
+        """
         return self.hp <= 0
 
 
