@@ -2,7 +2,16 @@ import random
 from fight import fight_sequence
 
 
-def default(player_dict: dict):
+def default(player_dict: dict) -> None:
+    """
+    Print a random message and add 1 water to the player's inventory.
+
+    :param player_dict: dictionary containing player's stats
+    :precondition: player_dict must be a dictionary containing 'inventory' as key
+    :precondition: player_dict['inventory'] must be a dictionary
+    :postcondition: prints a random message to screen
+    :postcondition: adds 'water' to player_dict['inventory']
+    """
     choice = random.randint(1, 2)
     if choice == 1:
         print('''
