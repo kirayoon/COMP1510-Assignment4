@@ -9,14 +9,18 @@ def make_board(num_row: int, num_col: int, current_level: int) -> dict:
     level_events = {1: {'start': 1, 'event1': 10, 'event2': 5, 'event3': 3, 'event4': 3, 'egg': 3},
                     2: {'start': 1, 'event1': 5, 'event2': 3, 'event3': 10, 'event4': 3, 'egg': 3},
                     3: {'start': 1, 'event1': 7, 'event2': 3, 'event3': 3, 'event4': 3, 'event5': 5, 'egg': 3},
-                    4: {'clear': 24, 'boss': 1}}
+                    4: {'clear': 25}}
     for event, occurrence in level_events[current_level].items():
         board_values.extend([event] * occurrence)
     copy = board_values[2:]
     random.shuffle(copy)
     board_values[2:] = copy
 
-    return dict(zip(board_key, board_values))
+    board_dict = dict(zip(board_key, board_values))
+    if current_level == 4:
+        board_dict[(2, 2)] = 'boss'
+
+    return board_dict
 
 
 # player_location is a tuple with i and j coordinates (row, col)
