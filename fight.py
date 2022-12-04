@@ -246,7 +246,10 @@ def player_turn(player_dict: dict, enemy_name: str, player_attacks: dict, player
         return bite(player_dict, enemy_name)
 
 
-def final_boss_defeated():
+def final_boss_defeated() -> None:
+    """
+    Print final boss defeated message and ascii art.
+    """
     print_from_text_file('hunter_dead.txt')
     print('''
     You have defeated the final boss!
