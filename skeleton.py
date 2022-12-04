@@ -162,6 +162,22 @@ def right(player_location: tuple):
 
 
 def check_event(board: dict, player_dict: dict, level_events: dict) -> None:
+    """
+    Check if player is on an event space.
+
+    :param board: a dictionary containing the board
+    :param player_dict: a dictionary containing the player's information
+    :param level_events: a dictionary containing the events for the current level
+    :precondition: parameters must be dictionaries
+    :precondition: board must have tuples for keys corresponding to the board's x and y coordinates
+    :precondition: board must have strings for values corresponding to level_events keys
+    :precondition: player_dict must have strings for keys corresponding to the functions in level_events
+    :precondition: level_events must have strings for keys corresponding to the events for the current level
+    :precondition: level_events must have functions for values
+    :postcondition: player's event is executed
+    :postcondition: player's event is removed from the board
+    :postcondition: player_dict is updated
+    """
     location = player_dict['location']
     current_event = board[location]
     if current_event == 'clear':
