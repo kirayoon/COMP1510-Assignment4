@@ -83,6 +83,15 @@ def soup(player_dict: dict) -> None:
 
 
 def scraps(player_dict: dict):
+    """
+    Execute random events.
+
+    Random events can result in gain or loss in hp or xp, or add items to inventory.
+
+    :param player_dict: dictionary containing player information
+    :precondition: player_dict must be a dictionary containing 'hp', 'xp', and 'inventory' as keys
+    :postcondition: executes random events based on random number
+    """
     rand = random.randint(1, 4)
     if rand == 1:
         print('''
