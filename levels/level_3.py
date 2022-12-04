@@ -18,6 +18,13 @@ def default(player_dict: dict):
 
 
 def deer(player_dict: dict):
+    """
+    Execute fight_sequence with a deer.
+
+    :param player_dict: dictionary containing player information
+    :precondition: player_dict must be a dictionary
+    :postcondition: executes fight_sequence with 'deer' as parameter
+    """
     print('''
     It's a deer! Just standing there.
     The deer doesn't know what's about to happen.
