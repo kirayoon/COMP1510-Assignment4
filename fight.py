@@ -193,6 +193,22 @@ def bite(player_dict: dict, enemy_name: str) -> int:
 
 
 def enemy_turn(player_dict: dict, enemy_dict: dict, enemy_min_roll: int) -> None:
+    """
+    Deal damage to the player.
+
+    Amount of damage is random between enemy's minimum damage and enemy's attack points.
+
+    :param player_dict: dictionary of the player's stats
+    :param enemy_dict: dictionary of the enemy's stats
+    :param enemy_min_roll: an integer of the minimum damage the enemy can deal
+    :precondition: player_dict must be a dictionary containing 'hp' as key
+    :precondition: player_dict['hp'] must be an integer
+    :precondition: enemy_dict must be a dictionary containing 'attack' and 'attack_flavour_text' as keys
+    :precondition: enemy_dict['attack'] must be an integer
+    :precondition: enemy_dict['attack_flavour_text'] must be a list of strings
+    :postcondition: deal damage to the player
+    :postcondition: print a random enemy's attack flavour text
+    """
     enemy_damage = random.randint(enemy_min_roll, enemy_dict['attack'])
     player_dict['hp'] -= enemy_damage
     print('      ', random.choice(enemy_dict['attack_flavour_text']), '\n\n')

@@ -13,13 +13,27 @@ soup_counter = 0
 chair_counter = 0
 
 
-def default(player_dict: dict):
+def default(player_dict: dict) -> None:
+    """
+    Print a simple message.
+    """
     print('''
     nothing here...
     ''')
 
 
-def soup(player_dict: dict):
+def soup(player_dict: dict) -> None:
+    """
+    Gain 200 XP for each soup found, and execute fight_sequence if third soup is found.
+
+    Use the global variable soup_counter to keep track of how many soups have been found.
+
+    :param player_dict: dictionary containing player information
+    :precondition: player_dict must be a dictionary containing 'xp' as key
+    :precondition: player_dict['xp'] must be an integer
+    :postcondition: increases player_dict['xp'] by 200 for each soup found
+    :postcondition: executes fight_sequence with 'papa' as parameter if third soup is found
+    """
     global soup_counter
 
     print('''
@@ -68,7 +82,16 @@ def soup(player_dict: dict):
     soup_counter += 1
 
 
-def scraps(player_dict: dict):
+def scraps(player_dict: dict) -> None:
+    """
+    Execute random events.
+
+    Random events can result in gain or loss in hp or xp, or add items to inventory.
+
+    :param player_dict: dictionary containing player information
+    :precondition: player_dict must be a dictionary containing 'hp', 'xp', and 'inventory' as keys
+    :postcondition: executes random events based on random number
+    """
     rand = random.randint(1, 4)
     if rand == 1:
         print('''
@@ -129,7 +152,17 @@ def scraps(player_dict: dict):
         player_dict['hp'] = max(player_dict['hp'] - 3, 1)
 
 
-def chair(player_dict: dict):
+def chair(player_dict: dict) -> None:
+    """
+    Execute chair events based on how many chairs have been found.
+
+    Use the global variable chair_counter to keep track of how many chairs have been found.
+
+    :param player_dict: dictionary containing player information
+    :precondition: player_dict must be a dictionary containing 'hp' and 'xp' as keys
+    :postcondition: executes events based on how many chairs have been found
+    :postcondition: chair events can result in gain or loss in hp or xp
+    """
     global chair_counter
 
     print('''
