@@ -167,18 +167,26 @@ def claw(player_dict: dict, enemy_name: str, player_min_roll: int) -> int:
 
 
 def bite(player_dict: dict, enemy_name: str) -> int:
+    """
+    Return the amount of damage player will deal.
+
+    Amount of damage is random between 0 and twice the player's attack points.
+
+    :param player_dict: dictionary of the player's stats
+    :param enemy_name: the enemy's name as a string
+    :precondition: player_dict must contain 'attack' key
+    :precondition: player_dict['attack'] must be an integer
+    :precondition: enemy_name must be a string
+    :postcondition: return an integer of the amount of damage the player will deal
+    :return: an integer of the amount of damage the player will deal
+    """
     player_damage = random.randint(0, 2 * player_dict['attack'])
     if player_damage == 0:
-        print('''
-                You haven't had food in too long! 
-                You forgot how to bite and you missed!
+        print('''\n\tYou haven't had food in too long!\n\tYou forgot how to bite and you missed!
                 
-                    ''')
+        ''')
     else:
-        print(f'''
-        You bit the {enemy_name}! It did {player_damage} damage!
-        
-        What a yummy taste!
+        print(f'''\n\tYou bit the {enemy_name}! It did {player_damage} damage!\n\tWhat a yummy taste!
         
         ''')
     return player_damage
