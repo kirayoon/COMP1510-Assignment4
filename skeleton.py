@@ -38,6 +38,22 @@ def get_player_choice(command_map: dict) -> str:
     return valid_choice[0]
 
 
+def validate_yes_no(prompt: str) -> str:
+    while True:
+        choice = input(prompt).lower()
+        try:
+            choice = str(choice)
+        except ValueError:
+            print('\nPlease enter y or n.')
+            continue
+        if choice not in ('y', 'n'):
+            print('\nPlease enter y or n.')
+            continue
+        else:
+            break
+    return choice
+
+
 def validate_move(player_input: str, player_coordinate: tuple, board_width: int, board_height: int) -> bool:
     move_dictionary = {'up': player_coordinate[0] > 0,
                        'down': player_coordinate[0] < board_height - 1,
