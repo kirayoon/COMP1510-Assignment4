@@ -34,7 +34,7 @@ def game():
               'hp': 20,
               'max_hp': 20,
               'attack': 5,
-              'level': 4,
+              'level': 3,
               'xp': 0,
               'max_xp': 1000,
               'turn': 1}
@@ -126,10 +126,10 @@ def game():
                           'egg': egg}
         elif player['level'] == 3:
             event_dict = {'event1': level_3.default,
-                          'event2': level_3.mushroom,
+                          'event2': level_3.deer,
                           'event3': level_3.berry,
                           'event4': level_3.nut,
-                          'event5': level_3.deer,
+                          'event5': level_3.mushroom,
                           'egg': egg}
         elif player['level'] == 4:
             event_dict = {}
