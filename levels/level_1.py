@@ -53,10 +53,10 @@ def slippery_rock(player_dict: dict) -> None:
     
     You lost 1 hp
     ''')
-    player_dict['hp'] -= 1
+    player_dict['hp'] = max(player_dict['hp'] - 1, 1)
 
 
-def heavy_current(player_dict: dict) -> None:
+def heavy_current() -> None:
     """
     Print a simple message.
     """
