@@ -1,6 +1,7 @@
 {
   "fish": {
     "name": "Salmon",
+    "drop": "Raw Salmon",
     "attack": 2,
     "hp": 20,
     "max_hp": 20,
@@ -9,13 +10,9 @@
                             "Flip Flop Flippity Flop! The salmon flops on!"],
     "death_flavour_text": "The salmon flops around on the ground, dead."
   },
-  "dog": {
-    "name": "Fido",
-    "age": 4,
-    "weight": 25
-  },
   "papa": {
     "name": "Mr.Lobs",
+    "drop": "Mr. Lobs' Big Toe",
     "attack": 10,
     "hp": 40,
     "max_hp": 40,
@@ -26,6 +23,7 @@
   },
   "deer": {
     "name": "Deer",
+    "drop": "Raw Deer",
     "attack": 5,
     "hp": 20,
     "max_hp": 20,

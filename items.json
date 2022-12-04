@@ -1,8 +1,8 @@
 {
-  "fish": {
+  "Raw Salmon": {
     "hp": 5
   },
-  "deer": {
+  "Raw Deer": {
     "hp": 20
   },
   "water": {
@@ -19,5 +19,8 @@
   },
   "egg": {
     "?": "?"
+  },
+  "Mr. Lobs' Big Toe": {
+    "hp": 50
   }
 }

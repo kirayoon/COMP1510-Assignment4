@@ -134,8 +134,20 @@ def chair(player_dict: dict):
 
     if chair_counter == 0:
         print('''
+        You sit on the chair and it's TOO STINKY!??!
+        ''')
+        time.sleep(1)
+        print('''
+        Yuck.
+
+        You lose 5 HP. But you gain 5 XP for trying.''')
+        player_dict['hp'] -= 5
+        player_dict['xp'] += 5
+
+    elif chair_counter == 1:
+        print('''
         You sit on the chair and it's TOO SMALL!
-    
+
         Uh oh. You're stuck!
         ''')
         time.sleep(1)
@@ -144,21 +156,9 @@ def chair(player_dict: dict):
         time.sleep(1)
         print('''
         POP! You're free!
-    
+
         But what a waste of time. You lost 5 XP.''')
         player_dict['xp'] -= 5
-
-    elif chair_counter == 1:
-        print('''
-        You sit on the chair and it's TOO STINKY!??!
-        ''')
-        time.sleep(1)
-        print('''
-        Yuck.
-    
-        You lose 5 HP.''')
-
-        player_dict['hp'] -= 5
 
     elif chair_counter == 2:
         print('''

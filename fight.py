@@ -27,7 +27,7 @@ def death_sequence(player_dict: dict) -> None:
     ''')
     restart = validate_yes_no('Restart the level? (y/n)')
     if restart == 'y':
-        player_dict['turns'] = 0
+        player_dict['turn'] = 0
         player_dict['hp'] = player_dict['max_hp']
         player_dict['xp'] = 0
         player_dict['location'] = (0, 0)
@@ -41,29 +41,35 @@ def death_sequence(player_dict: dict) -> None:
 
 def victory(player_dict: dict, enemy_dict: dict) -> None:
     print_health(player_dict, enemy_dict)
+    enemy_name = enemy_dict['name']
+    enemy_drop_name = enemy_dict['drop']
     print(f'''
-        You defeated the {enemy_dict['name']}!
+        You defeated the {enemy_name}!
         You gained {enemy_dict['xp_gain']} xp!
+        
+        {enemy_name} has been added to your inventory!
+        
         ''')
     player_dict['xp'] += enemy_dict['xp_gain']
-    input('Press enter to continue...')
+    if enemy_name in player_dict['inventory']:
+        player_dict['inventory'][enemy_drop_name] += 1
+    else:
+        player_dict['inventory'][enemy_drop_name] = 1
 
 
-def charge(player_dict: dict, enemy_dict: dict, player_min_roll: int) -> None:
+def charge(player_dict: dict, enemy_dict: dict, player_min_roll: int) -> int:
     player_damage = 2 * player_dict['attack']
-    enemy_dict['hp'] -= player_damage
     self_damage = random.randint(player_min_roll, player_dict['attack'])
     player_dict['hp'] -= self_damage
 
     print(f'''
     You feel your power increasing!
-    You rush at the enemy and do {player_damage} damage!
+    You rush at the {enemy_dict['name']} and do {player_damage} damage!
 
     However, in your rage, you also did {self_damage} damage to yourself.
     
-    The enemy is stunned.
     ''')
-    input('Press enter to continue...')
+    return player_damage
 
 
 def claw(player_dict: dict, enemy_dict: dict, player_min_roll: int) -> int:
@@ -71,6 +77,7 @@ def claw(player_dict: dict, enemy_dict: dict, player_min_roll: int) -> int:
     print(f'''
     You clawed at the {enemy_dict['name']}! It did {player_damage} damage!
     They say ouchie :(
+    
     ''')
     return player_damage
 
@@ -81,12 +88,14 @@ def bite(player_dict: dict, enemy_dict: dict) -> int:
         print('''
                 You haven't had food in too long! 
                 You forgot how to bite and you missed!
+                
                     ''')
     else:
         print(f'''
         You bit the {enemy_dict['name']}! It did {player_damage} damage!
         
         What a yummy taste!
+        
         ''')
     return player_damage
 
@@ -101,8 +110,8 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
     enemy_dict = load_enemy(enemy)
     print(f'{"FIGHT!":^56}')
     time.sleep(1)
-    print(type(enemy_dict['hp']))
-    while enemy_dict['hp'] > 0 and player_dict['hp'] > 0:
+
+    while True:
         # 1. print ascii image from file
         file_to_use = enemy_dict['name']
         print_enemy_picture(file_to_use + '.txt')
@@ -123,8 +132,8 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
             input('Press enter to continue...')
             continue
         elif move == 'charge':
-            charge(player_dict, enemy_dict, player_min_roll)
-            continue
+            damage = charge(player_dict, enemy_dict, player_min_roll)
+            # continue
         elif move == 'claw':
             damage = claw(player_dict, enemy_dict, player_min_roll)
         else:  # move is bite
@@ -132,17 +141,22 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
 
         # 6. subtract hp from enemy
         enemy_dict['hp'] -= damage
-        if enemy_dict['hp'] <= 0:
-            print_health(player_dict, enemy_dict)
-            victory(player_dict, enemy_dict)
+        if enemy_dict['hp'] <= 0 or player_dict['hp'] <= 0:
+            break
 
         # 7. Enemy's turn
         enemy_turn(player_dict, enemy_dict, enemy_min_roll)
         if player_dict['hp'] <= 0:
-            death_sequence(player_dict)
+            break
 
         print_health(player_dict, enemy_dict)
         input('Press enter to continue...')
+
+    if enemy_dict['hp'] <= 0:
+        victory(player_dict, enemy_dict)
+    if player_dict['hp'] <= 0:
+        print_health(player_dict, enemy_dict)
+        death_sequence(player_dict)
 
 
 def main():

@@ -83,6 +83,7 @@ def print_attack_menu(command_map: dict):
 
 
 def convert_health_to_bars(health: int, max_health: int) -> tuple[str, str]:
+    health = max(health, 0)
     health_bar_size = 20
     health_per_dash = int(max_health / health_bar_size)
     current_health_dashes = int(health / health_per_dash)
