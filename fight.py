@@ -260,6 +260,20 @@ def final_boss_defeated() -> None:
 
 
 def fight_sequence(enemy: str, player_dict: dict) -> None:
+    """
+    Fight with the enemy until enemy or player dies.
+
+    :param enemy: string of the enemy's name
+    :param player_dict: dictionary of the player's stats
+    :precondition: enemy must be a string
+    :precondition: enemy must be a valid enemy
+    :precondition: player_dict must be a dictionary containing 'attacks', 'level', 'attack', and 'hp' as keys
+    :precondition: player_dict['attacks'] must be a dictionary containing 'charge', 'claw', and 'bite' as keys
+    :precondition: values of 'level', 'attack', and 'hp' must be integers
+    :postcondition: fight with the enemy until enemy or player dies
+    :postcondition: execute victory function if enemy dies
+    :postcondition: execute death_sequence function if player dies
+    """
     enemy_dict = load_enemy(enemy)
     # Get dictionary of possible player attacks
     player_attacks = player_dict['attacks']
