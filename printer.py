@@ -12,7 +12,7 @@ def print_map(board: dict, board_height: int, board_width: int, player_loc: tupl
             if board[(row, col)] == 'event2':
                 print("|  (!)  ", end="")
             elif (row, col) == player_loc:
-                print("|  [X]  ", end="")
+                print("|ʕ•`ᴥ´•ʔ", end="")
             elif board[(row, col)] == 'clear' or board[(row, col)] == 'start':
                 print("|       ", end="")
             elif board[(row, col)] == 'boss':

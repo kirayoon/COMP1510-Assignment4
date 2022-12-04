@@ -2,10 +2,11 @@
 1. WHOAMI: You are a bear. roar.
 
 2. MAP:
-    - |   X   |: Your location
+    - |ʕ•`ᴥ´•ʔ|: Your location
     - |  (!)  |: Level goal
     - |   ?   |: Unvisited location
     - |       |: Visited location
+    - | •`_´• |: Boss
 
 3. STATS:
     - Press 6 or 'p' to see your stats
@@ -22,18 +23,18 @@
     - You lose HP by being attacked
     - You can gain / lose HP by interacting with objects
 
-6. LEVELS:
-    - There are 3 levels in this game
-    - Each level has a goal
-    - You can only move to the next level if you have completed the goal
-    - You can choose to stay in a level and gain more XP
-    - Reach level 3 and beat the final boss to win the game
+6. ATTACK:
+    - Claw: Use those pointy claws to attack. Damage: a random number up to your attack points
+    - Bite: Chomp chomp. It's feeding time. Damage: between 0 and 2x your attack points.
+    - Charge: Charge at your enemy. Damage: 2x your attack points. Damages yourself by up to your attack points.
 
 7. INVENTORY:
     - You can gain items by interacting with objects
     - You can use items to gain HP
 
-8. ATTACK:
-    - Claw: Use those pointy claws to attack. Damage: a random number up to your attack points
-    - Bite: Chomp chomp. It's feeding time. Damage: between 0 and 2x your attack points.
-    - Charge: Charge at your enemy. Damage: 2x your attack points. Damages yourself by up to your attack points.
+8. LEVELS:
+    - There are 3 levels in this game
+    - Each level has a goal
+    - You can only move to the next level if you have completed the goal
+    - You can choose to stay in a level and gain more XP
+    - Reach level 3 and beat the final boss to win the game
