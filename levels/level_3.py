@@ -83,7 +83,15 @@ def nut(player_dict: dict) -> None:
     Interesting choice.''')
 
 
-def mushroom(player_dict: dict):
+def mushroom(player_dict: dict) -> None:
+    """
+    Lose or gain 5 hp if player chooses to eat the mushroom.
+
+    :param player_dict: dictionary containing player information
+    :precondition: player_dict must be a dictionary containing 'hp' as key
+    :precondition: player_dict['hp'] must be an integer
+    :postcondition: randomly increase or decrease player_dict['hp'] by 5 if player chooses to eat the mushroom
+    """
     print('''
     You found a mushroom.''')
     choice = validate_yes_no('    Eat mushroom? (y/n)')
