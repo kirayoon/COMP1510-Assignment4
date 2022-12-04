@@ -76,6 +76,22 @@ def validate_yes_no(prompt: str) -> str:
 
 
 def validate_move(player_input: str, player_coordinate: tuple, board_width: int, board_height: int) -> bool:
+    """
+    Validate player input for movement.
+
+    Input is valid if movement is in the range of the board.
+
+    :param player_input: string representing the player's input
+    :param player_coordinate: tuple representing the player's current location
+    :param board_width: integer representing the width of the board
+    :param board_height: integer representing the height of the board
+    :precondition: player_input must be a string 'up', 'down', 'left', or 'right'
+    :precondition: player_coordinate must be a tuple of integers
+    :precondition: board_width must be an integer greater than 0
+    :precondition: board_height must be an integer greater than 0
+    :postcondition: player's move is validated
+    :return: True if player's input for movement is valid, False otherwise
+    """
     move_dictionary = {'up': player_coordinate[0] > 0,
                        'down': player_coordinate[0] < board_height - 1,
                        'left': player_coordinate[1] > 0,
