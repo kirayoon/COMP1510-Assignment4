@@ -1,3 +1,8 @@
+"""
+This module contains functions that print to the screen.
+"""
+
+
 import os
 from pathlib import Path
 import time
@@ -5,6 +10,24 @@ import json
 
 
 def print_map(board: dict, board_height: int, board_width: int, player_dict: dict, boss_loc=None) -> None:
+    """
+    Print the map to the screen.
+
+    :param board: dictionary of the board with the keys as coordinates and values as event names
+    :param board_height: integer of the height of the board
+    :param board_width: integer of the width of the board
+    :param player_dict: dictionary of the player's stats
+    :param boss_loc: tuple of the boss's location for the boss fight
+    :precondition: board must be a dictionary with the keys as tuples of coordinates and values as strings
+    :precondition: board_height must be an integer
+    :precondition: board_width must be an integer
+    :precondition: player_dict must be a dictionary containing 'level' and 'location' keys
+    :precondition: values of 'level' must be an integer and 'location' must be a tuple of integers of coordinates
+    :precondition: boss_loc must be a tuple of integers of coordinates
+    :postcondition: prints the map to the screen
+    :postcondition: each coordinate is filled depending on the event at that coordinate
+    :postcondition: prints player's level and level goal at the top of the map
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     with open(Path('json/') / 'level_desc.json') as file:
         level_json = json.load(file)
@@ -31,6 +54,15 @@ def print_map(board: dict, board_height: int, board_width: int, player_dict: dic
 
 
 def print_scrolling_text(text_file: str) -> None:
+    """
+    Print the text from a text file to the screen one line at a time.
+
+    :param text_file: a string of the name of the text file to be printed
+    :precondition: text_file must be a string
+    :precondition: text_file must be a valid file name in the text folder
+    :postcondition: prints the text from the text file to the screen one line at a time
+    :postcondition: prints a line of text every 0.5 seconds
+    """
     text_file = Path('text/') / text_file
     with open(text_file, 'r') as file:
         script = [line.rstrip('\n') for line in file]
@@ -52,6 +84,14 @@ def print_scrolling_text(text_file: str) -> None:
 
 
 def print_from_text_file(text_file: str) -> None:
+    """
+    Print the text from a text file to the screen.
+
+    :param text_file: a string of the name of the text file to be printed
+    :precondition: text_file must be a string
+    :precondition: text_file must be a valid file name in the text folder
+    :postcondition: prints the text from the text file to the screen
+    """
     folder = Path("text/")
     text_file = folder / text_file
     with open(text_file, 'r', encoding='utf-8') as text_file:
@@ -63,6 +103,17 @@ def print_from_text_file(text_file: str) -> None:
 
 
 def print_choices_menu(command_map: dict) -> None:
+    """
+    Print the choices menu to the screen.
+
+    Choices menu contains commands that the player can use.
+
+    :param command_map: dictionary of the commands and their functions
+    :precondition: command_map must be a dictionary with the keys as strings and values as functions or empty strings
+    :postcondition: prints the choices menu to the screen
+    :postcondition: prints the commands and their corresponding numbers
+    :postcondition: prints movement commands in the first column and other commands in the second column
+    """
     menu = list(enumerate(command_map.keys(), 1))
     headings = ["\033[4mMovement\033[0m", "\033[4mCommands\033[0m"]
 
@@ -79,7 +130,15 @@ def print_choices_menu(command_map: dict) -> None:
     print(f"{menu[4][0]:8}: {menu[4][1].title(): <15}\n")
 
 
-def print_attack_menu(command_map: dict):
+def print_attack_menu(command_map: dict) -> None:
+    """
+    Print the attack menu to the screen.
+
+    :param command_map: dictionary of the commands and their functions
+    :precondition: command_map must be a dictionary with the keys as strings and values as integers
+    :precondition: keys must be the names of the attack move and values must be the damages
+    :postcondition: prints the attack menu with possible moves to the screen
+    """
     attack_menu = list(enumerate(command_map.keys(), 1))
     headings = ["\033[4mMoves\033[0m"]
 
@@ -90,6 +149,20 @@ def print_attack_menu(command_map: dict):
 
 
 def convert_health_to_bars(health: int, max_health: int) -> tuple[str, str]:
+    """
+    Convert the health of the player or enemy to a tuple of strings.
+
+    :param health: an integer of the health of the player or enemy
+    :param max_health: an integer of the maximum health of the player or enemy
+    :precondition: health must be an integer
+    :precondition: max_health must be an integer
+    :precondition: health must be less than or equal to max_health
+    :postcondition: calculates the number of bars to be filled and empty
+    :postcondition: calculates the percentage of health remaining
+    :postcondition: converts the health bar and percentage to a tuple of strings
+    :postcondition: the first string is the health in bars and the second string is the percentage of health in numbers
+    :return: a tuple of strings
+    """
     health = max(health, 0)
     health_bar_size = 20
     health_per_dash = int(max_health / health_bar_size)
