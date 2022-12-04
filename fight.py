@@ -248,10 +248,17 @@ def player_turn(player_dict: dict, enemy_name: str, player_attacks: dict, player
         return bite(player_dict, enemy_name)
 
 
-def final_boss_defeated(player_dict: dict, time_played) -> None:
+def final_boss_defeated(player_dict: dict, time_played: float) -> None:
     """
-    TODO: update docstring
-    Print final boss defeated message and ascii art.
+    Print the final boss defeated message.
+
+    :param player_dict: dictionary of the player's stats
+    :param time_played: the time the player has played the game
+    :precondition: player_dict must be a dictionary
+    :precondition: player_dict must contain the keys 'damage_dealt', 'kills', 'deaths', and 'egg_count'
+    :precondition: the values of the keys must be integers
+    :precondition: time_played must be a float
+    :postcondition: print the final boss defeated message
     """
     print_from_text_file('hunter_dead.txt')
     minutes = int(time_played // 60)
@@ -267,7 +274,7 @@ def final_boss_defeated(player_dict: dict, time_played) -> None:
     You killed {player_dict['kills']} enemies!
     You died {player_dict['deaths']} times!
     
-    You found {player_dict['egg']}/9 eggs!
+    You found {player_dict['eggs_found']}/9 eggs!
     ''')
     if player_dict['eggs_found'] == 9:
         print('''\n\tYou found all the eggs! You are the best!
