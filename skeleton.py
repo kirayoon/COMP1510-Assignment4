@@ -1,5 +1,4 @@
 import random
-# TODO: use itertools
 
 
 def make_board(num_row: int, num_col: int, current_level: int) -> dict:
@@ -51,7 +50,6 @@ def get_player_choice(command_map: dict) -> str:
     if player_choice.isdigit() and 1 <= int(player_choice) <= len(choices):
         return choices[int(player_choice) - 1]
 
-    # TODO: see if this can be reformatted
     valid_choice = list(filter(lambda choice: choice.startswith(player_choice.lower()), choices))
 
     if len(valid_choice) != 1:
