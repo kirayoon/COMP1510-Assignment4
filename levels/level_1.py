@@ -51,13 +51,23 @@ def slippery_rock(player_dict: dict) -> None:
     player_dict['hp'] -= 1
 
 
-def heavy_current(player_dict: dict):
+def heavy_current(player_dict: dict) -> None:
+    """
+    Print a simple message.
+    """
     print('''
     You're in a heavy current.
     ''')
 
 
 def fish(player_dict: dict):
+    """
+    Execute fight_sequence with a fish.
+
+    :param player_dict: dictionary containing player's stats
+    :precondition: player_dict must be a dictionary
+    :postcondition: executes fight_sequence with 'fish' as parameter
+    """
     print('''
     Splish splash a salmon jumps out and slaps you in the face.
     You better show it who's boss.
