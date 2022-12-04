@@ -25,6 +25,8 @@ def deer(player_dict: dict) -> None:
     :param player_dict: dictionary containing player information
     :precondition: player_dict must be a dictionary
     :postcondition: executes fight_sequence with 'deer' as parameter
+
+    Too difficult to test
     """
     print('''
     It's a deer! Just standing there.

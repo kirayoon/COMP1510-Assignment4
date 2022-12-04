@@ -23,7 +23,7 @@ def soup(player_dict: dict) -> None:
     """
     Gain 200 XP for each soup found, and execute fight_sequence if third soup is found.
 
-    Use the global variable soup_counter to keep track of how many soups have been found.
+    Use the player_dict['soup_counter'] to keep track of how many soups have been found.
 
     :param player_dict: dictionary containing player information
     :precondition: player_dict must be a dictionary containing 'xp' as key
@@ -153,7 +153,7 @@ def chair(player_dict: dict) -> None:
     """
     Execute chair events based on how many chairs have been found.
 
-    Use the global variable chair_counter to keep track of how many chairs have been found.
+    Use the player_dict['chair_counter'] to keep track of how many chairs have been found.
 
     :param player_dict: dictionary containing player information
     :precondition: player_dict must be a dictionary containing 'hp' and 'xp' as keys

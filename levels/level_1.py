@@ -82,6 +82,8 @@ def fish(player_dict: dict):
     :param player_dict: dictionary containing player's stats
     :precondition: player_dict must be a dictionary
     :postcondition: executes fight_sequence with 'fish' as parameter
+
+    Too difficult to unittest/doctest
     """
     print('''
     Splish splash a salmon jumps out and slaps you in the face.
