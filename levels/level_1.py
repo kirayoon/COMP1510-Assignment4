@@ -58,13 +58,21 @@ def slippery_rock(player_dict: dict) -> None:
 
 def heavy_current(player_dict: dict) -> None:
     """
-    Print a simple message.
+    Print flavour text and increase player hp.
+
+    :param player_dict: a dictionary
+    :precondition: player_dict must contain the keys 'hp' and 'useless_events'
+    :precondition: the values for the above keys must be integers >= 0
+    :postcondition: player['hp'] increases by 2
+    :postcondition: player['useless_events'] increases by 1
+    :postcondition: prints flavour text
     """
     print('''
     You're in a heavy current.
     The water washes you fur.
     You feel nice and refreshed''')
     player_dict['hp'] = min(player_dict['hp'] + 2, player_dict['max_hp'])
+    player_dict['useless_events'] += 1
 
 
 def fish(player_dict: dict):

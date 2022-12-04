@@ -273,6 +273,7 @@ def final_boss_defeated(player_dict: dict, time_played: float) -> None:
     In total, you did {player_dict['damage_dealt']} damage!
     You killed {player_dict['kills']} enemies!
     You died {player_dict['deaths']} times!
+    Overall, you did {player_dict['useless_events']} useless events!
     
     You found {player_dict['eggs_found']}/9 eggs!
     ''')

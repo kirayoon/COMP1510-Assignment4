@@ -15,6 +15,7 @@ def default(player_dict: dict) -> None:
     print('''
     nothing here...
     ''')
+    player_dict['useless_events'] += 1
 
 
 def deer(player_dict: dict) -> None:

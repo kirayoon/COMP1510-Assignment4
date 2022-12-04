@@ -1,10 +1,9 @@
 import time
-from levels import level_1, level_2, level_3, level_final
+from levels import level_1, level_2, level_3
 from skeleton import make_board, get_player_choice, validate_move, up, down, left, right, egg, check_event
 from player import player_sleep, player_information, show_inventory, level_up
-from printer import print_map, print_scrolling_text, print_from_text_file, print_choices_menu, print_attack_menu, \
-    print_health, print_enemy_picture
-from fight import death_sequence, load_enemy, final_boss_loop, final_boss_defeated
+from printer import print_map, print_scrolling_text, print_from_text_file, print_choices_menu
+from fight import death_sequence, final_boss_loop, final_boss_defeated
 
 
 def game():
@@ -42,7 +41,8 @@ def game():
               'deaths': 0,
               'kills': 0,
               'damage_dealt': 0,
-              'eggs_found': 0}
+              'eggs_found': 0,
+              'useless_events': 0}
 
     command_map = {'up': up,
                    'down': down,
