@@ -1,3 +1,8 @@
+"""
+This module contains event functions for level 2.
+"""
+
+
 import random
 import time
 from fight import fight_sequence
