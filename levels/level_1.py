@@ -32,7 +32,15 @@ def default(player_dict: dict) -> None:
         player_dict['inventory']['water'] = 1
 
 
-def slippery_rock(player_dict: dict):
+def slippery_rock(player_dict: dict) -> None:
+    """
+    Remove 1 hp from player's hp.
+
+    :param player_dict: dictionary containing player's stats
+    :precondition: player_dict must be a dictionary containing 'hp' as key
+    :precondition: player_dict['hp'] must be an integer
+    :postcondition: removes 1 hp from player_dict['hp']
+    """
     print('''
     WoooaaaaAAAAHHH!
     You slipped on a rock and fell. 
