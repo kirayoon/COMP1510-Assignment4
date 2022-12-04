@@ -80,6 +80,17 @@ def show_inventory(player_dict: dict) -> None:
 
 
 def choose_item(player_dict: dict):
+    """
+    Execute the use_item or use_egg function if the player chooses to use a valid item or the egg.
+
+    :param player_dict: dictionary of player stats
+    :precondition: player_dict must be a dictionary containing 'inventory' key
+    :precondition: player_dict['inventory'] must be a dictionary containing at least one item
+    :postcondition: exit the inventory menu if the player's input is an empty string
+    :postcondition: print out a special message if the player chooses an invalid item and execute the function again
+    :postcondition: execute use_item function if the player chooses to use a valid item
+    :postcondition: execute use_egg function if the player chooses to use the egg
+    """
     choice = input('\nType the number of a item you want to use or press enter to continue: ')
     if choice == '':
         return
