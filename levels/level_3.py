@@ -9,28 +9,13 @@ def default(player_dict: dict):
     ''')
 
 
-def mushroom(player_dict: dict):
+def deer(player_dict: dict):
     print('''
-    You found a mushroom.''')
-    choice = validate_yes_no('    Eat mushroom? (y/n)')
-    if choice == 'y':
-        rand = random.randint(1, 2)
-        if rand == 1:
-            print('''
-    You ate the mushroom. Delicious!
-    You gained 5 HP.
+    It's a deer! Just standing there.
+    The deer doesn't know what's about to happen.
+    Let's hurry up and kill it.
     ''')
-            player_dict['hp'] += 5
-        else:
-            print('''
-    You ate a POISONOUS mushroom. YUCK!
-    You lose 5 HP.
-    ''')
-            player_dict['hp'] -= 5
-
-    elif choice == 'n':
-        print('''
-    You left the mushroom alone.''')
+    fight_sequence('deer', player_dict)
 
 
 def berry(player_dict: dict):
@@ -66,10 +51,25 @@ def nut(player_dict: dict):
     Interesting choice.''')
 
 
-def deer(player_dict: dict):
+def mushroom(player_dict: dict):
     print('''
-    It's a deer! Just standing there.
-    The deer doesn't know what's about to happen.
-    Let's hurry up and kill it.
+    You found a mushroom.''')
+    choice = validate_yes_no('    Eat mushroom? (y/n)')
+    if choice == 'y':
+        rand = random.randint(1, 2)
+        if rand == 1:
+            print('''
+    You ate the mushroom. Delicious!
+    You gained 5 HP.
     ''')
-    fight_sequence('deer', player_dict)
+            player_dict['hp'] += 5
+        else:
+            print('''
+    You ate a POISONOUS mushroom. YUCK!
+    You lose 5 HP.
+    ''')
+            player_dict['hp'] -= 5
+
+    elif choice == 'n':
+        print('''
+    You left the mushroom alone.''')
