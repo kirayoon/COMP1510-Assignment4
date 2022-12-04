@@ -34,6 +34,14 @@ def deer(player_dict: dict):
 
 
 def berry(player_dict: dict):
+    """
+    Add 1 berry to player's inventory.
+
+    :param player_dict: dictionary containing player information
+    :precondition: player_dict must be a dictionary containing 'inventory' as key
+    :precondition: player_dict['inventory'] must be a dictionary
+    :postcondition: adds 1 berry to player_dict['inventory']
+    """
     print('''
     You found a berry.
     1 berry has been added to your inventory.
