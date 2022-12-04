@@ -111,6 +111,17 @@ class Boss:
         player_dict['hp'] -= damage
 
     def move(self, player_dict: dict) -> None:
+        """
+        Move the boss to a random location
+
+        :param player_dict: a dictionary containing the player's stats
+        :precondition: player_dict must be a dictionary
+        :precondition: player_dict must contain the following keys: 'location'
+        :postcondition: check if boss' new location is a valid location
+        :postcondition: the boss's location is changed to a random location
+        :postcondition: player_dict is modified
+        :postcondition: Prints the flavour text for the move
+        """
         x_direction = random.randint(-1, 1)
         y_direction = random.randint(-1, 1)
         player_loc = player_dict['location']
