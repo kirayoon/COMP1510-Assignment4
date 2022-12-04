@@ -3,6 +3,21 @@ import random
 
 
 def make_board(num_row: int, num_col: int, current_level: int) -> dict:
+    """
+    Create a dictionary with keys as tuples of coordinates and values as strings of events at those coordinates.
+
+    :param num_row: integer representing number of rows in board
+    :param num_col: integer representing number of columns in board
+    :param current_level: integer representing player's current level
+    :precondition: num_row must be an integer greater than 0
+    :precondition: num_col must be an integer greater than 0
+    :precondition: current_level must be an integer between [1, 4]
+    :postcondition: creates a dictionary
+    :postcondition: keys are tuples of integers representing the coordinates
+    :postcondition: values are strings representing the events at those coordinates
+    :postcondition: keys are paired with random values
+    :return: dictionary with keys as tuples of coordinates and values as strings of events at those coordinates
+    """
     board_key = [(row, col) for row in range(num_row) for col in range(num_col)]
     board_values = []
     # TODO: Change for live
