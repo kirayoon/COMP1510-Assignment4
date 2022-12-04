@@ -49,7 +49,18 @@ def player_information(player_dict: dict) -> None:
           f'{stats[1].upper():>7}: {player_dict[stats[1]]}/{player_dict[stats[2]]}\n', sep='\n')
 
 
-def show_inventory(player_dict: dict):
+def show_inventory(player_dict: dict) -> None:
+    """
+    Print out the player's inventory if inventory is not empty.
+
+    :param player_dict: dictionary of player stats
+    :precondition: player_dict must be a dictionary containing 'inventory' key
+    :precondition: player_dict['inventory'] must be a dictionary
+    :postcondition: print out a special message if the player's inventory is empty
+    :postcondition: print out the player's inventory in a formatted way if the player's inventory is not empty
+    :postcondition: printed inventory includes item name, quantity, and possible effects
+    :postcondition: execute choose_item function if the player's inventory is not empty
+    """
     with open('items.json') as file:
         item_json = json.load(file)
     player_inventory = player_dict['inventory'].items()
