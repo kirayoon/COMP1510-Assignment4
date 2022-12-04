@@ -91,6 +91,16 @@ class Boss:
             player_dict['hp'] -= 0
 
     def bomb(self, player_dict: dict) -> None:
+        """
+        Calculate the amount of damage done to player, print flavour text, and subtract damage from player's hp
+
+        :param player_dict: a dictionary containing the player's stats
+        :precondition: player_dict must be a dictionary
+        :precondition: player_dict must contain the following keys: 'hp'
+        :postcondition: calculates the damage done to the player and prints the flavour text
+        :postcondition: subtracts the damage done to the player from their hp
+        :postcondition: player_dict is modified
+        """
         min_damage = int(self.abilities['bomb']['damage'] / 2)
         max_damage = self.abilities['bomb']['damage']
         damage = random.randint(min_damage, max_damage)
