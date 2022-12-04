@@ -2,13 +2,15 @@
 This module contains the basic fight sequence and the functions that are used in the fight sequence.
 """
 
-
+import itertools
 import json
 import random
 import time
-from printer import print_health, print_attack_menu, print_enemy_picture, print_from_text_file
+from printer import print_health, print_attack_menu, print_enemy_picture, print_from_text_file, print_map
 from skeleton import get_player_choice, validate_yes_no
 from player import show_inventory
+from levels import level_final
+from skeleton import make_board
 
 
 def load_enemy(enemy: str) -> dict:
@@ -188,8 +190,32 @@ def enemy_turn(player_dict: dict, enemy_dict: dict, enemy_min_roll: int) -> None
     print('      ', random.choice(enemy_dict['attack_flavour_text']), '\n\n')
 
 
+def player_turn(player_dict: dict, enemy_dict: dict, player_attacks: dict, player_min_roll: int) -> int or None:
+    print_attack_menu(player_attacks)
+    move = get_player_choice(player_attacks)
+
+    if move == 'inventory':
+        # TODO: remove main from here
+        show_inventory(player_dict)
+        input('Press enter to continue...')
+        return None
+    elif move == 'charge':
+        return charge(player_dict, enemy_dict, player_min_roll)
+    elif move == 'claw':
+        return claw(player_dict, enemy_dict, player_min_roll)
+    else:  # move is bite
+        return bite(player_dict, enemy_dict)
+
+
 def fight_sequence(enemy: str, player_dict: dict) -> None:
     enemy_dict = load_enemy(enemy)
+    # Get dictionary of possible player attacks
+    player_attacks = player_dict['attacks']
+    current_level = player_dict['level']
+
+    # Add attack to move list if player is high enough level
+    player_options = dict(itertools.takewhile(lambda item: item[1] <= current_level, player_attacks.items()))
+    player_options['inventory'] = 4
     print(f'{"FIGHT!":^56}')
     time.sleep(1)
 
@@ -197,36 +223,22 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
         # 1. print ascii image from file
         file_to_use = enemy_dict['name']
         print_enemy_picture(file_to_use + '.txt')
+
         # 2. print health bars
         print_health(player_dict, enemy_dict)
 
         # 3. print attack options
-        player_attacks = {'claw': 'claw', 'bite': 'bite', 'charge': 'charge', 'inventory': 'inventory'}
-        print_attack_menu(player_attacks)
-        move = get_player_choice(player_attacks)
-
-        # Get min rolls
         player_min_roll, enemy_min_roll = calc_min_roll(player_dict, enemy_dict)
-
-        if move == 'inventory':
-            # TODO: remove main from here
-            show_inventory(player_dict)
-            input('Press enter to continue...')
+        damage = player_turn(player_dict, enemy_dict, player_options, player_min_roll)
+        if damage is None:
             continue
-        elif move == 'charge':
-            damage = charge(player_dict, enemy_dict, player_min_roll)
-            # continue
-        elif move == 'claw':
-            damage = claw(player_dict, enemy_dict, player_min_roll)
-        else:  # move is bite
-            damage = bite(player_dict, enemy_dict)
 
-        # 6. subtract hp from enemy
+        # 4. subtract hp from enemy
         enemy_dict['hp'] -= damage
         if enemy_dict['hp'] <= 0 or player_dict['hp'] <= 0:
             break
 
-        # 7. Enemy's turn
+        # 5. Enemy's turn
         enemy_turn(player_dict, enemy_dict, enemy_min_roll)
         if player_dict['hp'] <= 0:
             break
