@@ -1,3 +1,8 @@
+"""
+This module contains functions that are responsible for the player to interact with the game.
+"""
+
+
 import time
 import json
 import random
