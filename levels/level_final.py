@@ -154,6 +154,9 @@ class Boss:
 
 
 def main():
+    """
+    Drive the program
+    """
     print('Please run the game.py file. This is a module.')
 
 
