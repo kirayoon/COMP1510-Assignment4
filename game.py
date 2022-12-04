@@ -1,9 +1,9 @@
 import time
-from levels import level_1, level_2, level_3
+from levels import level_1, level_2, level_3, level_final
 from skeleton import make_board, get_player_choice, validate_move, up, down, left, right, egg, check_event
 from player import player_sleep, player_information, show_inventory, level_up
-from printer import print_map, print_scrolling_text, print_from_text_file, print_choices_menu, print_attack_menu
-from fight import death_sequence
+from printer import print_map, print_scrolling_text, print_from_text_file, print_choices_menu, print_attack_menu, print_health, print_enemy_picture
+from fight import death_sequence, load_enemy
 
 
 def game():
@@ -37,7 +37,8 @@ def game():
               'level': 3,
               'xp': 0,
               'max_xp': 1000,
-              'turn': 1}
+              'turn': 1,
+              'attacks': {'claw': 1, 'bite': 2, 'charge': 3}}
 
     command_map = {'up': up,
                    'down': down,
@@ -131,8 +132,6 @@ def game():
                           'event4': level_3.nut,
                           'event5': level_3.mushroom,
                           'egg': egg}
-        elif player['level'] == 4:
-            event_dict = {}
 
         # Check if there is an event at the player's location
         check_event(board, player, event_dict)

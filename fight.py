@@ -2,13 +2,15 @@
 This module contains the basic fight sequence and the functions that are used in the fight sequence.
 """
 
-
+import itertools
 import json
 import random
 import time
-from printer import print_health, print_attack_menu, print_enemy_picture, print_from_text_file
+from printer import print_health, print_attack_menu, print_enemy_picture, print_from_text_file, print_map
 from skeleton import get_player_choice, validate_yes_no
 from player import show_inventory
+from levels import level_final
+from skeleton import make_board
 
 
 def load_enemy(enemy: str) -> dict:
@@ -108,17 +110,16 @@ def victory(player_dict: dict, enemy_dict: dict) -> None:
         player_dict['inventory'][enemy_drop_name] = 1
 
 
-def charge(player_dict: dict, enemy_dict: dict, player_min_roll: int) -> int:
+def charge(player_dict: dict, enemy_name: str, player_min_roll: int) -> int:
     """
     Return twice the amount of player's attack points and deal random amount of self damage.
 
     :param player_dict: dictionary of the player's stats
-    :param enemy_dict: dictionary of the enemy's stats
+    :param enemy_name: the enemy's name as a string
     :param player_min_roll: minimum damage the player can deal
     :precondition: player_dict must contain 'attack' and 'hp' keys
     :precondition: player_dict['attack'] and player_dict['hp'] must be integers
-    :precondition: enemy_dict must contain 'name' key
-    :precondition: enemy_dict['name'] must be a string
+    :precondition: enemy_name must be a string
     :precondition: player_min_roll must be an integer
     :postcondition: return twice the amount of player's attack points
     :postcondition: deal random amount of self damage between player_min_roll and player's attack points
@@ -130,7 +131,7 @@ def charge(player_dict: dict, enemy_dict: dict, player_min_roll: int) -> int:
 
     print(f'''
     You feel your power increasing!
-    You rush at the {enemy_dict['name']} and do {player_damage} damage!
+    You rush at the {enemy_name} and do {player_damage} damage!
 
     However, in your rage, you also did {self_damage} damage to yourself.
     
@@ -138,33 +139,32 @@ def charge(player_dict: dict, enemy_dict: dict, player_min_roll: int) -> int:
     return player_damage
 
 
-def claw(player_dict: dict, enemy_dict: dict, player_min_roll: int) -> int:
+def claw(player_dict: dict, enemy_name: str, player_min_roll: int) -> int:
     """
     Return the amount of damage player will deal.
 
     Amount of damage is random between player's minimum damage and player's attack points.
 
     :param player_dict: dictionary of the player's stats
-    :param enemy_dict: dictionary of the enemy's stats
+    :param enemy_name: the enemy's name as a string
     :param player_min_roll: minimum damage the player can deal
     :precondition: player_dict must contain 'attack' key
     :precondition: player_dict['attack'] must be an integer
-    :precondition: enemy_dict must contain 'name' key
-    :precondition: enemy_dict['name'] must be a string
+    :precondition: enemy_name must be a string
     :precondition: player_min_roll must be an integer
     :postcondition: return an integer of the amount of damage the player will deal
     :return: an integer of the amount of damage the player will deal
     """
     player_damage = random.randint(player_min_roll, player_dict['attack'])
     print(f'''
-    You clawed at the {enemy_dict['name']}! It did {player_damage} damage!
+    You clawed at the {enemy_name}! It did {player_damage} damage!
     They say ouchie :(
     
     ''')
     return player_damage
 
 
-def bite(player_dict: dict, enemy_dict: dict) -> int:
+def bite(player_dict: dict, enemy_name: str) -> int:
     player_damage = random.randint(0, 2 * player_dict['attack'])
     if player_damage == 0:
         print('''
@@ -174,7 +174,7 @@ def bite(player_dict: dict, enemy_dict: dict) -> int:
                     ''')
     else:
         print(f'''
-        You bit the {enemy_dict['name']}! It did {player_damage} damage!
+        You bit the {enemy_name}! It did {player_damage} damage!
         
         What a yummy taste!
         
@@ -188,8 +188,32 @@ def enemy_turn(player_dict: dict, enemy_dict: dict, enemy_min_roll: int) -> None
     print('      ', random.choice(enemy_dict['attack_flavour_text']), '\n\n')
 
 
+def player_turn(player_dict: dict, enemy_name: str, player_attacks: dict, player_min_roll: int) -> int or None:
+    print_attack_menu(player_attacks)
+    move = get_player_choice(player_attacks)
+
+    if move == 'inventory':
+        # TODO: remove main from here
+        show_inventory(player_dict)
+        input('Press enter to continue...')
+        return None
+    elif move == 'charge':
+        return charge(player_dict, enemy_name, player_min_roll)
+    elif move == 'claw':
+        return claw(player_dict, enemy_name, player_min_roll)
+    else:  # move is bite
+        return bite(player_dict, enemy_name)
+
+
 def fight_sequence(enemy: str, player_dict: dict) -> None:
     enemy_dict = load_enemy(enemy)
+    # Get dictionary of possible player attacks
+    player_attacks = player_dict['attacks']
+    current_level = player_dict['level']
+
+    # Add attack to move list if player is high enough level
+    player_options = dict(itertools.takewhile(lambda item: item[1] <= current_level, player_attacks.items()))
+    player_options['inventory'] = 4
     print(f'{"FIGHT!":^56}')
     time.sleep(1)
 
@@ -197,36 +221,22 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
         # 1. print ascii image from file
         file_to_use = enemy_dict['name']
         print_enemy_picture(file_to_use + '.txt')
+
         # 2. print health bars
         print_health(player_dict, enemy_dict)
 
         # 3. print attack options
-        player_attacks = {'claw': 'claw', 'bite': 'bite', 'charge': 'charge', 'inventory': 'inventory'}
-        print_attack_menu(player_attacks)
-        move = get_player_choice(player_attacks)
-
-        # Get min rolls
         player_min_roll, enemy_min_roll = calc_min_roll(player_dict, enemy_dict)
-
-        if move == 'inventory':
-            # TODO: remove main from here
-            show_inventory(player_dict)
-            input('Press enter to continue...')
+        damage = player_turn(player_dict, enemy_dict['name'], player_options, player_min_roll)
+        if damage is None:
             continue
-        elif move == 'charge':
-            damage = charge(player_dict, enemy_dict, player_min_roll)
-            # continue
-        elif move == 'claw':
-            damage = claw(player_dict, enemy_dict, player_min_roll)
-        else:  # move is bite
-            damage = bite(player_dict, enemy_dict)
 
-        # 6. subtract hp from enemy
+        # 4. subtract hp from enemy
         enemy_dict['hp'] -= damage
         if enemy_dict['hp'] <= 0 or player_dict['hp'] <= 0:
             break
 
-        # 7. Enemy's turn
+        # 5. Enemy's turn
         enemy_turn(player_dict, enemy_dict, enemy_min_roll)
         if player_dict['hp'] <= 0:
             break
