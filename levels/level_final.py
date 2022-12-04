@@ -34,6 +34,11 @@ class Boss:
         return self.hp
 
     def get_location(self):
+        """
+        Get the boss's current location
+
+        :return: the boss's current location as a tuple
+        """
         return self.location
 
     def get_stats(self):
