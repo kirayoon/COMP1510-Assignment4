@@ -139,6 +139,22 @@ def charge(player_dict: dict, enemy_dict: dict, player_min_roll: int) -> int:
 
 
 def claw(player_dict: dict, enemy_dict: dict, player_min_roll: int) -> int:
+    """
+    Return the amount of damage player will deal.
+
+    Amount of damage is random between player's minimum damage and player's attack points.
+
+    :param player_dict: dictionary of the player's stats
+    :param enemy_dict: dictionary of the enemy's stats
+    :param player_min_roll: minimum damage the player can deal
+    :precondition: player_dict must contain 'attack' key
+    :precondition: player_dict['attack'] must be an integer
+    :precondition: enemy_dict must contain 'name' key
+    :precondition: enemy_dict['name'] must be a string
+    :precondition: player_min_roll must be an integer
+    :postcondition: return an integer of the amount of damage the player will deal
+    :return: an integer of the amount of damage the player will deal
+    """
     player_damage = random.randint(player_min_roll, player_dict['attack'])
     print(f'''
     You clawed at the {enemy_dict['name']}! It did {player_damage} damage!
