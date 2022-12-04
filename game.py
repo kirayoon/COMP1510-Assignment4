@@ -71,9 +71,6 @@ def game():
         print_choices_menu(command_map)
         player_choice = get_player_choice(command_map)
 
-        # just for test
-        input(f'You chose {player_choice}. Press enter to continue.')
-
         # Print help if the player enters "help"
         if player_choice == 'help':
             # TODO: create help documentation
@@ -101,16 +98,20 @@ def game():
 
         # Check if player can move in the direction they chose
         valid_move = validate_move(player_choice, player['location'], board_height, board_width)
-        print(f'Walking {player_choice}...')
+        print(f'''
+        Walking {player_choice}...
+        ''')
         if valid_move:
             # Change player location key to new location value
             player['location'] = command(player['location'])
         else:
-            print(f'*** You cannot move {player_choice}. Please try again. ***')
+            print(f'''
+            *** You cannot move {player_choice}. Please try again. ***
+            ''')
             input('Press enter to continue...')
             player['turn'] += 1
             continue
-        time.sleep(1)
+        time.sleep(0.5)
         # TODO: add random events and main game loop
 
         # Set events for a players' level

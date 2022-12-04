@@ -74,7 +74,7 @@ def show_inventory(player_dict: dict) -> None:
     if len(player_inventory) == 0:
         print('\tnothing here\n')
     else:
-        for count, (item, amount) in enumerate(player_inventory):
+        for count, (item, amount) in enumerate(player_inventory, 1):
             item_dict = item_json[item]
             if 'hp' in item_dict:
                 print(f'\t{count}) {item}: {amount} [+{item_dict["hp"]} hp]')
@@ -100,12 +100,13 @@ def choose_item(player_dict: dict):
     choice = input('\nType the number of a item you want to use or press enter to continue: ')
     if choice == '':
         return
-    elif choice.isalpha() or len(player_dict['inventory']) - 1 < int(choice):
-        print_out = '*** Invalid choice. Please try again. ***'
-        print(f'\n{print_out:^47}\n')
+    elif choice.isalpha() or len(player_dict['inventory']) < int(choice) < 1:
+        print('''
+        *** Invalid choice. Please try again. ***
+        ''')
         choose_item(player_dict)
     else:
-        item = list(player_dict['inventory'].keys())[int(choice)]
+        item = list(player_dict['inventory'].keys())[int(choice) - 1]
         print(f'You chose {item}.\n')
         if item == 'egg':
             use_egg(player_dict)
