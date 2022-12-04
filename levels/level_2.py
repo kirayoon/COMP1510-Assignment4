@@ -80,7 +80,7 @@ def scraps(player_dict: dict):
         if choice == 'y':
             print('''
             yummy.. You gained 5 HP & 10 XP!''')
-            player_dict['hp'] += 5
+            player_dict['hp'] = min(player_dict['hp'] + 5, player_dict['max_hp'])
             player_dict['xp'] += 10
         elif choice == 'n':
             print('''
@@ -92,9 +92,9 @@ def scraps(player_dict: dict):
         You slipped on a banana peel and fell on your face. 
         You have a nosebleed. boohoo :(
     
-        You lost 1 HP & gained 10 XP
+        You lost 2 HP & gained 10 XP
         ''')
-        player_dict['hp'] -= 5
+        player_dict['hp'] = max(player_dict['hp'] - 2, 1)
         player_dict['xp'] += 10
 
     elif rand == 3:
@@ -126,7 +126,7 @@ def scraps(player_dict: dict):
         
         You lost 3 hp
         ''')
-        player_dict['hp'] -= 3
+        player_dict['hp'] = max(player_dict['hp'] - 3, 1)
 
 
 def chair(player_dict: dict):
@@ -145,7 +145,7 @@ def chair(player_dict: dict):
         Yuck.
 
         You lose 5 HP. But you gain 5 XP for trying.''')
-        player_dict['hp'] -= 5
+        player_dict['hp'] = max(player_dict['hp'] - 5, 1)
         player_dict['xp'] += 5
 
     elif chair_counter == 1:
@@ -179,7 +179,7 @@ def chair(player_dict: dict):
         You gain 10 XP & 10 HP.
         ''')
         player_dict['xp'] += 10
-        player_dict['hp'] += 10
+        player_dict['hp'] = min(player_dict['hp'] + 10, player_dict['max_hp'])
     chair_counter += 1
 
 
