@@ -32,7 +32,15 @@ def player_sleep(player_dict: dict) -> None:
     Your health has recovered to {player_dict["max_hp"]}.''')
 
 
-def player_information(player_dict: dict):
+def player_information(player_dict: dict) -> None:
+    """
+    Print out the player's information.
+
+    :param player_dict: dictionary of player stats
+    :precondition: player_dict must be a dictionary
+    :precondition: player_dict must contain 'name', 'hp', 'max_hp', 'level', 'attack', 'xp', and 'max_xp' keys
+    :postcondition: print out the player's information in a formatted way
+    """
     stats = ['name', 'hp', 'max_hp', 'level', 'attack', 'xp', 'max_xp']
     print(f'\n{" " * 7}{player_dict[stats[0]].title()} the Scary Bear',
           f'{stats[3].title():>12}: {player_dict[stats[3]]:>2} '
