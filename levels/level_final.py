@@ -50,6 +50,14 @@ class Boss:
         return {'hp': self.hp, 'max_hp': self.max_hp, 'name': self.name, 'attack': self.attack}
 
     def choose_move(self, player_dict) -> None:
+        """
+        Choose a move for the boss to make
+
+        :param player_dict: a dictionary containing the player's stats
+        :precondition: player_dict must be a dictionary
+        :precondition: player_dict must contain the following keys: 'hp', 'max_hp', 'name', 'attack', 'location'
+        :postcondition: a move is chosen for the boss to make based on a loop
+        """
         move_loop = ['shoot', 'move', 'bomb', 'move']
         current_move = move_loop[self.turn_count % 4]
         eval(f'self.{current_move}')(player_dict)
