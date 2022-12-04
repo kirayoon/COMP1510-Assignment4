@@ -42,6 +42,17 @@ def calc_min_roll(player_dict: dict, enemy_dict: dict) -> tuple[int, int]:
 
 
 def death_sequence(player_dict: dict) -> None:
+    """
+    Restart the level or end the game if the player dies.
+
+    Player dies if their hp is 0 or less.
+
+    :param player_dict: dictionary of the player's stats
+    :precondition: player_dict must contain 'turn', 'hp', 'max_hp', 'xp', and 'location' keys
+    :precondition: player_dict values must be integers, except for 'location' which must be a tuple of integers
+    :postcondition: restart level if player chooses yes
+    :postcondition: end game if player chooses no
+    """
     print('''
     You died.
     That was unfortunate.
