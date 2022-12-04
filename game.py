@@ -40,7 +40,7 @@ def game():
               'turn': 1,
               'attacks': {'claw': 1, 'bite': 2, 'charge': 3},
               'deaths': 0,
-              'killed': 0,
+              'kills': 0,
               'damage_dealt': 0,
               'eggs_found': 0}
 
