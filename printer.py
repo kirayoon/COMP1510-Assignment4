@@ -79,6 +79,14 @@ def print_scrolling_text(text_file: str) -> None:
 
 
 def print_from_text_file(text_file: str) -> None:
+    """
+    Prints the text from a text file to the screen.
+
+    :param text_file: a string of the name of the text file to be printed
+    :precondition: text_file must be a string
+    :precondition: text_file must be a valid file name in the text folder
+    :postcondition: prints the text from the text file to the screen
+    """
     folder = Path("text/")
     text_file = folder / text_file
     with open(text_file, 'r', encoding='utf-8') as text_file:
