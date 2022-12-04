@@ -110,18 +110,54 @@ def validate_move(player_input: str, player_coordinate: tuple, board_width: int,
 
 # Functions for each basic command
 def up(player_location: tuple):
+    """
+    Move player up one space.
+
+    :param player_location: a tuple containing the x and y coordinates of the player
+    :precondition: player_location must be a tuple of integers
+    :precondition: integers must be >= 0
+    :postcondition: player_location is moved down one space
+    :return: a tuple containing new x and y coordinates of the player
+    """
     return player_location[0] - 1, player_location[1]
 
 
 def down(player_location: tuple):
+    """
+    Move player down one space.
+
+    :param player_location: a tuple containing the x and y coordinates of the player
+    :precondition: player_location must be a tuple of integers
+    :precondition: integers must be >= 0
+    :postcondition: player_location is moved down one space
+    :return: a tuple containing new x and y coordinates of the player
+    """
     return player_location[0] + 1, player_location[1]
 
 
 def left(player_location: tuple):
+    """
+    Move player left one space.
+
+    :param player_location: a tuple containing the x and y coordinates of the player
+    :precondition: player_location must be a tuple of integers
+    :precondition: integers must be >= 0
+    :postcondition: player_location is moved down one space
+    :return: a tuple containing new x and y coordinates of the player
+    """
     return player_location[0], player_location[1] - 1
 
 
 def right(player_location: tuple):
+    """
+    Move player left one space.
+
+    :param player_location: a tuple containing the x and y coordinates of the player
+    :precondition: player_location must be a tuple of integers
+    :precondition: integers must be >= 0
+    :postcondition: player_location is moved down one space
+    :return: a tuple containing new x and y coordinates of the player
+    """
     return player_location[0], player_location[1] + 1
 
 
