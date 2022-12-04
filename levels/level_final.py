@@ -5,10 +5,6 @@ import os
 from printer import print_health, print_enemy_picture
 
 
-# def randomize_boss_movement(current_boss_location: tuple, board_width: int, board_height: int) -> tuple:
-#     pass
-
-
 def print_map(board: dict, board_height: int, board_width: int, player_loc: tuple, boss_loc=None) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
     for row in range(board_height):
@@ -70,11 +66,11 @@ class Boss:
         if random.randint(1, 100) <= accuracy:
             self.shot_count -= 1
             print(f'''
-        {self.abilities["shoot"]["flavour_text"]}
-        It does {self.abilities["shoot"]["damage"]} damage!
+            {self.abilities["shoot"]["flavour_text"]}
+            \b\b\b\bIt does {self.abilities["shoot"]["damage"]} damage!
         
-        Mama Lob has {self.shot_count} shot(s) left!
-        ''')
+            \b\b\b\bMama Lob has {self.shot_count} shot(s) left!
+            ''')
             # return self.abilities['shoot']['damage']
             player_dict['hp'] -= self.abilities['shoot']['damage']
         else:
