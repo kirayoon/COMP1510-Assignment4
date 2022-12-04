@@ -8,7 +8,7 @@ from fight import fight_sequence
 from skeleton import validate_yes_no
 
 
-def default(player_dict: dict):
+def default(player_dict: dict) -> None:
     """
     Print a simple message.
     """
@@ -17,7 +17,7 @@ def default(player_dict: dict):
     ''')
 
 
-def deer(player_dict: dict):
+def deer(player_dict: dict) -> None:
     """
     Execute fight_sequence with a deer.
 
@@ -33,7 +33,7 @@ def deer(player_dict: dict):
     fight_sequence('deer', player_dict)
 
 
-def berry(player_dict: dict):
+def berry(player_dict: dict) -> None:
     """
     Add 1 berry to player's inventory.
 
@@ -52,7 +52,16 @@ def berry(player_dict: dict):
         player_dict['inventory']['berry'] = 1
 
 
-def nut(player_dict: dict):
+def nut(player_dict: dict) -> None:
+    """
+    Add 1 hazelnut to player's inventory if player chooses to crack it.
+
+    :param player_dict: dictionary containing player information
+    :precondition: player_dict must be a dictionary containing 'xp' and 'inventory' as keys
+    :precondition: player_dict['xp'] must be an integer and player_dict['inventory'] must be a dictionary
+    :postcondition: increases player_dict['xp'] by 10 if player chooses to crack the nut
+    :postcondition: adds 1 hazelnut to player_dict['inventory'] if player chooses to crack it
+    """
     print('''
     You found a hazelnut. We love hazelnuts!
     ''')
