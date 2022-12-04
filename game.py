@@ -31,7 +31,7 @@ def game():
               'i-coord': 0,
               'j-coord': 0,
               'inventory': {'fish': 3, 'deer': 1, 'honey': 2, "egg": 2},
-              'hp': 20,
+              'hp': 1,
               'max_hp': 20,
               'attack': 5,
               'level': 1,

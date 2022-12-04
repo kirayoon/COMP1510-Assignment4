@@ -95,50 +95,12 @@ def check_event(board: dict, player_dict: dict, level_events: dict) -> None:
 
 
 def egg(player_dict: dict):
-    choice = validate_yes_no('\n    Crack the egg? (y/n)')
-    if choice == 'y':
-        egg_select(player_dict)
-        player_dict['inventory']['egg'] -= 1
-    elif choice == 'n':
-        print('egg left alone')
-
-
-def egg_select(player_dict: dict):
-    with open('egg.json') as file:
-        egg_json = json.load(file)
-    egg_dict = egg_json[random.choice(list(egg_json))]
-    choice = validate_yes_no(f'''
-        There's a little {egg_dict['name']} inside.
-        {egg_dict['text']} (y/n)''')
-
-    if choice == 'y':
-        if egg_dict['name'] == 'chicky':
-            player_dict['xp'] += egg_dict['xp']
-            print(f'''
-        How nice. You have gained {egg_dict["xp"]} xp.
-        XP: {player_dict["xp"]}''')
-
-        elif egg_dict['name'] == 'shard':
-            player_dict['attack'] += egg_dict['attack']
-            print(f'''
-        You're stronger now. You gained {egg_dict["attack"]} attack points.
-        Attack: {player_dict["attack"]}''')
-
-        elif egg_dict['name'] == 'magic hat':
-            player_dict['max_hp'] += egg_dict['max_hp']
-            print(f'''
-        You're healthier now. Your max-hp has been increased by {egg_dict["max_hp"]} points.
-        Max HP: {player_dict["max_hp"]}''')
-
-    elif choice == 'n' and egg_dict['name'] == 'chicky':
-        player_dict['attack'] += egg_dict['attack']
-        print(f'''
-        You eat the chicky. It was delicious. You gained {egg_dict["attack"]} attack points.
-        Attack: {player_dict["attack"]}''')
-
+    if 'egg' in player_dict['inventory']:
+        print('\nYou found another egg! \nIt has been added to your inventory.')
+        player_dict['inventory']['egg'] += 1
     else:
-        print(f'''
-        Your loss. The {egg_dict["name"]} evaporates into thin air.''')
+        print('\nYou found a mysterious egg! \nEgg has been added to your inventory.')
+        player_dict['inventory']['egg'] = 1
 
 
 def main():

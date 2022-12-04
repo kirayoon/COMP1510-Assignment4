@@ -1,7 +1,8 @@
 import time
 import json
+import random
 from printer import print_scrolling_text
-from skeleton import egg
+from skeleton import validate_yes_no
 
 
 def player_sleep(player_dict: dict):
@@ -52,7 +53,7 @@ def choose_item(player_dict: dict):
         item = list(player_dict['inventory'].keys())[int(choice)]
         print(f'You chose {item}.\n')
         if item == 'egg':
-            egg(player_dict)
+            use_egg(player_dict)
         else:
             use_item(player_dict, item)
 
@@ -70,6 +71,54 @@ def use_item(player_dict: dict, item: str):
         player_dict['hp'] = player_dict['max_hp']
     print(f'You eat the {item} and gain {item_dict["hp"]} hp. Your health is now {player_dict["hp"]}.\n')
     player_dict['inventory'][item] -= 1
+
+
+def use_egg(player_dict: dict):
+    choice = validate_yes_no('\n    Crack the egg? (y/n)')
+    if choice == 'y':
+        egg_select(player_dict)
+        player_dict['inventory']['egg'] -= 1
+    elif choice == 'n':
+        print('''
+        You leave the egg alone.''')
+
+
+def egg_select(player_dict: dict):
+    with open('egg.json') as file:
+        egg_json = json.load(file)
+    egg_dict = egg_json[random.choice(list(egg_json))]
+    choice = validate_yes_no(f'''
+        There's a little {egg_dict['name']} inside.
+        {egg_dict['text']} (y/n)''')
+
+    if choice == 'y':
+        if egg_dict['name'] == 'chicky':
+            player_dict['xp'] += egg_dict['xp']
+            print(f'''
+        How nice. You have gained {egg_dict["xp"]} xp.
+        XP: {player_dict["xp"]}''')
+
+        elif egg_dict['name'] == 'shard':
+            player_dict['attack'] += egg_dict['attack']
+            print(f'''
+        You're stronger now. You gained {egg_dict["attack"]} attack points.
+        Attack: {player_dict["attack"]}''')
+
+        elif egg_dict['name'] == 'magic hat':
+            player_dict['max_hp'] += egg_dict['max_hp']
+            print(f'''
+        You're healthier now. Your max-hp has been increased by {egg_dict["max_hp"]} points.
+        Max HP: {player_dict["max_hp"]}''')
+
+    elif choice == 'n' and egg_dict['name'] == 'chicky':
+        player_dict['attack'] += egg_dict['attack']
+        print(f'''
+        You eat the chicky. It was delicious. You gained {egg_dict["attack"]} attack points.
+        Attack: {player_dict["attack"]}''')
+
+    else:
+        print(f'''
+        Your loss. The {egg_dict["name"]} evaporates into thin air.''')
 
 
 def level_up(player_dict: dict):
