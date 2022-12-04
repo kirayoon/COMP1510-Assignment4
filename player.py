@@ -217,7 +217,20 @@ def hatch_egg(player_dict: dict) -> None:
         Your loss. The {egg_dict["name"]} evaporates into thin air.''')
 
 
-def level_up(player_dict: dict):
+def level_up(player_dict: dict) -> None:
+    """
+    Increase the player's level and stats if the player chooses to level up.
+
+    :param player_dict: dictionary of player stats
+    :precondition: player_dict must be a dictionary
+    :precondition: player_dict must contain 'level', 'xp', 'max_hp', 'hp', 'attack', 'turn', and 'location' keys
+    :precondition: values of 'level', 'xp', 'max_hp', 'hp', 'attack', and 'turn' must be positive integers
+    :precondition: values of 'location' must be a tuple of two positive integers
+    :postcondition: increases the player's level by 1, max_hp by 20, and attack by 10
+    :postcondition: sets the player's hp to max_hp, xp to 0, turn to 0, and location to (0, 0)
+    :postcondition: prints the player's new stats
+    :postcondition: prints the intro text for the new level
+    """
     print("\nYou're ready to level up.")
     answer = validate_yes_no('Would you like to move to the next level (y/n)?')
     if answer == 'y':
