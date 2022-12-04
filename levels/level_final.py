@@ -70,11 +70,11 @@ class Boss:
         if random.randint(1, 100) <= accuracy:
             self.shot_count -= 1
             print(f'''
-        {self.abilities["shoot"]["flavour_text"]}
-        It does {self.abilities["shoot"]["damage"]} damage!
+            {self.abilities["shoot"]["flavour_text"]}
+            \b\b\b\bIt does {self.abilities["shoot"]["damage"]} damage!
         
-        Mama Lob has {self.shot_count} shot(s) left!
-        ''')
+            \b\b\b\bMama Lob has {self.shot_count} shot(s) left!
+            ''')
             # return self.abilities['shoot']['damage']
             player_dict['hp'] -= self.abilities['shoot']['damage']
         else:
