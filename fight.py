@@ -78,7 +78,7 @@ def victory(player_dict: dict, enemy_dict: dict) -> None:
     Gain xp and loot from the enemy if the enemy is defeated.
 
     Enemy is defeated if their hp is 0 or less.
-    
+
     :param player_dict: dictionary of the player's stats
     :param enemy_dict: dictionary of the enemy's stats
     :precondition: player_dict must contain 'xp' and 'inventory' keys
@@ -109,6 +109,21 @@ def victory(player_dict: dict, enemy_dict: dict) -> None:
 
 
 def charge(player_dict: dict, enemy_dict: dict, player_min_roll: int) -> int:
+    """
+    Return twice the amount of player's attack points and deal random amount of self damage.
+
+    :param player_dict: dictionary of the player's stats
+    :param enemy_dict: dictionary of the enemy's stats
+    :param player_min_roll: minimum damage the player can deal
+    :precondition: player_dict must contain 'attack' and 'hp' keys
+    :precondition: player_dict['attack'] and player_dict['hp'] must be integers
+    :precondition: enemy_dict must contain 'name' key
+    :precondition: enemy_dict['name'] must be a string
+    :precondition: player_min_roll must be an integer
+    :postcondition: return twice the amount of player's attack points
+    :postcondition: deal random amount of self damage between player_min_roll and player's attack points
+    :return: the amount of damage the player dealt to the enemy
+    """
     player_damage = 2 * player_dict['attack']
     self_damage = random.randint(player_min_roll, player_dict['attack'])
     player_dict['hp'] -= self_damage
