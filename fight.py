@@ -215,6 +215,21 @@ def enemy_turn(player_dict: dict, enemy_dict: dict, enemy_min_roll: int) -> None
 
 
 def player_turn(player_dict: dict, enemy_name: str, player_attacks: dict, player_min_roll: int) -> int or None:
+    """
+    Return the result of player's selected move.
+
+    :param player_dict: dictionary of the player's stats
+    :param enemy_name: the enemy's name as a string
+    :param player_attacks: dictionary of the player's attacks
+    :param player_min_roll: minimum damage the player can deal
+    :precondition: player_dict must be a dictionary
+    :precondition: enemy_name must be a string
+    :precondition: player_attacks must be a dictionary
+    :precondition: player_min_roll must be an integer
+    :postcondition: execute the player's move and return the amount of damage the player deals
+    :postcondition: execute show_inventory if player chooses 'inventory' and return None
+    :return: integer of the damage the player will deal with their move or None if 'inventory' is chosen
+    """
     print_attack_menu(player_attacks)
     move = get_player_choice(player_attacks)
 
