@@ -86,10 +86,11 @@ def choose_item(player_dict: dict):
     :param player_dict: dictionary of player stats
     :precondition: player_dict must be a dictionary containing 'inventory' key
     :precondition: player_dict['inventory'] must be a dictionary containing at least one item
-    :postcondition: exit the inventory menu if the player's input is an empty string
-    :postcondition: print out a special message if the player chooses an invalid item and execute the function again
-    :postcondition: execute use_item function if the player chooses to use a valid item
-    :postcondition: execute use_egg function if the player chooses to use the egg
+    :postcondition: exits the inventory menu if the player's input is an empty string
+    :postcondition: prints out a special message if the player chooses an invalid item and execute the function again
+    :postcondition: executes use_item function if the player chooses to use a valid item
+    :postcondition: executes use_egg function if the player chooses to use the egg
+    :postcondition: deletes the item from the player's inventory if the item's quantity is 0
     """
     choice = input('\nType the number of a item you want to use or press enter to continue: ')
     if choice == '':
@@ -111,6 +112,21 @@ def choose_item(player_dict: dict):
 
 
 def use_item(player_dict: dict, item: str):
+    """
+    Apply the item's effect to the player.
+
+    Item effects are stored in items.json and are hp gains.
+
+    :param player_dict: dictionary of player stats
+    :param item: chosen item to use as a string
+    :precondition: player_dict must be a dictionary containing 'hp', 'max_hp', and 'inventory' keys
+    :precondition: player_dict['hp'] and player_dict['max_hp'] must be integers
+    :precondition: player_dict['inventory'] must be a dictionary containing at least one item
+    :precondition: item must be a string that is a key in player_dict['inventory']
+    :postcondition: adds the item's hp gain to the player's hp
+    :postcondition: sets player's hp to max_hp if the item's hp gain is greater than the player's missing hp
+    :postcondition: subtracts one from the item's quantity in the player's inventory
+    """
     with open('items.json') as file:
         item_json = json.load(file)
     item_dict = item_json[item]
