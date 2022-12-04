@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 
 def fish(player_dict: dict):
@@ -12,7 +13,7 @@ def fish(player_dict: dict):
 def fight(enemy: str, player_dict: dict):
     # fight code here
     # code to read json file
-    with open('enemy.json') as f:
+    with open(Path('json/') / 'enemy.json') as f:
         enemy_dict = json.load(f)
         print(enemy_dict['dog']['name'])
 

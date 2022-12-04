@@ -6,7 +6,7 @@ import json
 
 def print_map(board: dict, board_height: int, board_width: int, player_dict: dict, boss_loc=None) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
-    with open('level_desc.json') as file:
+    with open(Path('json/') / 'level_desc.json') as file:
         level_json = json.load(file)
     level_dict = level_json[str(player_dict['level'])]
     print(f'''

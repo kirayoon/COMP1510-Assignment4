@@ -6,6 +6,7 @@ import itertools
 import json
 import random
 import time
+from pathlib import Path
 from printer import print_health, print_attack_menu, print_enemy_picture, print_from_text_file, print_map, \
     print_scrolling_text
 from skeleton import get_player_choice, validate_yes_no
@@ -24,7 +25,7 @@ def load_enemy(enemy: str) -> dict:
     :postcondition: returns a dictionary of the enemy's stats
     :return: dictionary of the enemy's stats
     """
-    with open('enemy.json') as file:
+    with open(Path('json/') / 'enemy.json') as file:
         enemy_json = json.load(file)
     return enemy_json[enemy]
 

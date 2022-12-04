@@ -6,6 +6,7 @@ This module contains functions that are responsible for the player to interact w
 import time
 import json
 import random
+from pathlib import Path
 from printer import print_scrolling_text
 from skeleton import validate_yes_no
 
@@ -65,7 +66,7 @@ def show_inventory(player_dict: dict) -> None:
     :postcondition: printed inventory includes item name, quantity, and possible effects
     :postcondition: execute choose_item function if the player's inventory is not empty
     """
-    with open('items.json') as file:
+    with open(Path('json/') / 'items.json') as file:
         item_json = json.load(file)
     player_inventory = player_dict['inventory'].items()
     heading = "\033[4mInventory\033[0m"
@@ -131,7 +132,7 @@ def use_item(player_dict: dict, item: str) -> None:
     :postcondition: sets player's hp to max_hp if the item's hp gain is greater than the player's missing hp
     :postcondition: subtracts one from the item's quantity in the player's inventory
     """
-    with open('items.json') as file:
+    with open(Path('json/') / 'items.json') as file:
         item_json = json.load(file)
     item_dict = item_json[item]
 
@@ -176,7 +177,7 @@ def hatch_egg(player_dict: dict) -> None:
     :postcondition: chooses a random dictionary of hatched item from egg.json
     :postcondition: applies the hatched item's effect to the player
     """
-    with open('egg.json') as file:
+    with open(Path('json/') / 'egg.json') as file:
         egg_json = json.load(file)
     egg_dict = egg_json[random.choice(list(egg_json))]
     choice = validate_yes_no(f'''
