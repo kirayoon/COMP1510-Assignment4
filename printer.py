@@ -5,6 +5,24 @@ import json
 
 
 def print_map(board: dict, board_height: int, board_width: int, player_dict: dict, boss_loc=None) -> None:
+    """
+    Prints the map to the screen.
+
+    :param board: dictionary of the board with the keys as coordinates and values as event names
+    :param board_height: integer of the height of the board
+    :param board_width: integer of the width of the board
+    :param player_dict: dictionary of the player's stats
+    :param boss_loc: tuple of the boss's location for the boss fight
+    :precondition: board must be a dictionary with the keys as tuples of coordinates and values as strings
+    :precondition: board_height must be an integer
+    :precondition: board_width must be an integer
+    :precondition: player_dict must be a dictionary containing 'level' and 'location' keys
+    :precondition: values of 'level' must be an integer and 'location' must be a tuple of integers of coordinates
+    :precondition: boss_loc must be a tuple of integers of coordinates
+    :postcondition: prints the map to the screen
+    :postcondition: each coordinate is filled depending on the event at that coordinate
+    :postcondition: prints player's level and level goal at the top of the map
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     with open('level_desc.json') as file:
         level_json = json.load(file)
