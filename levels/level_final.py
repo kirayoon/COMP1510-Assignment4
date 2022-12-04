@@ -42,6 +42,11 @@ class Boss:
         return self.location
 
     def get_stats(self):
+        """
+        Get the boss's stats
+
+        :return: A dictionary containing the boss's stats for hp, max_hp, attack, and name
+        """
         return {'hp': self.hp, 'max_hp': self.max_hp, 'name': self.name, 'attack': self.attack}
 
     def choose_move(self, player_dict) -> None:
