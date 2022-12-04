@@ -55,6 +55,16 @@ def get_player_choice(command_map: dict) -> str:
 
 
 def validate_yes_no(prompt: str) -> str:
+    """
+    Validate user input for yes or no.
+
+    Input is valid if it is 'y', 'Y', 'n', or 'N'.
+
+    :param prompt: string representing the prompt to the user
+    :precondition: prompt must be a string
+    :postcondition: user input is validated
+    :return: 'y' or 'n'
+    """
     while True:
         choice = input(prompt + ':  ').lower()
         if choice not in ('y', 'n'):
