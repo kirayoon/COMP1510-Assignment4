@@ -6,7 +6,7 @@ import json
 
 def print_map(board: dict, board_height: int, board_width: int, player_dict: dict, boss_loc=None) -> None:
     """
-    Prints the map to the screen.
+    Print the map to the screen.
 
     :param board: dictionary of the board with the keys as coordinates and values as event names
     :param board_height: integer of the height of the board
@@ -50,7 +50,7 @@ def print_map(board: dict, board_height: int, board_width: int, player_dict: dic
 
 def print_scrolling_text(text_file: str) -> None:
     """
-    Prints the text from a text file to the screen one line at a time.
+    Print the text from a text file to the screen one line at a time.
 
     :param text_file: a string of the name of the text file to be printed
     :precondition: text_file must be a string
@@ -80,7 +80,7 @@ def print_scrolling_text(text_file: str) -> None:
 
 def print_from_text_file(text_file: str) -> None:
     """
-    Prints the text from a text file to the screen.
+    Print the text from a text file to the screen.
 
     :param text_file: a string of the name of the text file to be printed
     :precondition: text_file must be a string
@@ -98,6 +98,17 @@ def print_from_text_file(text_file: str) -> None:
 
 
 def print_choices_menu(command_map: dict) -> None:
+    """
+    Print the choices menu to the screen.
+
+    Choices menu contains commands that the player can use.
+
+    :param command_map: dictionary of the commands and their functions
+    :precondition: command_map must be a dictionary with the keys as strings and values as functions or empty strings
+    :postcondition: prints the choices menu to the screen
+    :postcondition: prints the commands and their corresponding numbers
+    :postcondition: prints movement commands in the first column and other commands in the second column
+    """
     menu = list(enumerate(command_map.keys(), 1))
     headings = ["\033[4mMovement\033[0m", "\033[4mCommands\033[0m"]
 
