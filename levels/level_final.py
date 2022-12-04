@@ -6,13 +6,15 @@ class Boss:
         """
         Initialize a boss object
 
-        :param enemy_dict: A dictionary containing the boss's stats
-        :precondition: enemy_dict must be a dictionary
+        :param enemy_dict: A dictionary containing the boss's stats :precondition: enemy_dict must be a dictionary
         :precondition: enemy_dict must contain the following keys: 'hp', 'max_hp', 'name', 'attack', 'abilities'
-        :precondition: enemy_dict['abilities'] must contain the following keys: 'shoot', 'bomb', 'move'
-        :precondition: enemy_dict['abilities']['shoot'] must contain the following keys: 'damage', 'flavour_text', 'flavour_text_miss'
-        :precondition: enemy_dict['abilities']['bomb'] must contain the following keys: 'damage', 'flavour_text'
-        :precondition: enemy_dict['abilities']['move'] must contain the following keys: 'flavour_text'
+        :precondition: enemy_dict['abilities'] must contain the following keys: 'shoot', 'bomb',
+        'move' :precondition: enemy_dict['abilities']['shoot'] must contain the following keys: 'damage',
+        'flavour_text', 'flavour_text_miss'
+        :precondition: enemy_dict['abilities']['bomb'] must contain the following
+        keys: 'damage', 'flavour_text'
+        :precondition: enemy_dict['abilities']['move'] must contain the following
+        keys: 'flavour_text'
         :postcondition: A boss object is created
         """
         self.location = (2, 2)
