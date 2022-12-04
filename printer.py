@@ -4,13 +4,13 @@ import time
 import json
 
 
-def print_map(board: dict, board_height: int, board_width: int, player_loc: tuple, current_level: int) -> None:
+def print_map(board: dict, board_height: int, board_width: int, player_dict: dict, boss_loc=None) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
     with open('level_desc.json') as file:
         level_json = json.load(file)
-    level_dict = level_json[str(current_level)]
+    level_dict = level_json[str(player_dict['level'])]
     print(f'''
-            Level {current_level}: {level_dict["name"]}
+            Level {player_dict['level']}: {level_dict["name"]}
             Goal: {level_dict["goal"]}''')
     for row in range(board_height):
         print("  +-------+-------+-------+-------+-------+")
@@ -18,12 +18,12 @@ def print_map(board: dict, board_height: int, board_width: int, player_loc: tupl
         for col in range(board_width):
             if board[(row, col)] == 'event2':
                 print("|  (!)  ", end="")
-            elif (row, col) == player_loc:
+            elif (row, col) == player_dict['location']:
                 print("|ʕ•`ᴥ´•ʔ", end="")
-            elif board[(row, col)] == 'clear' or board[(row, col)] == 'empty' or board[(row, col)] == 'start':
-                print("|       ", end="")
-            elif board[(row, col)] == 'boss':
+            elif (row, col) == boss_loc:
                 print("| •`_´• ", end="")
+            elif board[(row, col)] == 'clear' or board[(row, col)] == 'start':
+                print("|       ", end="")
             else:
                 print("|   ?   ", end="")
         print('|', end="\n")

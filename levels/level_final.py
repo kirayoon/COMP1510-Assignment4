@@ -5,10 +5,6 @@ import os
 from printer import print_health, print_enemy_picture
 
 
-# def randomize_boss_movement(current_boss_location: tuple, board_width: int, board_height: int) -> tuple:
-#     pass
-
-
 def print_map(board: dict, board_height: int, board_width: int, player_loc: tuple, boss_loc=None) -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
     for row in range(board_height):
