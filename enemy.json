@@ -31,5 +31,31 @@
     "attack_flavour_text": ["The deer kicks you in the shins!",
                             "The deer bites you!"],
     "death_flavour_text": "The deer falls to the ground, dead."
+  },
+  "mama": {
+    "name": "Ms. Lobs",
+    "attack": 10,
+    "hp": 40,
+    "max_hp": 40,
+    "xp_gain": 400,
+    "attack_flavour_text": ["Papa Lobs slaps you with his big, fat, hairy hand!",
+                            "AHH! Papa Lobs headbutts you!"],
+    "abilities": {
+      "shoot": {
+        "name": "Shoot",
+        "damage": 10,
+        "flavour_text": "Ms. Lobs shoots you with a gun!",
+        "flavour_text_miss": "\tMs. Lobs shoots but whiffs her shot!\n\t\tNow's your chance!"
+      },
+      "bomb": {
+        "name": "Bomb",
+        "damage": 10,
+        "flavour_text": "Ms.Lobs lobs a bomb at you! Ouch."
+      },
+      "move": {
+        "flavour_text": "\n\t\tMama Lob is on the move.\n\t\tIs she running away?\n\t\tOr is she coming for you?"
+      }
+    },
+    "death_flavour_text": "Papa Lobs falls to the ground, dead."
   }
 }
