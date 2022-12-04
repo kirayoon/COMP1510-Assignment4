@@ -73,3 +73,11 @@ def mushroom(player_dict: dict):
     elif choice == 'n':
         print('''
     You left the mushroom alone.''')
+
+
+def main():
+    print('Please run game.py. This is a module.')
+
+
+if __name__ == '__main__':
+    main()
