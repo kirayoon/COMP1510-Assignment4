@@ -2,7 +2,7 @@ import json
 import random
 import time
 from printer import print_health, print_attack_menu, print_enemy_picture, print_from_text_file
-from skeleton import get_player_choice
+from skeleton import get_player_choice, validate_yes_no
 from player import show_inventory
 
 
@@ -25,21 +25,18 @@ def death_sequence(player_dict: dict) -> None:
     
     You can start again from the beginning of the level with your inventory intact.
     ''')
-    restart = input(input('Restart the level? (y/n)').lower())
+    restart = validate_yes_no('Restart the level? (y/n)')
     if restart == 'y':
         player_dict['turns'] = 0
         player_dict['hp'] = player_dict['max_hp']
         player_dict['xp'] = 0
         player_dict['location'] = (0, 0)
     elif restart == 'n':
-        if input('Quit the game? (y/n)').lower() == 'y':
+        if validate_yes_no('Quit the game? (y/n)') == 'y':
             print_from_text_file('goodbye.txt')
             exit()
         else:
             return death_sequence(player_dict)
-    else:
-        print('Please enter y or n.')
-        return death_sequence(player_dict)
 
 
 def victory(player_dict: dict, enemy_dict: dict) -> None:

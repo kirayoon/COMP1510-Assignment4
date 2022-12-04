@@ -2,6 +2,7 @@ import json
 import random
 import time
 from fight import fight_sequence
+from skeleton import validate_yes_no
 
 
 soup_counter = 0
@@ -70,7 +71,7 @@ def scraps(player_dict: dict):
         *crunch* *squish*
         You stepped on a rat...
         ''')
-        choice = input("Eat the rat? (y/n)").lower()
+        choice = validate_yes_no("Eat the rat? (y/n)")
         if choice == 'y':
             print('yummy.. You gained 5 HP & 10 XP!')
             player_dict['hp'] += 5
@@ -78,8 +79,6 @@ def scraps(player_dict: dict):
         elif choice == 'n':
             print('''
         You left the dead rat alone.''')
-        else:
-            print('Invalid input. Enter y or n')
 
     elif rand == 2:
         print('''
@@ -96,7 +95,7 @@ def scraps(player_dict: dict):
         print('''
         You found a jar of honey!
         ''')
-        choice = input("Steal the honey? (y/n)").lower()
+        choice = validate_yes_no("Steal the honey? (y/n)")
         if choice == 'y':
             if 'honey' in player_dict['inventory']:
                 player_dict['inventory']['honey'] += 1
@@ -111,8 +110,6 @@ def scraps(player_dict: dict):
             You gained 10 XP!
             ''')
             player_dict['xp'] += 10
-        else:
-            print('Invalid input. Enter y or n')
 
     else:
         print('''

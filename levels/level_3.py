@@ -1,8 +1,9 @@
 import random
 from fight import fight_sequence
+from skeleton import validate_yes_no
 
 
-def default():
+def default(player_dict: dict):
     print('''
     nothing here...
     ''')
@@ -11,7 +12,7 @@ def default():
 def mushroom(player_dict: dict):
     print('''
     You found a mushroom.''')
-    choice = input('    Eat mushroom? (y/n)').lower()
+    choice = validate_yes_no('    Eat mushroom? (y/n)')
     if choice == 'y':
         rand = random.randint(1, 2)
         if rand == 1:
@@ -30,8 +31,6 @@ def mushroom(player_dict: dict):
     elif choice == 'n':
         print('''
     You left the mushroom alone.''')
-    else:
-        print('Invalid input. Enter y or n')
 
 
 def berry(player_dict: dict):
@@ -49,7 +48,7 @@ def nut(player_dict: dict):
     print('''
     You found a hazelnut. We love hazelnuts!
     ''')
-    choice = input('    Crack the nut? (y/n)').lower()
+    choice = validate_yes_no('    Crack the nut? (y/n)')
     if choice == 'y':
         print('''
     You cracked the nut. How fun and delicious!
@@ -65,8 +64,6 @@ def nut(player_dict: dict):
         print('''
     You left the nut alone.
     Interesting choice.''')
-    else:
-        print('Invalid input. Enter y or n')
 
 
 def deer(player_dict: dict):
