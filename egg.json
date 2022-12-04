@@ -1,0 +1,18 @@
+{
+  "chicky": {
+    "name":"chicky",
+    "text": "Set the chicky free?",
+    "attack": 2,
+    "xp": 2
+  },
+  "shard": {
+    "name":"shard",
+    "text": "Use shard?",
+    "attack": 2
+  },
+  "hat": {
+    "name":"magic hat",
+    "text": "Use magic hat?",
+    "max_hp": 10
+  }
+}

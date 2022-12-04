@@ -1,6 +1,7 @@
 import time
 import json
 from printer import print_scrolling_text
+from skeleton import egg
 
 
 def player_sleep(player_dict: dict):
@@ -34,7 +35,7 @@ def show_inventory(player_dict: dict):
         if 'hp' in item_dict:
             print(f'\t{count}) {item}: {amount} [+{item_dict["hp"]} hp]')
         else:
-            print(f'\t{count}) {item}: {amount} [+{item_dict["xp"]} xp]')
+            print(f'\t{count}) {item}: {amount} [{item_dict["?"]}]')
 
     choose_item(player_dict)
 
@@ -50,8 +51,13 @@ def choose_item(player_dict: dict):
     else:
         item = list(player_dict['inventory'].keys())[int(choice)]
         print(f'You chose {item}.\n')
-        use_item(player_dict, item)
-    pass
+        if item == 'egg':
+            egg(player_dict)
+        else:
+            use_item(player_dict, item)
+
+        if player_dict['inventory'][item] == 0:
+            del player_dict['inventory'][item]
 
 
 def use_item(player_dict: dict, item: str):
@@ -64,10 +70,6 @@ def use_item(player_dict: dict, item: str):
         player_dict['hp'] = player_dict['max_hp']
     print(f'You eat the {item} and gain {item_dict["hp"]} hp. Your health is now {player_dict["hp"]}.\n')
     player_dict['inventory'][item] -= 1
-
-    if player_dict['inventory'][item] == 0:
-        del player_dict['inventory'][item]
-    pass
 
 
 def level_up(player_dict: dict):
