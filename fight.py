@@ -6,7 +6,8 @@ import itertools
 import json
 import random
 import time
-from printer import print_health, print_attack_menu, print_enemy_picture, print_from_text_file, print_map
+from printer import print_health, print_attack_menu, print_enemy_picture, print_from_text_file, print_map, \
+    print_scrolling_text
 from skeleton import get_player_choice, validate_yes_no
 from player import show_inventory
 from levels import level_final
@@ -28,18 +29,18 @@ def load_enemy(enemy: str) -> dict:
     return enemy_json[enemy]
 
 
-def calc_min_roll(player_dict: dict, enemy_dict: dict) -> tuple[int, int]:
+def calc_min_roll(player_attack: int, enemy_attack: int) -> tuple[int, int]:
     """
     Calculate the minimum possible damage the player and enemy can make.
 
-    :param player_dict: dictionary of the player's stats
-    :param enemy_dict: dictionary of the enemy's stats
-    :precdondition: player_dict and enemy_dict must contain 'attack' key
+    :param player_attack: the attack of the player as an integer
+    :param enemy_attack: the attack of the enemy as an integer
+    :precdondition: player_attack and enemy_attack must be integers >= 0
     :postcondition: returns a tuple of the minimum damage the player and enemy can make
     :return: a tuple of the minimum possible damage for the player and enemy as integers
     """
-    min_roll = max(1, player_dict['attack'] - 10)
-    enemy_min_roll = max(1, enemy_dict['attack'] - 10)
+    min_roll = max(1, player_attack - 10)
+    enemy_min_roll = max(1, enemy_attack - 10)
     return min_roll, enemy_min_roll
 
 
@@ -205,6 +206,16 @@ def player_turn(player_dict: dict, enemy_name: str, player_attacks: dict, player
         return bite(player_dict, enemy_name)
 
 
+def final_boss_defeated():
+    print_from_text_file('hunter_dead.txt')
+    print('''
+    You have defeated the final boss!
+    You have won the game!
+    
+    ''')
+    exit()
+
+
 def fight_sequence(enemy: str, player_dict: dict) -> None:
     enemy_dict = load_enemy(enemy)
     # Get dictionary of possible player attacks
@@ -226,7 +237,7 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
         print_health(player_dict, enemy_dict)
 
         # 3. print attack options
-        player_min_roll, enemy_min_roll = calc_min_roll(player_dict, enemy_dict)
+        player_min_roll, enemy_min_roll = calc_min_roll(player_dict['attack'], enemy_dict['attack'])
         damage = player_turn(player_dict, enemy_dict['name'], player_options, player_min_roll)
         if damage is None:
             continue
@@ -249,6 +260,57 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
     if player_dict['hp'] <= 0:
         print_health(player_dict, enemy_dict)
         death_sequence(player_dict)
+
+
+def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
+    # Get dictionary of possible player attacks
+    player_attacks = player_dict['attacks']
+    current_level = player_dict['level']
+
+    # Add attack to move list if player is high enough level
+    player_options = dict(itertools.takewhile(lambda item: item[1] <= current_level, player_attacks.items()))
+    player_options['inventory'] = 4
+
+    # Set stage for final boss
+    # TODO: Print scrolling text for final boss intro
+    boss_dict = load_enemy(enemy_name)
+    final_boss = level_final.Boss(boss_dict)
+    board = make_board(5, 5, 4)
+    # print_scrolling_text('final_boss_intro.txt')
+    print_from_text_file('hunter_shoot_straight.txt')
+
+    while True:
+        # Resets the board if player dies
+        if player_dict['turn'] == 1:
+            final_boss = level_final.Boss(boss_dict)
+            board = make_board(5, 5, 4)
+
+        # Print the grid
+        print_map(board, 5, 5, player_dict, final_boss.get_location())
+
+        # 3. print attack options
+        player_min_roll, enemy_min_roll = calc_min_roll(player_dict['attack'], final_boss.get_stats()['attack'])
+        damage = player_turn(player_dict, final_boss.get_stats()['name'], player_options, player_min_roll)
+        if damage is None:
+            continue
+
+        # 4. subtract hp from enemy
+        final_boss.is_damaged(damage)
+        if final_boss.is_dead() or player_dict['hp'] <= 0:
+            break
+
+        # 5. Final_boss turn
+        final_boss.choose_move(player_dict)
+        print_health(player_dict, final_boss.get_stats())
+        if player_dict['hp'] <= 0:
+            death_sequence(player_dict)
+            break
+
+        # 6. Check if player dies
+        if player_dict['hp'] <= 0:
+            death_sequence(player_dict)
+            player_dict['turn'] = 1
+            continue
 
 
 def main():

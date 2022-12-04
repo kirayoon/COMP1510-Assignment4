@@ -2,8 +2,9 @@ import time
 from levels import level_1, level_2, level_3, level_final
 from skeleton import make_board, get_player_choice, validate_move, up, down, left, right, egg, check_event
 from player import player_sleep, player_information, show_inventory, level_up
-from printer import print_map, print_scrolling_text, print_from_text_file, print_choices_menu, print_attack_menu, print_health, print_enemy_picture
-from fight import death_sequence, load_enemy
+from printer import print_map, print_scrolling_text, print_from_text_file, print_choices_menu, print_attack_menu, \
+    print_health, print_enemy_picture
+from fight import death_sequence, load_enemy, final_boss_loop, final_boss_defeated
 
 
 def game():
@@ -139,6 +140,11 @@ def game():
         player['turn'] += 1
         input('\n\nEnter to continue...')
         level_up(player) if player['xp'] >= player['max_xp'] else None
+        if player['level'] == 4:
+            final_boss_loop(player, 'mama')
+            game_is_won = True
+
+    final_boss_defeated()
 
 
 def main():
