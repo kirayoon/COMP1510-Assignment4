@@ -1,6 +1,7 @@
 import time
 from levels import level_1, level_2, level_3
-from skeleton import make_board, get_player_choice, validate_move, up, down, left, right, egg, check_event
+from skeleton import make_board, get_player_choice, validate_move, up, down, left, right, egg, check_event, \
+    create_player
 from player import player_sleep, player_information, show_inventory, level_up
 from printer import print_map, print_scrolling_text, print_from_text_file, print_choices_menu
 from fight import death_sequence, final_boss_loop, final_boss_defeated
@@ -14,6 +15,9 @@ def game():
     # print_from_text_file('title_screen.txt')
     char_name = input('Please input your character\'s name: ')
     # print(f'\nHello {char_name}! Welcome to the game!')
+
+    # Initialize player information
+    player = create_player(char_name)
     # time.sleep(3)
     #
     # Initialize player board
@@ -25,26 +29,6 @@ def game():
     # print_scrolling_text('intro.txt')
     # print_from_text_file('ascii_bear.txt')
     # print_from_text_file('level_1.txt')
-
-    # Initialize player information
-    player = {'name': char_name,
-              'location': (0, 0),
-              'inventory': {},
-              'hp': 20,
-              'max_hp': 20,
-              'attack': 5,
-              'level': 1,
-              'xp': 0,
-              'max_xp': 1000,
-              'turn': 1,
-              'attacks': {'claw': 1, 'bite': 2, 'charge': 3},
-              'deaths': 0,
-              'kills': 0,
-              'damage_dealt': 0,
-              'eggs_found': 0,
-              'useless_events': 0,
-              'soup_counter': 0,
-              'chair_counter': 0}
 
     command_map = {'up': up,
                    'down': down,

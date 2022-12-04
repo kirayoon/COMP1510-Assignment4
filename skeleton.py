@@ -1,6 +1,35 @@
 import random
 
 
+def create_player(player_name: str) -> dict:
+    """
+    Create a dictionary for important player information
+
+    :param player_name: string representing the player's name
+    :precondition: player_name must be a string
+    :postcondition: creates a dictionary
+    :return: a dictionary containing player information
+    """
+    return {'name': player_name,
+              'location': (0, 0),
+              'inventory': {},
+              'hp': 20,
+              'max_hp': 20,
+              'attack': 5,
+              'level': 1,
+              'xp': 0,
+              'max_xp': 1000,
+              'turn': 1,
+              'attacks': {'claw': 1, 'bite': 2, 'charge': 3},
+              'deaths': 0,
+              'kills': 0,
+              'damage_dealt': 0,
+              'eggs_found': 0,
+              'useless_events': 0,
+              'soup_counter': 0,
+              'chair_counter': 0}
+
+
 def make_board(num_row: int, num_col: int, current_level: int) -> dict:
     """
     Create a dictionary with keys as tuples of coordinates and values as strings of events at those coordinates.
