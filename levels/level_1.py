@@ -56,12 +56,15 @@ def slippery_rock(player_dict: dict) -> None:
     player_dict['hp'] = max(player_dict['hp'] - 1, 1)
 
 
-def heavy_current() -> None:
+def heavy_current(player_dict: dict) -> None:
     """
     Print a simple message.
     """
     print('''
-    You're in a heavy current.''')
+    You're in a heavy current.
+    The water washes you fur.
+    You feel nice and refreshed''')
+    player_dict['hp'] = min(player_dict['hp'] + 2, player_dict['max_hp'])
 
 
 def fish(player_dict: dict):
