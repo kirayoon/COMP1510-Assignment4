@@ -284,6 +284,7 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
     player_options['inventory'] = 4
     print(f'{"FIGHT!":^56}')
     time.sleep(1)
+    input('Press enter to continue...')
 
     while True:
         # 1. print ascii image from file
