@@ -13,13 +13,27 @@ soup_counter = 0
 chair_counter = 0
 
 
-def default(player_dict: dict):
+def default(player_dict: dict) -> None:
+    """
+    Print a simple message.
+    """
     print('''
     nothing here...
     ''')
 
 
-def soup(player_dict: dict):
+def soup(player_dict: dict) -> None:
+    """
+    Gain 200 XP for each soup found, and execute fight_sequence if third soup is found.
+
+    Use the global variable soup_counter to keep track of how many soups have been found.
+
+    :param player_dict: dictionary containing player information
+    :precondition: player_dict must be a dictionary containing 'xp' as key
+    :precondition: player_dict['xp'] must be an integer
+    :postcondition: increases player_dict['xp'] by 200 for each soup found
+    :postcondition: executes fight_sequence with 'papa' as parameter if third soup is found
+    """
     global soup_counter
 
     print('''
