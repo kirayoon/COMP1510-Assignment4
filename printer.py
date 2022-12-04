@@ -173,7 +173,17 @@ def convert_health_to_bars(health: int, max_health: int) -> tuple[str, str]:
     return health_bar, health_percentage
 
 
-def print_health(player_dict: dict, enemy_dict: dict):
+def print_health(player_dict: dict, enemy_dict: dict) -> None:
+    """
+    Print the health of the player and enemy to the screen.
+
+    :param player_dict: dictionary of the player's stats
+    :param enemy_dict: dictionary of the enemy's stats
+    :precondition: player_dict must be a dictionary containing 'hp', 'max_hp', and 'name' as keys
+    :precondition: enemy_dict must be a dictionary containing 'hp', 'max_hp', and 'name' as keys
+    :precondition: values of 'hp' and 'max_hp' must be integers and 'name' must be a string
+    :postcondition: prints the name, health bar, and percentage of health of the player and enemy in a formatted way
+    """
     player_health_bar, player_health_percentage = convert_health_to_bars(player_dict['hp'], player_dict['max_hp'])
     enemy_health_bar, enemy_health_percentage = convert_health_to_bars(enemy_dict['hp'], enemy_dict['max_hp'])
 
