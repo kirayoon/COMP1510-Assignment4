@@ -1,9 +1,17 @@
+"""
+This module contains event functions for level 3.
+"""
+
+
 import random
 from fight import fight_sequence
 from skeleton import validate_yes_no
 
 
 def default(player_dict: dict):
+    """
+    Print a simple message.
+    """
     print('''
     nothing here...
     ''')
