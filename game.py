@@ -61,7 +61,7 @@ def game():
         # Print the grid
         # TODO: update second param for final
         print(player['location'])
-        print_map(board, board_height, board_width, player['location'], player['level'])
+        print_map(board, board_height, board_width, player)
 
         # Need function to describe room
 
