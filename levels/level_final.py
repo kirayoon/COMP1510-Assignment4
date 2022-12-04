@@ -133,6 +133,14 @@ class Boss:
             self.move(player_dict)
 
     def is_damaged(self, damage: int) -> None:
+        """
+        Subtract the player's attack from the boss's hp
+
+        :param damage: the amount of damage to be done to the boss
+        :precondition: damage must be an int
+        :precondition: damage must be greater than 0
+        :postcondition: the boss's hp is subtracted by the damage
+        """
         self.hp -= damage
 
     def is_dead(self) -> bool:
