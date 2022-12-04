@@ -49,6 +49,15 @@ def print_map(board: dict, board_height: int, board_width: int, player_dict: dic
 
 
 def print_scrolling_text(text_file: str) -> None:
+    """
+    Prints the text from a text file to the screen one line at a time.
+
+    :param text_file: a string of the name of the text file to be printed
+    :precondition: text_file must be a string
+    :precondition: text_file must be a valid file name in the text folder
+    :postcondition: prints the text from the text file to the screen one line at a time
+    :postcondition: prints a line of text every 0.5 seconds
+    """
     text_file = Path('text/') / text_file
     with open(text_file, 'r') as file:
         script = [line.rstrip('\n') for line in file]
