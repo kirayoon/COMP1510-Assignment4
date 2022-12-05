@@ -24,9 +24,9 @@
   "deer": {
     "name": "Deer",
     "drop": "Raw Deer",
-    "attack": 5,
-    "hp": 60,
-    "max_hp": 60,
+    "attack": 7,
+    "hp": 80,
+    "max_hp": 80,
     "xp_gain": 200,
     "attack_flavour_text": ["The deer kicks you in the shins!",
                             "The deer bites you!"],
@@ -34,20 +34,20 @@
   },
   "mama": {
     "name": "Ms. Lobs",
-    "attack": 10,
+    "attack": 20,
     "hp": 160,
     "max_hp": 160,
     "xp_gain": 400,
     "abilities": {
       "shoot": {
         "name": "Shoot",
-        "damage": 10,
+        "damage": 20,
         "flavour_text": "\b\b\b\bMs. Lobs shoots you with a gun!",
         "flavour_text_miss": "\b\b\b\bMs. Lobs shoots but whiffs her shot!\n\t\tNow's your chance!"
       },
       "bomb": {
         "name": "Bomb",
-        "damage": 10,
+        "damage": 20,
         "flavour_text": "Ms.Lobs lobs a bomb at you! Ouch."
       },
       "move": {

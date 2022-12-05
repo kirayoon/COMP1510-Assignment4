@@ -42,7 +42,7 @@ def calc_min_roll(player_attack: int, enemy_attack: int) -> tuple[int, int]:
     :postcondition: returns a tuple of the minimum damage the player and enemy can make
     :return: a tuple of the minimum possible damage for the player and enemy as integers
     """
-    min_roll = max(1, player_attack - 10)
+    min_roll = max(1, int(player_attack/3))
     enemy_min_roll = max(1, enemy_attack - 10)
     return min_roll, enemy_min_roll
 
@@ -135,7 +135,7 @@ def charge(player_dict: dict, enemy_name: str, player_min_roll: int) -> int:
     :return: the amount of damage the player dealt to the enemy
     """
     player_damage = 2 * player_dict['attack']
-    self_damage = random.randint(player_min_roll, player_dict['attack'])
+    self_damage = random.randint(player_min_roll, int(player_dict['attack']/2))
     player_dict['hp'] -= self_damage
 
     print(f'''
