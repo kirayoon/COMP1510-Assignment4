@@ -23,16 +23,21 @@
     - You lose HP by being attacked
     - You can gain / lose HP by interacting with objects
 
-6. ATTACK:
+6. ATTACK MOVES:
+    - You gain a move by leveling up
     - Claw: Use those pointy claws to attack. Damage: a random number up to your attack points
     - Bite: Chomp chomp. It's feeding time. Damage: between 0 and 2x your attack points.
     - Charge: Charge at your enemy. Damage: 2x your attack points. Damages yourself by up to your attack points.
 
-7. INVENTORY:
+7. SLEEP:
+    - You can sleep at any location
+    - Sleeping restores your HP to full
+
+8. INVENTORY:
     - You can gain items by interacting with objects
     - You can use items to gain HP
 
-8. LEVELS:
+9. LEVELS:
     - There are 3 levels in this game
     - Each level has a goal
     - You can only move to the next level if you have completed the goal
