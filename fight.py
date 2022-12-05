@@ -470,17 +470,15 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
         # 5. Final_boss turn
         final_boss.choose_move(player_dict)
         print_health(player_dict, final_boss.get_stats())
-        if player_dict['hp'] <= 0:
-            death_sequence(player_dict)
-            break
 
-        input('Press enter to continue...')
 
         # 6. Check if player dies
         if player_dict['hp'] <= 0:
             death_sequence(player_dict)
             player_dict['turn'] = 1
             continue
+
+        input('Press enter to continue...')
 
 
 def main():

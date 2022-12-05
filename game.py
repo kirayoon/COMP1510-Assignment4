@@ -133,7 +133,6 @@ def game():
 
         input('\n\nPress enter to continue...')
 
-
     end_time = time.time()
     total_time = end_time - start_time
     final_boss_defeated(player, total_time)
