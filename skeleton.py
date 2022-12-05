@@ -16,7 +16,7 @@ def create_player(player_name: str) -> dict:
             'inventory': {},
             'hp': 20,
             'max_hp': 20,
-            'attack': 5,
+            'attack': 10,
             'level': 1,
             'xp': 0,
             'max_xp': 1000,
