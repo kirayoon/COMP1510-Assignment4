@@ -380,7 +380,6 @@ def check_player_close_to_boss(player_location: tuple, boss_location: tuple) -> 
 # move the player 1 square closer to the boss
 def move_player_towards_boss(player_location: tuple, boss_location: tuple) -> tuple:
     """
-    TODO: add unit test
     Move the player 1 square closer to the boss.
 
     :param player_location: tuple of the player's location
@@ -389,7 +388,6 @@ def move_player_towards_boss(player_location: tuple, boss_location: tuple) -> tu
     :precondition: boss_location must be a tuple of two integers
     :postcondition: move the player 1 square closer to the boss
     :return: tuple of the player's new location
-
     """
     distance_between = [boss_location[0] - player_location[0], boss_location[1] - player_location[1]]
     try:
