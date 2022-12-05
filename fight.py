@@ -254,7 +254,7 @@ def player_turn(player_dict: dict, enemy_name: str, player_attacks: dict, player
         return charge(player_dict, enemy_name, player_min_roll)
     elif move == 'claw':
         return claw(player_dict, enemy_name, player_min_roll)
-    else:  # move is bite
+    elif move == 'bite':  # move is bite
         return bite(player_dict, enemy_name)
 
 
@@ -464,6 +464,7 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
         else:
             # Print command options for player (only one move: Close the gap!)
             far_choices = {'close the gap!': '', 'inventory': ''}
+            print_attack_menu(far_choices)
             choice = get_player_choice(far_choices)
             if choice == 'close the gap!':
                 player_dict['location'] = move_player_towards_boss(player_dict['location'], final_boss.get_location())
