@@ -245,7 +245,6 @@ def player_turn(player_dict: dict, enemy_name: str, player_attacks: dict, player
     move = get_player_choice(player_attacks)
 
     if move == 'inventory':
-        # TODO: remove main from here
         show_inventory(player_dict)
         input('Press enter to continue...')
         return None
@@ -372,8 +371,6 @@ def check_player_close_to_boss(player_location: tuple, boss_location: tuple) -> 
     :precondition: boss_location must be a tuple of two integers
     :postcondition: return True if player is close to boss
     :return: True if player is close to boss
-
-    TODO: add unit tests
     """
     if abs(player_location[0] - boss_location[0]) <= 1 and abs(player_location[1] - boss_location[1]) <= 1:
         return True
