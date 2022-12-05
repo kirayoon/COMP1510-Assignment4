@@ -14,8 +14,8 @@
     "name": "Mr.Lobs",
     "drop": "Mr. Lobs' Big Toe",
     "attack": 10,
-    "hp": 40,
-    "max_hp": 40,
+    "hp": 100,
+    "max_hp": 100,
     "xp_gain": 400,
     "attack_flavour_text": ["Papa Lobs slaps you with his big, fat, hairy hand!",
                             "AHH! Papa Lobs headbutts you!"],
@@ -35,8 +35,8 @@
   "mama": {
     "name": "Ms. Lobs",
     "attack": 10,
-    "hp": 40,
-    "max_hp": 40,
+    "hp": 160,
+    "max_hp": 160,
     "xp_gain": 400,
     "abilities": {
       "shoot": {

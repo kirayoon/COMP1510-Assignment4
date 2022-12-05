@@ -75,6 +75,7 @@ def soup(player_dict: dict) -> None:
         print('''
             Papa Lob yells, "You're not going anywhere, Bear!"
             ''')
+        input('Press enter to continue...')
         fight_sequence('papa', player_dict)
     player_dict['soup_counter'] += 1
 

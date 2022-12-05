@@ -8,7 +8,7 @@ import json
 import random
 from pathlib import Path
 from printer import print_scrolling_text
-from skeleton import validate_yes_no
+from skeleton import validate_yes_no, level_up_sound
 
 
 def player_sleep(player_dict: dict) -> None:
@@ -248,6 +248,7 @@ def level_up(player_dict: dict) -> None:
     print("\nYou're ready to level up.")
     answer = validate_yes_no('Would you like to move to the next level (y/n)?')
     if answer == 'y':
+        level_up_sound()
         player_dict['level'] += 1
         player_dict['xp'] = 0
         player_dict['max_hp'] += 20
@@ -258,6 +259,14 @@ def level_up(player_dict: dict) -> None:
         print('\nYou have leveled up, and moved onto the next zone')
         print(f'You are now level {player_dict["level"]}')
         player_information(player_dict)
+        if player_dict['level'] < 4:
+            move_list = [move for move in player_dict['attacks'].keys()]
+            unlocked_move = move_list[player_dict['level'] - 1]
+            print(f'''
+            \b\b\b\bYou have unlocked a new move!
+            \b\b\b\bYou can now use {unlocked_move}.
+            \b\b\b\bUse the 'help' command to see what it does.
+            ''')
         input('Press enter to continue...')
         if player_dict['level'] == 2:
             print_scrolling_text('level_2.txt')

@@ -11,24 +11,24 @@ def game():
     start_time = time.time()
     # # TODO: store ascii art in a file
     # TODO: remove comment for production
-    # # Print the title screen
-    # print_from_text_file('title_screen.txt')
+    # Print the title screen
+    print_from_text_file('title_screen.txt')
     char_name = input('Please input your character\'s name: ')
-    # print(f'\nHello {char_name}! Welcome to the game!')
+    print(f'\nHello {char_name}! Welcome to the game!')
 
     # Initialize player information
     player = create_player(char_name)
-    # time.sleep(3)
-    #
+    time.sleep(1)
+
     # Initialize player board
     board_height = 5
     board_width = 5
     board = dict()
 
-    # # Play intro text leading to level_1 text
-    # print_scrolling_text('intro.txt')
-    # print_from_text_file('ascii_bear.txt')
-    # print_from_text_file('level_1.txt')
+    # Play intro text leading to level_1 text
+    print_scrolling_text('intro.txt')
+    print_from_text_file('ascii_bear.txt')
+    print_from_text_file('level_1.txt')
 
     command_map = {'up': up,
                    'down': down,
@@ -128,7 +128,7 @@ def game():
         check_event(board, player, event_dict)
 
         player['turn'] += 1
-        input('\n\nEnter to continue...')
+        input('\n\nPress enter to continue...')
         level_up(player) if player['xp'] >= player['max_xp'] else None
         if player['level'] == 4:
             final_boss_loop(player, 'mama')

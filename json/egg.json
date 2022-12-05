@@ -13,6 +13,6 @@
   "hat": {
     "name":"magic hat",
     "text": "Use magic hat?",
-    "max_hp": 10
+    "max_hp": 20
   }
 }
