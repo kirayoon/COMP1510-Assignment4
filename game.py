@@ -126,11 +126,11 @@ def game():
         # Check if there is an event at the player's location
         check_event(board, player, event_dict)
         level_up(player) if player['xp'] >= player['max_xp'] else None
+        player['turn'] += 1
         if player['level'] == 4:
             final_boss_loop(player, 'mama')
             game_is_won = True
 
-        player['turn'] += 1
         input('\n\nPress enter to continue...')
 
 

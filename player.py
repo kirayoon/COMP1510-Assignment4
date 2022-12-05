@@ -254,7 +254,7 @@ def level_up(player_dict: dict) -> None:
         player_dict['max_hp'] += 20
         player_dict['hp'] = player_dict['max_hp']
         player_dict['attack'] += 10
-        player_dict['turn'] = 1
+        player_dict['turn'] = 0
         player_dict['location'] = (0, 0)
         print('\nYou have leveled up, and moved onto the next zone')
         print(f'You are now level {player_dict["level"]}')
