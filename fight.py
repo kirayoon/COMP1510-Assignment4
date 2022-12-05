@@ -447,7 +447,6 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
         print_map(board, 5, 5, player_dict, final_boss.get_location())
 
         is_close = check_player_close_to_boss(player_dict['location'], final_boss.get_location())
-        damage = 0
         if is_close:
             # 3. print attack options
             player_min_roll, enemy_min_roll = calc_min_roll(player_dict['attack'], final_boss.get_stats()['attack'])
@@ -455,20 +454,22 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
             if damage is None:
                 continue
 
+            # 4. subtract hp from enemy
+            player_dict['damage_dealt'] += damage
+            final_boss.is_damaged(damage)
+            print_health(player_dict, final_boss.get_stats())
+            if final_boss.is_dead() or player_dict['hp'] <= 0:
+                break
+
         else:
             # Print command options for player (only one move: Close the gap!)
             far_choices = {'close the gap!': '', 'inventory': ''}
-            get_player_choice(far_choices)
-
-            # Move player towards boss
-            player_dict['location'] = move_player_towards_boss(player_dict['location'], final_boss.get_location())
-
-        # 4. subtract hp from enemy
-        player_dict['damage_dealt'] += damage
-        final_boss.is_damaged(damage)
-        print_health(player_dict, final_boss.get_stats())
-        if final_boss.is_dead() or player_dict['hp'] <= 0:
-            break
+            choice = get_player_choice(far_choices)
+            if choice == 'close the gap!':
+                player_dict['location'] = move_player_towards_boss(player_dict['location'], final_boss.get_location())
+            if choice == 'inventory':
+                show_inventory(player_dict)
+                continue
 
         # 5. Final_boss turn
         final_boss.choose_move(player_dict)
