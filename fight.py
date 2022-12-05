@@ -483,7 +483,6 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
         final_boss.choose_move(player_dict)
         print_health(player_dict, final_boss.get_stats())
 
-
         # 6. Check if player dies
         if player_dict['hp'] <= 0:
             death_sequence(player_dict)
