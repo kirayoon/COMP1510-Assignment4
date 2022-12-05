@@ -78,7 +78,6 @@ def print_scrolling_text(text_file: str) -> None:
         print('\n' * height)
         for line in script[:num_lines + 1]:
             print(line)
-        # TODO: change this for final
         time.sleep(.75)
 
         height -= 1
