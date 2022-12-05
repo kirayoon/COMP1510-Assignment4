@@ -384,10 +384,17 @@ def move_player_towards_boss(player_location: tuple, boss_location: tuple) -> tu
 
     :param player_location: tuple of the player's location
     :param boss_location: tuple of the boss's location
-    :precondition: player_location must be a tuple of two integers
-    :precondition: boss_location must be a tuple of two integers
+    :precondition: player_location must be a tuple of two positive integers
+    :precondition: boss_location must be a tuple of two positive integers
     :postcondition: move the player 1 square closer to the boss
     :return: tuple of the player's new location
+
+    >>> move_player_towards_boss((1, 1), (3, 3))
+    (2, 2)
+    >>> move_player_towards_boss((1, 1), (1, 3))
+    (1, 2)
+    >>> move_player_towards_boss((1, 1), (3, 1))
+    (2, 1)
     """
     distance_between = [boss_location[0] - player_location[0], boss_location[1] - player_location[1]]
     try:
