@@ -9,8 +9,7 @@ from fight import death_sequence, final_boss_loop, final_boss_defeated
 
 def game():
     start_time = time.time()
-    # # TODO: store ascii art in a file
-    # TODO: remove comment for production
+
     # Print the title screen
     print_from_text_file('title_screen.txt')
     char_name = input('Please input your character\'s name: ')
@@ -50,8 +49,6 @@ def game():
         death_sequence(player) if player['hp'] <= 0 else None
 
         # Print the grid
-        # TODO: update second param for final
-        print(player['location'])
         print_map(board, board_height, board_width, player)
 
         # Need function to describe room
@@ -62,7 +59,6 @@ def game():
 
         # Print help if the player enters "help"
         if player_choice == 'help':
-            # TODO: create help documentation
             print('''
             help documentation
             ''')
@@ -100,7 +96,7 @@ def game():
             input('Press enter to continue...')
             continue
         time.sleep(0.5)
-        # TODO: add random events and main game loop
+
 
         # Set events for a players' level
         if player['level'] == 1:
