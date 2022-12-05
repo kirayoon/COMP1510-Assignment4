@@ -43,3 +43,8 @@
     - You can only move to the next level if you have completed the goal
     - You can choose to stay in a level and gain more XP
     - Reach level 3 and beat the final boss to win the game
+
+10. DEATH:
+    - You die if your HP reaches 0
+    - You can either restart the level or quit
+    - If you choose to restart, your inventory will stay the same, but XP and HP will be reset
