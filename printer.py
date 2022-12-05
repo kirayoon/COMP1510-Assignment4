@@ -150,7 +150,7 @@ def print_attack_menu(command_map: dict) -> None:
     attack_menu = list(enumerate(command_map.keys(), 1))
     headings = ["\033[4mMoves\033[0m"]
 
-    print(f'\n{headings[0]:^62}')
+    print(f'\n{headings[0]:^54}')
     for move in attack_menu:
         print(f'{move[0]:2}. {move[1].title()}', end='    ')
     print()

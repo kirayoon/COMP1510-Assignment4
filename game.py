@@ -98,7 +98,6 @@ def game():
             *** You cannot move {player_choice}. Please try again. ***
             ''')
             input('Press enter to continue...')
-            player['turn'] += 1
             continue
         time.sleep(0.5)
         # TODO: add random events and main game loop
@@ -126,13 +125,14 @@ def game():
 
         # Check if there is an event at the player's location
         check_event(board, player, event_dict)
-
-        player['turn'] += 1
-        input('\n\nPress enter to continue...')
         level_up(player) if player['xp'] >= player['max_xp'] else None
         if player['level'] == 4:
             final_boss_loop(player, 'mama')
             game_is_won = True
+
+        player['turn'] += 1
+        input('\n\nPress enter to continue...')
+
 
     end_time = time.time()
     total_time = end_time - start_time

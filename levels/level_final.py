@@ -62,6 +62,7 @@ class Boss:
         """
         move_loop = ['shoot', 'move', 'bomb', 'move']
         current_move = move_loop[self.turn_count % 4]
+        self.turn_count += 1
         eval(f'self.{current_move}')(player_dict)
 
     def shoot(self, player_dict) -> None:

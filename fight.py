@@ -397,11 +397,11 @@ def move_player_towards_boss(player_location: tuple, boss_location: tuple) -> tu
     """
     distance_between = [boss_location[0] - player_location[0], boss_location[1] - player_location[1]]
     try:
-        distance_between[0] // abs(distance_between[0])
+        distance_between[0] //= abs(distance_between[0])
     except ZeroDivisionError:
         distance_between[0] = 0
     try:
-        distance_between[1] // abs(distance_between[1])
+        distance_between[1] //= abs(distance_between[1])
     except ZeroDivisionError:
         distance_between[1] = 0
 
@@ -432,10 +432,9 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
     player_options['inventory'] = 4
 
     # Set stage for final boss
-    # TODO: Print scrolling text for final boss intro
     boss_dict = load_enemy(enemy_name)
-    final_boss = level_final.Boss(boss_dict)
-    board = make_board(5, 5, 4)
+    # final_boss = level_final.Boss(boss_dict)
+    # board = make_board(5, 5, 4)
 
     while True:
         # Resets the board if player dies
@@ -471,6 +470,8 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
             if choice == 'inventory':
                 show_inventory(player_dict)
                 continue
+
+        player_dict['turn'] += 1
 
         # 5. Final_boss turn
         final_boss.choose_move(player_dict)
