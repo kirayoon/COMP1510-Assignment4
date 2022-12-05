@@ -256,6 +256,7 @@ def egg(player_dict: dict) -> None:
     :precondition: player_dict must have a key 'inventory' with a list as a value
     :postcondition: player_dict['egg'] is incremented by 1
     """
+    player_dict['eggs_found'] += 1
     if 'egg' in player_dict['inventory']:
         print('\nYou found another egg! \nIt has been added to your inventory.')
         player_dict['inventory']['egg'] += 1
