@@ -7,8 +7,7 @@ import json
 import random
 import time
 from pathlib import Path
-from printer import print_health, print_attack_menu, print_enemy_picture, print_from_text_file, print_map, \
-    print_scrolling_text
+from printer import print_health, print_attack_menu, print_enemy_picture, print_from_text_file, print_map
 from skeleton import get_player_choice, validate_yes_no
 from player import show_inventory
 from levels import level_final
@@ -433,8 +432,8 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
 
     # Set stage for final boss
     boss_dict = load_enemy(enemy_name)
-    # final_boss = level_final.Boss(boss_dict)
-    # board = make_board(5, 5, 4)
+    final_boss = level_final.Boss(boss_dict)
+    board = make_board(5, 5, 4)
 
     while True:
         # Resets the board if player dies
