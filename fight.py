@@ -114,7 +114,7 @@ def victory(player_dict: dict, enemy_dict: dict) -> None:
         
         ''')
     player_dict['xp'] += enemy_dict['xp_gain']
-    if enemy_name in player_dict['inventory']:
+    if enemy_drop_name in player_dict['inventory']:
         player_dict['inventory'][enemy_drop_name] += 1
     else:
         player_dict['inventory'][enemy_drop_name] = 1
