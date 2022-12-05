@@ -1,4 +1,5 @@
 import random
+import winsound
 
 
 def create_player(player_name: str) -> dict:
@@ -262,6 +263,19 @@ def egg(player_dict: dict) -> None:
         print('\nYou found a mysterious egg! \nEgg has been added to your inventory.')
         player_dict['inventory']['egg'] = 1
 
+
+def level_up_sound() -> None:
+    """
+    Play the sound for when the player levels up.
+
+    :postcondition: level up sound is played
+    """
+    start_frequency = 600
+    end_frequency = 1000
+    duration = 50
+    while start_frequency <= end_frequency:
+        winsound.Beep(start_frequency, duration)
+        start_frequency += 100
 
 def main():
     """
