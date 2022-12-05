@@ -11,42 +11,24 @@ def create_player(player_name: str) -> dict:
     :postcondition: creates a dictionary
     :return: a dictionary containing player information
     """
-    # return {'name': player_name,
-    #           'location': (0, 0),
-    #           'inventory': {},
-    #           'hp': 20,
-    #           'max_hp': 20,
-    #           'attack': 5,
-    #           'level': 1,
-    #           'xp': 0,
-    #           'max_xp': 1000,
-    #           'turn': 1,
-    #           'attacks': {'claw': 1, 'bite': 2, 'charge': 3},
-    #           'deaths': 0,
-    #           'kills': 0,
-    #           'damage_dealt': 0,
-    #           'eggs_found': 0,
-    #           'useless_events': 0,
-    #           'soup_counter': 0,
-    #           'chair_counter': 0}
     return {'name': player_name,
-              'location': (0, 0),
-              'inventory': {},
-              'hp': 80,
-              'max_hp': 10000,
-              'attack': 1,
-              'level': 4,
-              'xp': 0,
-              'max_xp': 1000,
-              'turn': 1,
-              'attacks': {'claw': 1, 'bite': 2, 'charge': 3},
-              'deaths': 0,
-              'kills': 0,
-              'damage_dealt': 0,
-              'eggs_found': 0,
-              'useless_events': 0,
-              'soup_counter': 0,
-              'chair_counter': 0}
+            'location': (0, 0),
+            'inventory': {},
+            'hp': 20,
+            'max_hp': 20,
+            'attack': 5,
+            'level': 1,
+            'xp': 0,
+            'max_xp': 1000,
+            'turn': 1,
+            'attacks': {'claw': 1, 'bite': 2, 'charge': 3},
+            'deaths': 0,
+            'kills': 0,
+            'damage_dealt': 0,
+            'eggs_found': 0,
+            'useless_events': 0,
+            'soup_counter': 0,
+            'chair_counter': 0}
 
 
 def make_board(num_row: int, num_col: int, current_level: int) -> dict:
@@ -294,6 +276,7 @@ def level_up_sound() -> None:
     while start_frequency <= end_frequency:
         winsound.Beep(start_frequency, duration)
         start_frequency += 100
+
 
 def main():
     """
