@@ -111,7 +111,6 @@ def victory(player_dict: dict, enemy_dict: dict) -> None:
         You gained {enemy_dict['xp_gain']} xp!
         
         {enemy_name} has been added to your inventory!
-        
         ''')
     player_dict['xp'] += enemy_dict['xp_gain']
     if enemy_name in player_dict['inventory']:
@@ -364,6 +363,51 @@ def fight_sequence(enemy: str, player_dict: dict) -> None:
         death_sequence(player_dict)
 
 
+def check_player_close_to_boss(player_location: tuple, boss_location: tuple) -> bool:
+    """
+    Return True if player is close to boss.
+
+    :param player_location: tuple of the player's location
+    :param boss_location: tuple of the boss's location
+    :precondition: player_location must be a tuple of two integers
+    :precondition: boss_location must be a tuple of two integers
+    :postcondition: return True if player is close to boss
+    :return: True if player is close to boss
+
+    TODO: add unit tests
+    """
+    if abs(player_location[0] - boss_location[0]) <= 1 and abs(player_location[1] - boss_location[1]) <= 1:
+        return True
+    return False
+
+
+# move the player 1 square closer to the boss
+def move_player_towards_boss(player_location: tuple, boss_location: tuple) -> tuple:
+    """
+    TODO: add unit test
+    Move the player 1 square closer to the boss.
+
+    :param player_location: tuple of the player's location
+    :param boss_location: tuple of the boss's location
+    :precondition: player_location must be a tuple of two integers
+    :precondition: boss_location must be a tuple of two integers
+    :postcondition: move the player 1 square closer to the boss
+    :return: tuple of the player's new location
+
+    """
+    distance_between = [boss_location[0] - player_location[0], boss_location[1] - player_location[1]]
+    try:
+        distance_between[0] // abs(distance_between[0])
+    except ZeroDivisionError:
+        distance_between[0] = 0
+    try:
+        distance_between[1] // abs(distance_between[1])
+    except ZeroDivisionError:
+        distance_between[1] = 0
+
+    return player_location[0] + distance_between[0], player_location[1] + distance_between[1]
+
+
 def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
     """
     Fight with the final boss until player or boss dies.
@@ -392,8 +436,6 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
     boss_dict = load_enemy(enemy_name)
     final_boss = level_final.Boss(boss_dict)
     board = make_board(5, 5, 4)
-    # print_scrolling_text('final_boss_intro.txt')
-    print_from_text_file('hunter_shoot_straight.txt')
 
     while True:
         # Resets the board if player dies
@@ -404,15 +446,27 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
         # Print the grid
         print_map(board, 5, 5, player_dict, final_boss.get_location())
 
-        # 3. print attack options
-        player_min_roll, enemy_min_roll = calc_min_roll(player_dict['attack'], final_boss.get_stats()['attack'])
-        damage = player_turn(player_dict, final_boss.get_stats()['name'], player_options, player_min_roll)
-        if damage is None:
-            continue
+        is_close = check_player_close_to_boss(player_dict['location'], final_boss.get_location())
+        damage = 0
+        if is_close:
+            # 3. print attack options
+            player_min_roll, enemy_min_roll = calc_min_roll(player_dict['attack'], final_boss.get_stats()['attack'])
+            damage = player_turn(player_dict, final_boss.get_stats()['name'], player_options, player_min_roll)
+            if damage is None:
+                continue
+
+        else:
+            # Print command options for player (only one move: Close the gap!)
+            far_choices = {'close the gap!': '', 'inventory': ''}
+            get_player_choice(far_choices)
+
+            # Move player towards boss
+            player_dict['location'] = move_player_towards_boss(player_dict['location'], final_boss.get_location())
 
         # 4. subtract hp from enemy
         player_dict['damage_dealt'] += damage
         final_boss.is_damaged(damage)
+        print_health(player_dict, final_boss.get_stats())
         if final_boss.is_dead() or player_dict['hp'] <= 0:
             break
 
@@ -422,6 +476,8 @@ def final_boss_loop(player_dict: dict, enemy_name: str) -> None:
         if player_dict['hp'] <= 0:
             death_sequence(player_dict)
             break
+
+        input('Press enter to continue...')
 
         # 6. Check if player dies
         if player_dict['hp'] <= 0:
