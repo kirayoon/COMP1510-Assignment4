@@ -1,4 +1,4 @@
  +~~~~~~~~~~~~~~~~~~~~~~~~+
- | Assignment 4: The Game |
+ | The King of the Forest |
  | Joseph Chun, Kira Yoon |
  +~~~~~~~~~~~~~~~~~~~~~~~~+
