@@ -106,7 +106,7 @@ def choose_item(player_dict: dict):
     choice = input('\nType the number of a item you want to use or press enter to continue: ')
     if choice == '':
         return
-    elif choice.isalpha() or len(player_dict['inventory']) < int(choice) < 1:
+    elif choice.isalpha() or len(player_dict['inventory']) < int(choice) or int(choice) <= 0:
         print('''
         *** Invalid choice. Please try again. ***
         ''')
