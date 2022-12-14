@@ -1,4 +1,4 @@
-# COMP1510-Assignment3
+# COMP1510-Assignment4
 ##  The King of the Forest
 
 Welcome to The King of the Forest! There are 3 levels in this game. In order to proceed and level up, you must 
